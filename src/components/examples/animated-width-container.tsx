@@ -43,7 +43,7 @@ export function AnimatedWidthContainer({ children, onClick, className }: Animate
 					}}
 					onClick={onClick}
 					className={cn(
-						"flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-none bg-stone-800 outline-none active:scale-95",
+						"bg-primary border-border flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border outline-none active:scale-95",
 						className
 					)}
 				>
@@ -51,7 +51,7 @@ export function AnimatedWidthContainer({ children, onClick, className }: Animate
 						<motion.span
 							{...animation}
 							key={children?.toString()}
-							className="px-4 py-2 text-sm font-medium whitespace-nowrap text-stone-50"
+							className="text-primary-foreground px-4 py-2 text-sm font-medium whitespace-nowrap"
 						>
 							{children}
 						</motion.span>

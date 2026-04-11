@@ -59,7 +59,7 @@ export function AnimatedHeightContainer({
 					delay: 0.05,
 				}}
 			>
-				<div className="flex w-full max-w-md flex-col gap-3 rounded-xl border border-stone-200 bg-white p-5">
+				<div className="border-border bg-background flex w-full max-w-md flex-col gap-3 rounded-xl border p-5">
 					<motion.div
 						animate={{
 							height: bounds.height > 0 ? bounds.height : "auto",
@@ -74,7 +74,7 @@ export function AnimatedHeightContainer({
 					{expandedContent && (
 						<button
 							type="button"
-							className="flex h-8 cursor-pointer items-center justify-center rounded-lg border-none bg-stone-100 px-3 text-sm font-medium text-stone-600 outline-none hover:bg-stone-200 hover:text-stone-800 active:scale-95"
+							className="bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex h-8 cursor-pointer items-center justify-center rounded-lg border-none px-3 text-sm font-medium outline-none active:scale-95"
 							onClick={() => setExpanded((prev) => !prev)}
 						>
 							{expanded ? buttonText.expanded : buttonText.collapsed}

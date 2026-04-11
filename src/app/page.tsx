@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/ui/page-header"
 import { Paragraph } from "@/components/ui/paragraph"
 import { motion } from "motion/react"
 import { useState } from "react"
+import { ThemeSwitcher } from "../components/theme-switcher"
 
 export default function Home() {
 	const [widthIndex, setWidthIndex] = useState(0)
@@ -14,10 +15,13 @@ export default function Home() {
 
 	return (
 		<div className="mx-auto max-w-2xl space-y-12 p-8">
-			<PageHeader
-				title="Animation Containers"
-				description="Examples of smooth dimension animations using React and Motion"
-			/>
+			<div className="flex items-center justify-between">
+				<PageHeader
+					title="Animation Containers"
+					description="Examples of smooth dimension animations using React and Motion"
+				/>
+				<ThemeSwitcher />
+			</div>
 
 			<div className="space-y-8">
 				<ComponentSection
