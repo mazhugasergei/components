@@ -1,10 +1,9 @@
 "use client"
 
-import { AnimatedHeightContainerExample } from "@/components/examples/animated-height-container"
-import { AnimatedWidthContainerExample } from "@/components/examples/animated-width-container"
+import { ThemeSwitcher } from "@/components/theme-switcher"
 import { ComponentSection } from "@/components/ui/component-section"
 import { PageHeader } from "@/components/ui/page-header"
-import { ThemeSwitcher } from "../components/theme-switcher"
+import { components } from "@/lib/constants"
 
 export default function Home() {
 	return (
@@ -18,23 +17,18 @@ export default function Home() {
 			</div>
 
 			<div className="space-y-8">
-				<ComponentSection
-					title="<AnimatedWidthContainer/>"
-					description="Smooth width transitions when button content changes using custom useMeasure hook"
-					technique="ResizeObserver API + Motion animation"
-					badgeColor="blue"
-				>
-					<AnimatedWidthContainerExample />
-				</ComponentSection>
-
-				<ComponentSection
-					title="<AnimatedHeightContainer/>"
-					description="Smooth height animations for expandable content using AnimatePresence and ResizeObserver"
-					technique="AnimatePresence + height measurement"
-					badgeColor="green"
-				>
-					<AnimatedHeightContainerExample />
-				</ComponentSection>
+				{components.map((component, index) => (
+					<ComponentSection
+						key={index}
+						title={component.title}
+						description={component.description}
+						technique={component.technique}
+						badgeColor={component.badgeColor}
+						codeBlocks={component.codeBlocks}
+					>
+						{component.example}
+					</ComponentSection>
+				))}
 			</div>
 		</div>
 	)
