@@ -24,7 +24,7 @@ function CodeBlockContent({ block }: { block: ComponentCodeProps["codeBlocks"][0
 			setLoading(true)
 			setError("")
 
-			fetch(`https://raw.githubusercontent.com/mazhugasergei/components/refs/heads/main/${block.codeUrl}`)
+			fetch(`https://raw.githubusercontent.com/mazhugasergei/components/refs/heads/main/src/${block.codeUrl}`)
 				.then((response) => {
 					if (!response.ok) {
 						throw new Error(`Failed to fetch: ${response.statusText}`)

@@ -12,12 +12,16 @@ export const components = [
 				code: "npm install motion/react",
 			},
 			{
+				title: "Hook",
+				codeUrl: "hooks/use-measure.ts",
+			},
+			{
 				title: "Component",
-				codeUrl: "src/components/ui/animated-width-container.tsx",
+				codeUrl: "components/ui/animated-width-container.tsx",
 			},
 			{
 				title: "Usage",
-				codeUrl: "src/components/examples/animated-width-container.tsx",
+				codeUrl: "components/examples/animated-width-container.tsx",
 			},
 		],
 		example: <AnimatedWidthContainerExample />,
@@ -33,11 +37,11 @@ export const components = [
 			},
 			{
 				title: "Component",
-				codeUrl: "src/components/ui/animated-height-container.tsx",
+				codeUrl: "components/ui/animated-height-container.tsx",
 			},
 			{
 				title: "Usage",
-				codeUrl: "src/components/examples/animated-height-container.tsx",
+				codeUrl: "components/examples/animated-height-container.tsx",
 			},
 		],
 		example: <AnimatedHeightContainerExample />,
