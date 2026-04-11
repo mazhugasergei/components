@@ -11,7 +11,7 @@ export default function Home() {
 		<div className="mx-auto max-w-2xl space-y-12 p-8">
 			<div className="flex items-center justify-between">
 				<PageHeader
-					title="Animation Containers"
+					title="Animated Components"
 					description="Examples of smooth dimension animations using React and Motion"
 				/>
 				<ThemeSwitcher />
