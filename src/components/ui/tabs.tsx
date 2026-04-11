@@ -31,7 +31,12 @@ export function Tabs({ children, className }: TabsProps) {
 
 export function TabsList({ children, className }: TabsListProps) {
 	return (
-		<div className={cn("inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground", className)}>
+		<div
+			className={cn(
+				"bg-muted text-muted-foreground inline-flex h-9 items-center justify-center rounded-lg p-1",
+				className
+			)}
+		>
 			{children}
 		</div>
 	)
@@ -42,7 +47,7 @@ export function TabsTrigger({ children, isActive, onClick, className }: TabsTrig
 		<button
 			onClick={onClick}
 			className={cn(
-				"inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+				"ring-offset-background focus-visible:ring-ring inline-flex items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
 				isActive && "bg-background text-foreground shadow-sm",
 				className
 			)}
@@ -54,10 +59,6 @@ export function TabsTrigger({ children, isActive, onClick, className }: TabsTrig
 
 export function TabsContent({ children, isActive, className }: TabsContentProps) {
 	if (!isActive) return null
-	
-	return (
-		<div className={cn("mt-2 focus:outline-none", className)}>
-			{children}
-		</div>
-	)
+
+	return <div className={cn("mt-2 focus:outline-none", className)}>{children}</div>
 }
