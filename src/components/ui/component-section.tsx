@@ -9,7 +9,8 @@ interface ComponentSectionProps {
 	children: React.ReactNode
 	codeBlocks?: Array<{
 		title: string
-		code: string
+		code?: string
+		codeUrl?: string
 		filePath?: string
 	}>
 }
