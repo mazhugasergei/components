@@ -41,6 +41,7 @@ interface AnimatedHeightContainerProps {
 	}
 	onToggle?: (expanded: boolean) => void
 	className?: string
+	expandTrigger?: React.ReactNode
 }
 
 export function AnimatedHeightContainer({
@@ -49,6 +50,7 @@ export function AnimatedHeightContainer({
 	buttonText = { collapsed: "Read More", expanded: "Show Less" },
 	onToggle,
 	className,
+	expandTrigger,
 }: AnimatedHeightContainerProps) {
 	const [expanded, setExpanded] = useState(false)
 	const [ref, bounds] = useMeasure()
@@ -85,13 +87,19 @@ export function AnimatedHeightContainer({
 					</div>
 				</motion.div>
 				{expandedContent && (
-					<button
-						type="button"
-						className="bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex h-8 cursor-pointer items-center justify-center rounded-lg border-none px-3 text-sm font-medium outline-none active:scale-95"
-						onClick={handleToggle}
-					>
-						{expanded ? buttonText.expanded : buttonText.collapsed}
-					</button>
+					<>
+						{expandTrigger ? (
+							<div onClick={handleToggle}>{expandTrigger}</div>
+						) : (
+							<button
+								type="button"
+								className="bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex h-8 cursor-pointer items-center justify-center rounded-lg border-none px-3 text-sm font-medium outline-none active:scale-95"
+								onClick={handleToggle}
+							>
+								{expanded ? buttonText.expanded : buttonText.collapsed}
+							</button>
+						)}
+					</>
 				)}
 			</div>
 		</MotionConfig>
