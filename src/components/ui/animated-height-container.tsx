@@ -35,10 +35,6 @@ function useMeasure<T extends HTMLElement = HTMLElement>(): [
 interface AnimatedHeightContainerProps {
 	children: React.ReactNode
 	expandedContent?: React.ReactNode
-	buttonText?: {
-		collapsed: string
-		expanded: string
-	}
 	onToggle?: (expanded: boolean) => void
 	className?: string
 	expandTrigger?: React.ReactNode
@@ -47,7 +43,6 @@ interface AnimatedHeightContainerProps {
 export function AnimatedHeightContainer({
 	children,
 	expandedContent,
-	buttonText = { collapsed: "Read More", expanded: "Show Less" },
 	onToggle,
 	className,
 	expandTrigger,
@@ -96,7 +91,7 @@ export function AnimatedHeightContainer({
 								className="bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex h-8 cursor-pointer items-center justify-center rounded-lg border-none px-3 text-sm font-medium outline-none active:scale-95"
 								onClick={handleToggle}
 							>
-								{expanded ? buttonText.expanded : buttonText.collapsed}
+								{expanded ? "See less" : "See more"}
 							</button>
 						)}
 					</>

@@ -21,10 +21,7 @@ export function AnimatedHeightContainerExample() {
 
 	return (
 		<div className="flex items-center justify-center p-8">
-			<AnimatedHeightContainer
-				expandedContent={expandedContent}
-				buttonText={{ collapsed: "Read More", expanded: "Show Less" }}
-			>
+			<AnimatedHeightContainer expandedContent={expandedContent}>
 				<Paragraph>
 					Containers on the web snap to their new size instantly when content changes. By measuring the bounds of a
 					container and animating to those values, we can make these transitions feel smooth and intentional.
