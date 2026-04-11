@@ -5,7 +5,6 @@ export const components = [
 	{
 		title: "<AnimatedWidthContainer/>",
 		description: "Smooth width transitions when button content changes using custom useMeasure hook",
-		technique: "ResizeObserver API + Motion animation",
 		badgeColor: "blue" as const,
 		codeBlocks: [
 			{
@@ -101,7 +100,6 @@ export function Example() {
 	{
 		title: "<AnimatedHeightContainer/>",
 		description: "Smooth height animations for expandable content using AnimatePresence and ResizeObserver",
-		technique: "AnimatePresence + height measurement",
 		badgeColor: "green" as const,
 		codeBlocks: [
 			{
