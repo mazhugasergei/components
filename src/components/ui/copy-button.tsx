@@ -1,15 +1,14 @@
 "use client"
 
 import { cn } from "@/utils/classname"
-import { Check, Copy } from "lucide-react"
 import { useState } from "react"
+import { TextMorph } from "torph/react"
 
-interface CopyButtonProps {
+interface Props extends React.ComponentProps<"button"> {
 	text: string
-	className?: string
 }
 
-export function CopyButton({ text, className }: CopyButtonProps) {
+export function CopyButton({ text, className, ...props }: Props) {
 	const [copied, setCopied] = useState(false)
 
 	const handleCopy = async () => {
@@ -26,12 +25,13 @@ export function CopyButton({ text, className }: CopyButtonProps) {
 		<button
 			onClick={handleCopy}
 			className={cn(
-				"bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex h-6 w-6 items-center justify-center rounded border transition-colors",
+				"bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex items-center justify-center rounded-lg border px-2 py-0.5 text-xs transition-colors",
 				className
 			)}
 			aria-label="Copy to clipboard"
+			{...props}
 		>
-			{copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+			{copied ? <TextMorph>Copied</TextMorph> : <TextMorph>Copy</TextMorph>}
 		</button>
 	)
 }

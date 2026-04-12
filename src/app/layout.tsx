@@ -1,3 +1,4 @@
+import { ThemeLoader } from "@/components/theme-loader"
 import { ThemeProvider } from "@/components/theme-provider"
 import type { Metadata } from "next"
 import "./globals.css"
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en" suppressHydrationWarning>
 			<body>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+					<ThemeLoader />
 					{children}
 				</ThemeProvider>
 			</body>

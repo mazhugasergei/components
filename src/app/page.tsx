@@ -1,5 +1,3 @@
-"use client"
-
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import { ComponentSection } from "@/components/ui/component-section"
 import { PageHeader } from "@/components/ui/page-header"

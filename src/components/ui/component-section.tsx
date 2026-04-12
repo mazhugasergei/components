@@ -1,3 +1,5 @@
+"use client"
+
 import { CodeBlock } from "@/components/ui/code-block"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useState } from "react"

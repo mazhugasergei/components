@@ -1,5 +1,6 @@
 "use client"
 
+import { useStore } from "@/lib/store"
 import { useEffect, useState } from "react"
 import { createHighlighter } from "shiki"
 import { CopyButton } from "./copy-button"
@@ -14,13 +15,12 @@ interface ComponentCodeProps {
 	className?: string
 }
 
-const THEME_URL = "https://raw.githubusercontent.com/mazhugasergei/theme-builder/refs/heads/main/themes/theme.json"
-
 export function CodeBlock({ block }: { block: ComponentCodeProps["codeBlocks"][0] }) {
 	const [code, setCode] = useState<string>(block.code || "")
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string>("")
 	const [highlightedCode, setHighlightedCode] = useState<string>("")
+	const { codeBlockTheme } = useStore()
 
 	useEffect(() => {
 		if (block.codeUrl && !block.code) {
@@ -42,22 +42,18 @@ export function CodeBlock({ block }: { block: ComponentCodeProps["codeBlocks"][0
 	}, [block.codeUrl, block.code])
 
 	useEffect(() => {
-		if (!code) return
+		if (!code || !codeBlockTheme) return
 
 		const highlight = async () => {
 			try {
-				const [themeRes] = await Promise.all([fetch(THEME_URL)])
-				if (!themeRes.ok) throw new Error("Failed to fetch theme")
-				const theme = await themeRes.json()
-
 				const lang = getLang(block.filePath)
 
 				const highlighter = await createHighlighter({
-					themes: [theme],
+					themes: [codeBlockTheme],
 					langs: [lang],
 				})
 
-				setHighlightedCode(highlighter.codeToHtml(code, { lang, theme: theme.name }))
+				setHighlightedCode(highlighter.codeToHtml(code, { lang, theme: codeBlockTheme.name }))
 			} catch (err) {
 				console.error("Error highlighting code:", err)
 				setHighlightedCode(`<pre><code>${code}</code></pre>`)
@@ -65,7 +61,7 @@ export function CodeBlock({ block }: { block: ComponentCodeProps["codeBlocks"][0
 		}
 
 		highlight()
-	}, [code, block.filePath])
+	}, [code, block.filePath, codeBlockTheme])
 
 	if (loading) {
 		return (
@@ -84,14 +80,18 @@ export function CodeBlock({ block }: { block: ComponentCodeProps["codeBlocks"][0
 	}
 
 	return (
-		<div className="group relative overflow-hidden rounded-lg border">
+		<div
+			style={codeBlockTheme ? { background: codeBlockTheme.colors?.["editor.background"] } : {}}
+			className="group relative overflow-hidden rounded-lg border"
+		>
 			<div
-				className="max-h-96 overflow-auto [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-sm"
-				dangerouslySetInnerHTML={{
-					__html: highlightedCode || `<pre><code>${code}</code></pre>`,
-				}}
+				className="max-h-96 overflow-auto [&>pre]:inline-block [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:[tab-size:2]"
+				dangerouslySetInnerHTML={{ __html: highlightedCode || `<pre><code>${code}</code></pre>` }}
 			/>
-			<CopyButton text={code} className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100" />
+			<CopyButton
+				text={code}
+				className="absolute top-2 right-2 bg-inherit opacity-0 transition-opacity group-hover:opacity-100"
+			/>
 		</div>
 	)
 }
