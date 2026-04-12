@@ -1,11 +1,12 @@
 import { CodeBlock } from "@/components/ui/code-block"
 import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
-import { components } from "@/lib/constants"
+import { processCodeBlocks } from "@/lib/code-loader"
 
-const component = components.find((c) => c.title === "Expandable")
+export default async function Page() {
+	const components = await processCodeBlocks()
+	const component = components.find((c) => c.title === "Expandable")
 
-export default function Page() {
 	if (!component) return <div>Component not found</div>
 
 	return (
@@ -26,7 +27,7 @@ export default function Page() {
 										{block.filePath || block.codeUrl}
 									</span>
 								</div>
-								<CodeBlock block={block} />
+								<CodeBlock {...block} />
 							</div>
 						))}
 					</div>
