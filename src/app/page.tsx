@@ -24,7 +24,9 @@ export default function Home() {
 						description={component.description}
 						codeBlocks={component.codeBlocks}
 					>
-						{component.example}
+						{component.examples.map((example, exampleIndex) => (
+							<div key={exampleIndex}>{example}</div>
+						))}
 					</ComponentSection>
 				))}
 			</div>

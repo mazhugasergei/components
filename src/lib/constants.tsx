@@ -9,14 +9,18 @@ export const components = [
 		codeBlocks: [
 			{
 				title: "Installation",
-				code: "npm install motion/react",
+				code: "npm install motion",
 			},
 			{
 				title: "Hook",
 				codeUrl: "hooks/use-measure.ts",
 			},
 			{
-				title: "Component",
+				title: "Base component",
+				codeUrl: "components/ui/base-animated-width-container.tsx",
+			},
+			{
+				title: "Styled component",
 				codeUrl: "components/ui/animated-width-container.tsx",
 			},
 			{
@@ -24,7 +28,7 @@ export const components = [
 				codeUrl: "components/examples/animated-width-container.tsx",
 			},
 		],
-		example: <AnimatedWidthContainerExample />,
+		examples: [<AnimatedWidthContainerExample />],
 	},
 	{
 		title: "<Expandable/>",
@@ -33,7 +37,7 @@ export const components = [
 		codeBlocks: [
 			{
 				title: "Installation",
-				code: "npm install motion/react",
+				code: "npm install motion",
 			},
 			{
 				title: "Component",
@@ -44,6 +48,6 @@ export const components = [
 				codeUrl: "components/examples/animated-height-container.tsx",
 			},
 		],
-		example: <Expandable />,
+		examples: [<Expandable />],
 	},
 ]
