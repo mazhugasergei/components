@@ -1,11 +1,10 @@
+import { CodeBlock } from "@/components/ui/code-block"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useState } from "react"
-import { ComponentCode } from "./component-code"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
 
 interface ComponentSectionProps {
 	title: string
 	description: string
-	badgeColor: "blue" | "green" | "stone"
 	children: React.ReactNode
 	codeBlocks?: Array<{
 		title: string
@@ -15,13 +14,7 @@ interface ComponentSectionProps {
 	}>
 }
 
-export function ComponentSection({
-	title,
-	description,
-	badgeColor = "stone",
-	children,
-	codeBlocks,
-}: ComponentSectionProps) {
+export function ComponentSection({ title, description, children, codeBlocks = [] }: ComponentSectionProps) {
 	const [activeTab, setActiveTab] = useState<"preview" | "code">("preview")
 
 	return (
@@ -46,7 +39,19 @@ export function ComponentSection({
 				</TabsContent>
 
 				<TabsContent isActive={activeTab === "code"}>
-					<ComponentCode codeBlocks={codeBlocks || []} />
+					<div className="space-y-3">
+						{codeBlocks.map((block, index) => (
+							<div key={index} className="space-y-2">
+								<div className="flex items-center justify-between gap-2">
+									<h5 className="text-foreground font-mono text-xs font-medium">{block.title}</h5>
+									<span className="text-muted-foreground text-right font-mono text-xs">
+										{block.filePath || block.codeUrl}
+									</span>
+								</div>
+								<CodeBlock block={block} />
+							</div>
+						))}
+					</div>
 				</TabsContent>
 			</Tabs>
 		</div>
