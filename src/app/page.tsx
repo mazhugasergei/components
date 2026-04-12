@@ -1,27 +1,20 @@
 import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
-import { preventOrphan } from "@/utils/text"
+import { preventOrphan, toKebabCase } from "@/utils/text"
 import { ChevronRightIcon } from "lucide-react"
 import Link from "next/link"
 
 export default function Home() {
 	return (
-		<div>
+		<main>
 			<LayoutHeader title="Animated Components" />
 			<div className="mx-auto max-w-2xl space-y-12 p-8">
 				<PageHeader title="Components" description="Personal collection of reusable components." />
 
 				<div className="space-y-6">
 					{components.map((component, index) => {
-						const getSlug = (title: string) => {
-							return title
-								.replace(/([A-Z])/g, "-$1")
-								.replace(/^-/, "")
-								.toLowerCase()
-						}
-
-						const slug = getSlug(component.title)
+						const slug = toKebabCase(component.title)
 						return (
 							<Link
 								key={index}
@@ -42,6 +35,6 @@ export default function Home() {
 					})}
 				</div>
 			</div>
-		</div>
+		</main>
 	)
 }

@@ -2,16 +2,35 @@ import { CodeBlock } from "@/components/ui/code-block"
 import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
 import { processCodeBlocks } from "@/lib/code-loader"
+import { components } from "@/lib/constants"
+import { toKebabCase } from "@/utils/text"
 import { notFound } from "next/navigation"
 
-export default async function Page() {
-	const components = await processCodeBlocks()
-	const component = components.find((c) => c.title === "AnimatedButton")
+export async function generateStaticParams() {
+	return components.map((component) => ({
+		slug: toKebabCase(component.title),
+	}))
+}
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params
+	const component = components.find((item) => toKebabCase(item.title) === slug)
+	if (!component) return notFound()
+
+	return {
+		title: component.title,
+		description: component.description,
+	}
+}
+
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params
+	const processedComponents = await processCodeBlocks()
+	const component = processedComponents.find((item) => toKebabCase(item.title) === slug)
 	if (!component) return notFound()
 
 	return (
-		<div>
+		<main>
 			<LayoutHeader title={component.title} showBackButton />
 			<div className="mx-auto max-w-2xl space-y-12 p-8">
 				<PageHeader title={component.title} description={component.description} />
@@ -34,6 +53,6 @@ export default async function Page() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</main>
 	)
 }
