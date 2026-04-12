@@ -1,9 +1,9 @@
-import { AnimatedWidthContainerExample } from "@/components/examples/animated-width-container"
+import { AnimatedWidthContainerExample } from "@/components/examples/animated-button"
 import { Expandable } from "@/components/examples/expandable"
 
 export const components = [
 	{
-		title: "AnimatedWidthContainer",
+		title: "AnimatedButton",
 		description: "Smooth width transitions when button content changes using custom useMeasure hook",
 		badgeColor: "blue" as const,
 		codeBlocks: [
@@ -18,18 +18,18 @@ export const components = [
 			},
 			{
 				title: "Base component",
-				codeUrl: "components/ui/base-animated-width-container.tsx",
-				filePath: "components/ui/base-animated-width-container.tsx",
+				codeUrl: "components/ui/base-animated-button.tsx",
+				filePath: "components/ui/base-animated-button.tsx",
 			},
 			{
 				title: "Styled component",
-				codeUrl: "components/ui/animated-width-container.tsx",
-				filePath: "components/ui/animated-width-container.tsx",
+				codeUrl: "components/ui/animated-button.tsx",
+				filePath: "components/ui/animated-button.tsx",
 			},
 			{
 				title: "Usage",
-				codeUrl: "components/examples/animated-width-container.tsx",
-				filePath: "components/examples/animated-width-container.tsx",
+				codeUrl: "components/examples/animated-button.tsx",
+				filePath: "components/examples/animated-button.tsx",
 			},
 		],
 		examples: [<AnimatedWidthContainerExample />],

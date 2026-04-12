@@ -2,7 +2,7 @@
 
 import { cn } from "@/utils/classname"
 import { MotionConfig, type MotionProps, motion } from "motion/react"
-import { BaseAnimatedWidthContainer } from "./base-animated-width-container"
+import { BaseAnimatedButton } from "./base-animated-button"
 
 const animation: MotionProps = {
 	initial: { opacity: 0, filter: "blur(8px)", scale: 0.95 },
@@ -19,11 +19,7 @@ const animation: MotionProps = {
 	},
 }
 
-export function AnimatedWidthContainer({
-	children,
-	className,
-	...props
-}: React.ComponentProps<typeof BaseAnimatedWidthContainer>) {
+export function AnimatedButton({ children, className, ...props }: React.ComponentProps<typeof BaseAnimatedButton>) {
 	return (
 		<MotionConfig
 			transition={{
@@ -32,7 +28,7 @@ export function AnimatedWidthContainer({
 				delay: 0.05,
 			}}
 		>
-			<BaseAnimatedWidthContainer
+			<BaseAnimatedButton
 				className={cn("bg-primary cursor-pointer rounded-lg border px-4 py-1 active:scale-95", className)}
 				{...props}
 			>
@@ -43,7 +39,7 @@ export function AnimatedWidthContainer({
 				>
 					{children}
 				</motion.span>
-			</BaseAnimatedWidthContainer>
+			</BaseAnimatedButton>
 		</MotionConfig>
 	)
 }

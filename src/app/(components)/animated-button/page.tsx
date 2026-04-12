@@ -2,12 +2,13 @@ import { CodeBlock } from "@/components/ui/code-block"
 import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
 import { processCodeBlocks } from "@/lib/code-loader"
+import { notFound } from "next/navigation"
 
 export default async function Page() {
 	const components = await processCodeBlocks()
-	const component = components.find((c) => c.title === "AnimatedWidthContainer")
+	const component = components.find((c) => c.title === "AnimatedButton")
 
-	if (!component) return <div>Component not found</div>
+	if (!component) return notFound()
 
 	return (
 		<div>

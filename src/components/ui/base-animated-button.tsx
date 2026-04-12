@@ -8,7 +8,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof motion.button> {
 	children: React.ReactNode
 }
 
-export function BaseAnimatedWidthContainer({ children, className, ...props }: Props) {
+export function BaseAnimatedButton({ children, className, ...props }: Props) {
 	const [ref, bounds] = useMeasure()
 
 	return (

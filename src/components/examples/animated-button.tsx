@@ -1,6 +1,6 @@
 "use client"
 
-import { AnimatedWidthContainer } from "@/components/ui/animated-width-container"
+import { AnimatedButton } from "@/components/ui/animated-button"
 import { useState } from "react"
 
 const labels = ["Lorem Ipsum", "Ex Amet", "Aliqua Velit"]
@@ -10,9 +10,9 @@ export function AnimatedWidthContainerExample() {
 
 	return (
 		<div className="flex items-center justify-center py-8">
-			<AnimatedWidthContainer onClick={() => setWidthIndex((prev) => (prev + 1) % labels.length)}>
+			<AnimatedButton onClick={() => setWidthIndex((prev) => (prev + 1) % labels.length)}>
 				{labels[widthIndex]}
-			</AnimatedWidthContainer>
+			</AnimatedButton>
 		</div>
 	)
 }
