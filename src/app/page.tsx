@@ -2,11 +2,13 @@ import { ThemeSwitcher } from "@/components/theme-switcher"
 import { ComponentSection } from "@/components/ui/component-section"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
+import Link from "next/link"
 
 export default function Home() {
 	return (
 		<div className="mx-auto max-w-2xl space-y-12 p-8">
 			<div className="flex items-center justify-between">
+				<Link href="/test">Test</Link>
 				<PageHeader
 					title="Animated Components"
 					description="Examples of smooth dimension animations using React and Motion"
