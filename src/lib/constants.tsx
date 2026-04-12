@@ -14,18 +14,22 @@ export const components = [
 			{
 				title: "Hook",
 				codeUrl: "hooks/use-measure.ts",
+				filePath: "hooks/use-measure.ts",
 			},
 			{
 				title: "Base component",
 				codeUrl: "components/ui/base-animated-width-container.tsx",
+				filePath: "components/ui/base-animated-width-container.tsx",
 			},
 			{
 				title: "Styled component",
 				codeUrl: "components/ui/animated-width-container.tsx",
+				filePath: "components/ui/animated-width-container.tsx",
 			},
 			{
 				title: "Usage",
 				codeUrl: "components/examples/animated-width-container.tsx",
+				filePath: "components/examples/animated-width-container.tsx",
 			},
 		],
 		examples: [<AnimatedWidthContainerExample />],
@@ -42,10 +46,12 @@ export const components = [
 			{
 				title: "Component",
 				codeUrl: "components/ui/expandable.tsx",
+				filePath: "components/ui/expandable.tsx",
 			},
 			{
 				title: "Usage",
 				codeUrl: "components/examples/expandable.tsx",
+				filePath: "components/examples/expandable.tsx",
 			},
 		],
 		examples: [<Expandable />],
