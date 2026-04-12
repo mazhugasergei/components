@@ -90,7 +90,7 @@ export function CodeBlock({ block }: { block: ComponentCodeProps["codeBlocks"][0
 			/>
 			<CopyButton
 				text={code}
-				className="absolute top-2 right-2 bg-inherit opacity-0 transition-opacity group-hover:opacity-100"
+				className="absolute top-2 right-2 bg-inherit opacity-100 transition-opacity lg:opacity-0 lg:group-hover:opacity-100"
 			/>
 		</div>
 	)
