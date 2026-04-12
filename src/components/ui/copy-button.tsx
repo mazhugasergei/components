@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/utils/classname"
+import { CheckIcon, ClipboardIcon } from "lucide-react"
 import { useState } from "react"
-import { TextMorph } from "torph/react"
 
 interface Props extends React.ComponentProps<"button"> {
 	text: string
@@ -25,13 +25,13 @@ export function CopyButton({ text, className, ...props }: Props) {
 	return (
 		<Button
 			variant="outline"
-			size="xs"
+			size="icon-xs"
 			onClick={handleCopy}
-			className={cn("border-white/20! bg-inherit! text-white/80! hover:bg-white/5! hover:text-white!", className)}
+			className={cn("group border-white/20! bg-inherit! text-white/80! hover:bg-white/5! hover:text-white!", className)}
 			aria-label="Copy to clipboard"
 			{...props}
 		>
-			{copied ? <TextMorph>Copied</TextMorph> : <TextMorph>Copy</TextMorph>}
+			{copied ? <CheckIcon className="size-3" /> : <ClipboardIcon className="size-3" />}
 		</Button>
 	)
 }
