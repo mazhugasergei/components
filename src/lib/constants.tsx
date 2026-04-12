@@ -1,5 +1,5 @@
-import { AnimatedHeightContainerExample } from "@/components/examples/animated-height-container"
 import { AnimatedWidthContainerExample } from "@/components/examples/animated-width-container"
+import { Expandable } from "@/components/examples/expandable"
 
 export const components = [
 	{
@@ -27,7 +27,7 @@ export const components = [
 		example: <AnimatedWidthContainerExample />,
 	},
 	{
-		title: "<AnimatedHeightContainer/>",
+		title: "<Expandable/>",
 		description: "Smooth height animations for expandable content using AnimatePresence and ResizeObserver",
 		badgeColor: "green" as const,
 		codeBlocks: [
@@ -44,6 +44,6 @@ export const components = [
 				codeUrl: "components/examples/animated-height-container.tsx",
 			},
 		],
-		example: <AnimatedHeightContainerExample />,
+		example: <Expandable />,
 	},
 ]

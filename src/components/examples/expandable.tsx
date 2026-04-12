@@ -1,10 +1,10 @@
 "use client"
 
-import { AnimatedHeightContainer } from "@/components/ui/animated-height-container"
+import { AnimatedHeightContainer } from "@/components/ui/expandable"
 import { Paragraph } from "@/components/ui/paragraph"
 import { motion } from "motion/react"
 
-export function AnimatedHeightContainerExample() {
+export function Expandable() {
 	const expandedContent = (
 		<motion.div
 			initial={{ opacity: 0, filter: "blur(8px)" }}
