@@ -1,6 +1,8 @@
 import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
+import { preventOrphan } from "@/utils/text"
+import { ChevronRightIcon } from "lucide-react"
 import Link from "next/link"
 
 export default function Home() {
@@ -31,13 +33,9 @@ export default function Home() {
 										<h2 className="text-foreground group-hover:text-primary font-mono text-lg font-medium">
 											{component.title}
 										</h2>
-										<p className="text-muted-foreground mt-1 text-sm">{component.description}</p>
+										<p className="text-muted-foreground mt-1 text-sm">{preventOrphan(component.description)}</p>
 									</div>
-									<div className="text-muted-foreground group-hover:text-primary transition-colors">
-										<svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-										</svg>
-									</div>
+									<ChevronRightIcon className="text-muted-foreground group-hover:text-primary transition-colors" />
 								</div>
 							</Link>
 						)
