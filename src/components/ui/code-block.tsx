@@ -60,8 +60,8 @@ export function CodeBlock({ block }: { block: ComponentCodeProps["codeBlocks"][0
 	}
 
 	return (
-		<div className="group relative">
-			<div className="bg-muted text-muted-foreground max-h-96 overflow-auto rounded-lg border font-mono text-sm">
+		<div className="group relative overflow-hidden rounded-lg border">
+			<div className="bg-muted text-muted-foreground max-h-96 overflow-auto font-mono text-sm">
 				<pre className="inline-block p-3 whitespace-pre">{code}</pre>
 			</div>
 			<CopyButton text={code} className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100" />
