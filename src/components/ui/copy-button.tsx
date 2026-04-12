@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { cn } from "@/utils/classname"
 import { useState } from "react"
 import { TextMorph } from "torph/react"
@@ -22,16 +23,15 @@ export function CopyButton({ text, className, ...props }: Props) {
 	}
 
 	return (
-		<button
+		<Button
+			variant="outline"
+			size="xs"
 			onClick={handleCopy}
-			className={cn(
-				"bg-muted text-muted-foreground hover:bg-accent hover:text-foreground flex items-center justify-center rounded-lg border px-2 py-0.5 text-xs transition-colors",
-				className
-			)}
+			className={cn("border-white/20! bg-inherit! text-white/80! hover:bg-white/5! hover:text-white!", className)}
 			aria-label="Copy to clipboard"
 			{...props}
 		>
 			{copied ? <TextMorph>Copied</TextMorph> : <TextMorph>Copy</TextMorph>}
-		</button>
+		</Button>
 	)
 }
