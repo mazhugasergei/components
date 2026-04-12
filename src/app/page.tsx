@@ -13,12 +13,10 @@ export default function Home() {
 				<div className="space-y-6">
 					{components.map((component, index) => {
 						const getSlug = (title: string) => {
-							if (title === "<AnimatedWidthContainer/>") return "animated-width-container"
-							if (title === "<Expandable/>") return "expandable"
 							return title
-								.replace(/<\/?[^>]+>/g, "")
+								.replace(/([A-Z])/g, "-$1")
+								.replace(/^-/, "")
 								.toLowerCase()
-								.replace(/\s+/g, "-")
 						}
 
 						const slug = getSlug(component.title)
