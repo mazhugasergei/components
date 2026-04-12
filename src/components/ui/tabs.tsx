@@ -58,7 +58,5 @@ export function TabsTrigger({ children, isActive, onClick, className }: TabsTrig
 }
 
 export function TabsContent({ children, isActive, className }: TabsContentProps) {
-	if (!isActive) return null
-
-	return <div className={cn("mt-2 focus:outline-none", className)}>{children}</div>
+	return <div className={cn("mt-2 focus:outline-none", !isActive && "hidden", className)}>{children}</div>
 }
