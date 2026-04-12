@@ -44,7 +44,7 @@ export function LayoutHeader({
 			)}
 			{...props}
 		>
-			<div className="mx-auto flex items-center justify-between px-4 md:max-w-2xl lg:max-w-4xl xl:max-w-2xl">
+			<div className="mx-auto flex items-center justify-between px-4 md:max-w-2xl">
 				<div className="flex items-center gap-4">
 					{showBackButton && (
 						<Link
