@@ -1,6 +1,8 @@
 import { createHighlighter } from "shiki"
 import { components } from "./constants"
 
+let highlighter: any = null
+
 interface ProcessedCodeBlock {
 	title: string
 	code?: string
@@ -31,10 +33,12 @@ export async function processCodeBlocks(): Promise<
 		const theme = await themeResponse.json()
 
 		// Create highlighter once for all code blocks
-		const highlighter = await createHighlighter({
-			themes: [theme],
-			langs: ["tsx", "typescript", "jsx", "javascript", "css"],
-		})
+		if (!highlighter) {
+			highlighter = await createHighlighter({
+				themes: [theme],
+				langs: ["tsx", "typescript", "jsx", "javascript", "css"],
+			})
+		}
 
 		// Process all components
 		return await Promise.all(
