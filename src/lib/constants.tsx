@@ -41,11 +41,11 @@ export const components = [
 			},
 			{
 				title: "Component",
-				codeUrl: "components/ui/animated-height-container.tsx",
+				codeUrl: "components/ui/expandable.tsx",
 			},
 			{
 				title: "Usage",
-				codeUrl: "components/examples/animated-height-container.tsx",
+				codeUrl: "components/examples/expandable.tsx",
 			},
 		],
 		examples: [<Expandable />],
