@@ -33,10 +33,7 @@ export function AnimatedWidthContainer({
 			}}
 		>
 			<BaseAnimatedWidthContainer
-				className={cn(
-					"bg-primary border-border flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border outline-none active:scale-95",
-					className
-				)}
+				className={cn("bg-primary cursor-pointer rounded-lg border px-4 py-1 active:scale-95", className)}
 				{...props}
 			>
 				<motion.span

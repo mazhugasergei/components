@@ -22,12 +22,9 @@ export default function Home() {
 						key={index}
 						title={component.title}
 						description={component.description}
+						examples={component.examples}
 						codeBlocks={component.codeBlocks}
-					>
-						{component.examples.map((example, exampleIndex) => (
-							<div key={exampleIndex}>{example}</div>
-						))}
-					</ComponentSection>
+					/>
 				))}
 			</div>
 		</div>

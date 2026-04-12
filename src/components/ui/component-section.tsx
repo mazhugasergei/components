@@ -2,10 +2,10 @@ import { CodeBlock } from "@/components/ui/code-block"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useState } from "react"
 
-interface ComponentSectionProps {
+interface ComponentSectionProps extends React.ComponentProps<"section"> {
 	title: string
 	description: string
-	children: React.ReactNode
+	examples?: React.ReactNode[]
 	codeBlocks?: Array<{
 		title: string
 		code?: string
@@ -14,11 +14,17 @@ interface ComponentSectionProps {
 	}>
 }
 
-export function ComponentSection({ title, description, children, codeBlocks = [] }: ComponentSectionProps) {
+export function ComponentSection({
+	title,
+	description,
+	examples = [],
+	codeBlocks = [],
+	...props
+}: ComponentSectionProps) {
 	const [activeTab, setActiveTab] = useState<"preview" | "code">("preview")
 
 	return (
-		<section>
+		<section {...props}>
 			<h2 className="text-foreground font-mono text-xl font-bold">{title}</h2>
 			<p className="text-muted-foreground mt-2 text-sm">{description}</p>
 
@@ -32,8 +38,12 @@ export function ComponentSection({ title, description, children, codeBlocks = []
 					</TabsTrigger>
 				</TabsList>
 
-				<TabsContent isActive={activeTab === "preview"}>
-					<div className="border-border bg-card rounded-md border p-4">{children}</div>
+				<TabsContent isActive={activeTab === "preview"} className="space-y-2">
+					{examples.map((example, index) => (
+						<div key={index} className="border-border bg-card rounded-md border p-4">
+							{example}
+						</div>
+					))}
 				</TabsContent>
 
 				<TabsContent isActive={activeTab === "code"}>

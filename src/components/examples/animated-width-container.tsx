@@ -3,7 +3,6 @@
 import { AnimatedWidthContainer } from "@/components/ui/animated-width-container"
 import { useState } from "react"
 
-// Example data
 const labels = ["Lorem Ipsum", "Ex Amet", "Aliqua Velit"]
 
 export function AnimatedWidthContainerExample() {
