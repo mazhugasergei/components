@@ -10,7 +10,7 @@ export default function Home() {
 		<div>
 			<LayoutHeader title="Animated Components" />
 			<div className="mx-auto max-w-2xl space-y-12 p-8">
-				<PageHeader title="Components" description="Examples of smooth dimension animations using React and Motion" />
+				<PageHeader title="Components" description="Personal collection of reusable components." />
 
 				<div className="space-y-6">
 					{components.map((component, index) => {

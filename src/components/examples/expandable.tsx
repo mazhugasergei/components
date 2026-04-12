@@ -1,10 +1,10 @@
 "use client"
 
-import { AnimatedHeightContainer } from "@/components/ui/expandable"
+import { Expandable } from "@/components/ui/expandable"
 import { Paragraph } from "@/components/ui/paragraph"
 import { motion } from "motion/react"
 
-export function Expandable() {
+export function ExpandableExample() {
 	const expandedContent = (
 		<motion.div
 			initial={{ opacity: 0, filter: "blur(8px)" }}
@@ -21,12 +21,12 @@ export function Expandable() {
 
 	return (
 		<div className="flex items-center justify-center p-8">
-			<AnimatedHeightContainer expandedContent={expandedContent}>
+			<Expandable expandedContent={expandedContent}>
 				<Paragraph>
 					Containers on the web snap to their new size instantly when content changes. By measuring the bounds of a
 					container and animating to those values, we can make these transitions feel smooth and intentional.
 				</Paragraph>
-			</AnimatedHeightContainer>
+			</Expandable>
 		</div>
 	)
 }

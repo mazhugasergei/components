@@ -1,10 +1,10 @@
-import { AnimatedWidthContainerExample } from "@/components/examples/animated-button"
-import { Expandable } from "@/components/examples/expandable"
+import { AnimatedButtonExample } from "@/components/examples/animated-button"
+import { ExpandableExample } from "@/components/examples/expandable"
 
 export const components = [
 	{
 		title: "AnimatedButton",
-		description: "Smooth width transitions when button content changes using custom useMeasure hook",
+		description: "Smooth width transitions when button content changes using custom useMeasure hook.",
 		badgeColor: "blue" as const,
 		codeBlocks: [
 			{
@@ -32,11 +32,11 @@ export const components = [
 				filePath: "components/examples/animated-button.tsx",
 			},
 		],
-		examples: [<AnimatedWidthContainerExample />],
+		examples: [<AnimatedButtonExample />],
 	},
 	{
 		title: "Expandable",
-		description: "Smooth height animations for expandable content using AnimatePresence and ResizeObserver",
+		description: "Smooth height animations for expandable content using AnimatePresence and ResizeObserver.",
 		badgeColor: "green" as const,
 		codeBlocks: [
 			{
@@ -54,6 +54,6 @@ export const components = [
 				filePath: "components/examples/expandable.tsx",
 			},
 		],
-		examples: [<Expandable />],
+		examples: [<ExpandableExample />],
 	},
 ]

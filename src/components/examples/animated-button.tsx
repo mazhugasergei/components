@@ -5,7 +5,7 @@ import { useState } from "react"
 
 const labels = ["Lorem Ipsum", "Ex Amet", "Aliqua Velit"]
 
-export function AnimatedWidthContainerExample() {
+export function AnimatedButtonExample() {
 	const [widthIndex, setWidthIndex] = useState(0)
 
 	return (

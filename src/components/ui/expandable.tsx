@@ -40,7 +40,7 @@ interface AnimatedHeightContainerProps {
 	expandTrigger?: React.ReactNode
 }
 
-export function AnimatedHeightContainer({
+export function Expandable({
 	children,
 	expandedContent,
 	onToggle,
