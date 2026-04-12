@@ -22,7 +22,6 @@ export default function Home() {
 						key={index}
 						title={component.title}
 						description={component.description}
-						badgeColor={component.badgeColor}
 						codeBlocks={component.codeBlocks}
 					>
 						{component.example}

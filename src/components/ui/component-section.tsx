@@ -18,13 +18,11 @@ export function ComponentSection({ title, description, children, codeBlocks = []
 	const [activeTab, setActiveTab] = useState<"preview" | "code">("preview")
 
 	return (
-		<div className="space-y-4">
-			<div className="mb-4">
-				<h2 className="text-foreground font-mono text-lg font-medium">{title}</h2>
-			</div>
-			<p className="text-muted-foreground text-sm">{description}</p>
+		<section>
+			<h2 className="text-foreground font-mono text-xl font-bold">{title}</h2>
+			<p className="text-muted-foreground mt-2 text-sm">{description}</p>
 
-			<Tabs>
+			<Tabs className="mt-4">
 				<TabsList>
 					<TabsTrigger isActive={activeTab === "preview"} onClick={() => setActiveTab("preview")}>
 						Preview
@@ -54,6 +52,6 @@ export function ComponentSection({ title, description, children, codeBlocks = []
 					</div>
 				</TabsContent>
 			</Tabs>
-		</div>
+		</section>
 	)
 }
