@@ -3,7 +3,7 @@ import { Expandable } from "@/components/examples/expandable"
 
 export const components = [
 	{
-		title: "<AnimatedWidthContainer/>",
+		title: "AnimatedWidthContainer",
 		description: "Smooth width transitions when button content changes using custom useMeasure hook",
 		badgeColor: "blue" as const,
 		codeBlocks: [
@@ -35,7 +35,7 @@ export const components = [
 		examples: [<AnimatedWidthContainerExample />],
 	},
 	{
-		title: "<Expandable/>",
+		title: "Expandable",
 		description: "Smooth height animations for expandable content using AnimatePresence and ResizeObserver",
 		badgeColor: "green" as const,
 		codeBlocks: [

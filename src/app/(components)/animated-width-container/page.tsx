@@ -3,9 +3,9 @@ import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
 
-const component = components.find((c) => c.title === "<AnimatedWidthContainer/>")
+const component = components.find((c) => c.title === "AnimatedWidthContainer")
 
-export default function AnimatedWidthContainerPage() {
+export default function Page() {
 	if (!component) return <div>Component not found</div>
 
 	return (

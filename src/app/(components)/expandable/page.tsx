@@ -3,9 +3,9 @@ import { LayoutHeader } from "@/components/ui/layout-header"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
 
-const component = components.find((c) => c.title === "<Expandable/>")
+const component = components.find((c) => c.title === "Expandable")
 
-export default function ExpandablePage() {
+export default function Page() {
 	if (!component) return <div>Component not found</div>
 
 	return (
