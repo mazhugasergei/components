@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 export default function Home() {
 	return (
 		<>
-			<Header title="Components" />
+			<Header title="Components" backHref="~" />
 
 			<main>
 				<div className="mx-auto max-w-2xl space-y-12 p-4">

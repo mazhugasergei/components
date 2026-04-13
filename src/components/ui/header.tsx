@@ -8,11 +8,10 @@ import { ComponentProps, useEffect, useState } from "react"
 
 interface LayoutHeaderProps extends ComponentProps<"header"> {
 	title?: string
-	showBackButton?: boolean
-	backHref?: string
+	backHref?: string | "~"
 }
 
-export function Header({ title, showBackButton = false, backHref = "/", className, ...props }: LayoutHeaderProps) {
+export function Header({ title, backHref, className, ...props }: LayoutHeaderProps) {
 	const [scrollY, setScrollY] = useState(0)
 
 	useEffect(() => {
@@ -33,8 +32,11 @@ export function Header({ title, showBackButton = false, backHref = "/", classNam
 		>
 			<div className="mx-auto flex max-w-2xl items-center justify-between py-2">
 				<div className="flex items-center gap-4">
-					{showBackButton && (
-						<Link href={backHref} className={buttonVariants({ variant: "transparent" })}>
+					{backHref && (
+						<Link
+							href={backHref === "~" ? (typeof window !== "undefined" ? window.location.origin : "/") : backHref}
+							className={buttonVariants({ variant: "transparent" })}
+						>
 							<ChevronLeftIcon />
 							Back
 						</Link>

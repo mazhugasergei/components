@@ -31,7 +31,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
 	return (
 		<>
-			<Header title={component.title} showBackButton />
+			<Header title={component.title} backHref="/" />
+
 			<main>
 				<div className="mx-auto max-w-2xl space-y-12 p-4">
 					<PageHeader title={component.title} description={component.description} />
