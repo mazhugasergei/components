@@ -1,7 +1,6 @@
 "use client"
 
 import { buttonVariants } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { cn } from "@/utils/classname"
 import { ChevronLeftIcon } from "lucide-react"
 import Link from "next/link"
@@ -46,8 +45,6 @@ export function Header({ title, showBackButton = false, backHref = "/", classNam
 						</span>
 					)}
 				</div>
-
-				<ThemeToggle className="mr-4" />
 			</div>
 		</header>
 	)
