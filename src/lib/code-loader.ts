@@ -1,3 +1,4 @@
+import { logger } from "@/utils/logger"
 import { createHighlighter } from "shiki"
 import { components } from "./constants"
 
@@ -5,11 +6,8 @@ let highlighter: any = null
 
 interface ProcessedCodeBlock {
 	title: string
-	code?: string
-	codeUrl?: string
 	filePath?: string
-	highlightedCode?: string
-	error?: string
+	highlightedCode: string
 	themeBackground?: string
 }
 
@@ -27,9 +25,7 @@ export async function processCodeBlocks(): Promise<
 		const themeResponse = await fetch(
 			"https://raw.githubusercontent.com/mazhugasergei/theme-builder/refs/heads/main/themes/theme.json"
 		)
-		if (!themeResponse.ok) {
-			throw new Error("Failed to fetch theme")
-		}
+		if (!themeResponse.ok) throw new Error("Failed to fetch theme")
 		const theme = await themeResponse.json()
 
 		// Create highlighter once for all code blocks
@@ -45,45 +41,28 @@ export async function processCodeBlocks(): Promise<
 			components.map(async (component) => {
 				const processedCodeBlocks = await Promise.all(
 					component.codeBlocks.map(async (block): Promise<ProcessedCodeBlock> => {
-						if (block.code) {
-							// Code is already provided, just highlight it
-							const lang = getLang(block.filePath)
-							return {
-								...block,
-								highlightedCode: highlighter.codeToHtml(block.code, {
-									lang,
-									theme: theme.name,
-								}),
-								themeBackground: theme.colors?.["editor.background"],
-							}
-						} else if (block.codeUrl) {
-							// Fetch code from GitHub and highlight it
-							try {
-								const res = await fetch(
-									`https://raw.githubusercontent.com/mazhugasergei/components/refs/heads/main/src/${block.codeUrl}`
-								)
-								if (!res.ok) {
-									throw new Error(`Failed to fetch: ${res.statusText}`)
-								}
-								const code = await res.text()
-								const lang = getLang(block.filePath)
-								return {
-									...block,
-									code,
-									highlightedCode: highlighter.codeToHtml(code, {
-										lang,
-										theme: theme.name,
-									}),
-									themeBackground: theme.colors?.["editor.background"],
-								}
-							} catch (err) {
-								return {
-									...block,
-									error: err instanceof Error ? err.message : "Failed to load code",
-								}
-							}
+						if (!block.codeUrl) throw new Error(`code block "${block.title}" must have codeUrl`)
+
+						// Fetch code from GitHub
+						const res = await fetch(
+							`https://raw.githubusercontent.com/mazhugasergei/components/refs/heads/main/src/${block.codeUrl}`
+						)
+						if (!res.ok) throw new Error(`failed to fetch ${block.codeUrl}: ${res.statusText}`)
+
+						const code = await res.text()
+
+						const lang = getLang(block.filePath)
+						const highlightedCode = highlighter.codeToHtml(code, {
+							lang,
+							theme: theme.name,
+						})
+
+						return {
+							title: block.title,
+							filePath: block.filePath,
+							highlightedCode,
+							themeBackground: theme.colors?.["editor.background"],
 						}
-						return block
 					})
 				)
 
@@ -94,8 +73,9 @@ export async function processCodeBlocks(): Promise<
 			})
 		)
 	} catch (err) {
-		console.error("Error processing code blocks:", err)
-		return components
+		const errorMessage = `Failed to process code blocks: ${err instanceof Error ? err.message : String(err)}`
+		logger.error(errorMessage, "ERROR")
+		throw new Error(errorMessage)
 	}
 }
 

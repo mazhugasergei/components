@@ -43,11 +43,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 							<div key={index} className="space-y-2">
 								<div className="flex items-center justify-between gap-2">
 									<h3 className="text-foreground font-mono text-sm font-medium">{block.title}</h3>
-									<span className="text-muted-foreground text-right font-mono text-xs">
-										{block.filePath || block.codeUrl}
-									</span>
+									<span className="text-muted-foreground text-right font-mono text-xs">{block.filePath}</span>
 								</div>
-								<CodeBlock {...block} />
+								<CodeBlock highlightedCode={block.highlightedCode} themeBackground={block.themeBackground} />
 							</div>
 						))}
 					</div>
