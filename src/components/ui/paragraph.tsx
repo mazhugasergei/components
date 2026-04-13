@@ -8,5 +8,5 @@ interface ParagraphProps {
 
 export function Paragraph({ children, className }: ParagraphProps) {
 	const textContent = typeof children === "string" ? preventOrphan(children) : children
-	return <p className={cn("text-foreground m-0 text-sm leading-relaxed", className)}>{textContent}</p>
+	return <p className={cn("text-sm leading-relaxed", className)}>{textContent}</p>
 }

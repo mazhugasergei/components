@@ -17,12 +17,7 @@ export const components = [
 				filePath: "hooks/use-measure.ts",
 			},
 			{
-				title: "Base component",
-				codeUrl: "components/ui/base-animated-button.tsx",
-				filePath: "components/ui/base-animated-button.tsx",
-			},
-			{
-				title: "Styled component",
+				title: "Component",
 				codeUrl: "components/ui/animated-button.tsx",
 				filePath: "components/ui/animated-button.tsx",
 			},
@@ -42,6 +37,11 @@ export const components = [
 			{
 				title: "Installation",
 				code: "npm install motion",
+			},
+			{
+				title: "Hook",
+				codeUrl: "hooks/use-measure.ts",
+				filePath: "hooks/use-measure.ts",
 			},
 			{
 				title: "Component",

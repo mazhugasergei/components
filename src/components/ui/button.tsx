@@ -39,6 +39,7 @@ interface ButtonProps extends ComponentProps<"button">, VariantProps<typeof butt
 function Button({ className, variant = "default", size = "default", ...props }: ButtonProps) {
 	return (
 		<button
+			type="button"
 			data-variant={variant}
 			data-size={size}
 			className={cn(buttonVariants({ variant, size, className }))}
