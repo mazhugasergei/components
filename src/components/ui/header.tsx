@@ -14,6 +14,13 @@ interface LayoutHeaderProps extends ComponentProps<"header"> {
 export function Header({ title, backHref, className, ...props }: LayoutHeaderProps) {
 	const [scrollY, setScrollY] = useState(0)
 
+	const href =
+		backHref === "~"
+			? typeof window !== "undefined"
+				? window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, "")
+				: "/"
+			: backHref
+
 	useEffect(() => {
 		const handleScroll = () => setScrollY(window.scrollY)
 
@@ -32,11 +39,8 @@ export function Header({ title, backHref, className, ...props }: LayoutHeaderPro
 		>
 			<div className="mx-auto flex max-w-2xl items-center justify-between py-2">
 				<div className="flex items-center gap-4">
-					{backHref && (
-						<Link
-							href={backHref === "~" ? (typeof window !== "undefined" ? window.location.origin : "/") : backHref}
-							className={buttonVariants({ variant: "transparent" })}
-						>
+					{href && (
+						<Link href={href} className={buttonVariants({ variant: "transparent" })}>
 							<ChevronLeftIcon />
 							Back
 						</Link>
