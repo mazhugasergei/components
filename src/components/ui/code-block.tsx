@@ -11,7 +11,7 @@ interface Props extends React.ComponentProps<"div"> {
 export function CodeBlock({ highlightedCode, themeBackground, className, ...props }: Props) {
 	return (
 		<div
-			style={themeBackground ? { background: themeBackground } : {}}
+			style={{ background: themeBackground ?? "var(--background)" }}
 			className={cn("group relative overflow-hidden rounded-lg border", className)}
 			{...props}
 		>

@@ -40,12 +40,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
 					<div className="space-y-6">
 						{component.codeBlocks.map((block, index) => (
-							<div key={index} className="space-y-2">
-								<div className="flex items-center justify-between gap-2">
-									<h3 className="text-foreground font-mono text-sm font-medium">{block.title}</h3>
-									<span className="text-muted-foreground text-right font-mono text-xs">{block.filePath}</span>
+							<div key={index} className="bg-card rounded-lg border">
+								<div className="flex items-center justify-between gap-2 px-2 py-1 text-xs">
+									<h3 className="text-foreground font-mono font-medium">{block.title}</h3>
+									<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
 								</div>
-								<CodeBlock highlightedCode={block.highlightedCode} themeBackground={block.themeBackground} />
+								<CodeBlock
+									highlightedCode={block.highlightedCode}
+									themeBackground={block.themeBackground}
+									className="-m-0.25"
+								/>
 							</div>
 						))}
 					</div>
