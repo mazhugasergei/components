@@ -8,10 +8,6 @@ export const components = [
 		badgeColor: "blue" as const,
 		codeBlocks: [
 			{
-				title: "Installation",
-				code: "npm install motion",
-			},
-			{
 				title: "Hook",
 				codeUrl: "hooks/use-measure.ts",
 				filePath: "hooks/use-measure.ts",
