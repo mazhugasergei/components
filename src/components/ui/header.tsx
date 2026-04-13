@@ -1,11 +1,11 @@
 "use client"
 
-import { ThemeSwitcher } from "@/components/theme-switcher"
+import { buttonVariants } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { cn } from "@/utils/classname"
 import { ChevronLeftIcon } from "lucide-react"
 import Link from "next/link"
 import { ComponentProps, useEffect, useState } from "react"
-import { buttonVariants } from "./button"
 
 interface LayoutHeaderProps extends ComponentProps<"header"> {
 	title?: string
@@ -47,7 +47,7 @@ export function Header({ title, showBackButton = false, backHref = "/", classNam
 					)}
 				</div>
 
-				<ThemeSwitcher className="mr-4" />
+				<ThemeToggle className="mr-4" />
 			</div>
 		</header>
 	)
