@@ -50,7 +50,7 @@ export async function processCodeBlocks(): Promise<
 							)
 							if (!res.ok) throw new Error(`failed to fetch ${block.codeUrl}: ${res.statusText}`)
 							code = await res.text()
-						} else if (block.code) {
+						} else if ("code" in block && block.code) {
 							// Use inline code
 							code = block.code
 						} else {
