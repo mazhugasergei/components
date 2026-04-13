@@ -41,7 +41,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 					<div className="space-y-6">
 						{component.codeBlocks.map((block, index) => (
 							<div key={index} className="bg-card rounded-lg border">
-								<div className="flex items-center justify-between gap-2 px-2 py-1 text-xs">
+								<div className="flex items-center justify-between gap-2 px-3 py-1 text-xs">
 									<h3 className="text-foreground font-mono font-medium">{block.title}</h3>
 									<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
 								</div>
