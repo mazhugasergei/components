@@ -27,6 +27,7 @@ export default function Home() {
 	return (
 		<main>
 			<LayoutHeader title="Components" />
+
 			<div className="mx-auto max-w-2xl space-y-12 p-8">
 				<PageHeader title="Components" description="Personal collection of reusable components." />
 
