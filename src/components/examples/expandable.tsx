@@ -19,13 +19,11 @@ export function ExpandableExample() {
 	)
 
 	return (
-		<div className="flex items-center justify-center p-8">
-			<Expandable expandedContent={expandedContent}>
-				<p className="text-sm leading-relaxed">
-					Containers on the web snap to their new size instantly when content changes. By measuring the bounds of a
-					container and animating to those values, we can make these transitions feel smooth and intentional.
-				</p>
-			</Expandable>
-		</div>
+		<Expandable expandedContent={expandedContent}>
+			<p className="text-sm leading-relaxed">
+				Containers on the web snap to their new size instantly when content changes. By measuring the bounds of a
+				container and animating to those values, we can make these transitions feel smooth and intentional.
+			</p>
+		</Expandable>
 	)
 }

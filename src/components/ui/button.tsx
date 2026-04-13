@@ -1,4 +1,3 @@
-import { cn } from "@/utils/classname"
 import { cva, type VariantProps } from "class-variance-authority"
 import { ComponentProps } from "react"
 
@@ -15,6 +14,7 @@ export const buttonVariants = cva(
 				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
 				ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
 				link: "text-primary underline-offset-4 hover:underline",
+				transparent: "text-muted-foreground hover:text-foreground",
 			},
 			size: {
 				default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -42,7 +42,7 @@ export function Button({ className, variant = "default", size = "default", ...pr
 			type="button"
 			data-variant={variant}
 			data-size={size}
-			className={cn(buttonVariants({ variant, size, className }))}
+			className={buttonVariants({ variant, size, className })}
 			{...props}
 		/>
 	)
