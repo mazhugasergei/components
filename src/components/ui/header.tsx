@@ -13,9 +13,13 @@ interface LayoutHeaderProps extends ComponentProps<"header"> {
 
 export function Header({ title, backHref, className, ...props }: LayoutHeaderProps) {
 	const [scrollY, setScrollY] = useState(0)
+	const [href, setHref] = useState<string | undefined>(backHref)
 
-	const href =
-		backHref === "~" ? (typeof window !== "undefined" ? window.location.origin.replace(/\/[^/]*$/, "") : "/") : backHref
+	useEffect(() => {
+		if (backHref === "~") {
+			setHref(typeof window !== "undefined" ? window.location.origin.replace(/\/[^/]*$/, "") : "/")
+		}
+	}, [backHref])
 
 	useEffect(() => {
 		const handleScroll = () => setScrollY(window.scrollY)
