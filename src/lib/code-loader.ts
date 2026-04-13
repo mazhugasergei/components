@@ -41,15 +41,21 @@ export async function processCodeBlocks(): Promise<
 			components.map(async (component) => {
 				const processedCodeBlocks = await Promise.all(
 					component.codeBlocks.map(async (block): Promise<ProcessedCodeBlock> => {
-						if (!block.codeUrl) throw new Error(`code block "${block.title}" must have codeUrl`)
+						let code: string
 
-						// Fetch code from GitHub
-						const res = await fetch(
-							`https://raw.githubusercontent.com/mazhugasergei/components/refs/heads/main/src/${block.codeUrl}`
-						)
-						if (!res.ok) throw new Error(`failed to fetch ${block.codeUrl}: ${res.statusText}`)
-
-						const code = await res.text()
+						if (block.codeUrl) {
+							// Fetch code from GitHub
+							const res = await fetch(
+								`https://raw.githubusercontent.com/mazhugasergei/components/refs/heads/main/src/${block.codeUrl}`
+							)
+							if (!res.ok) throw new Error(`failed to fetch ${block.codeUrl}: ${res.statusText}`)
+							code = await res.text()
+						} else if (block.code) {
+							// Use inline code
+							code = block.code
+						} else {
+							throw new Error(`code block "${block.title}" must have either codeUrl or code`)
+						}
 
 						const lang = getLang(block.filePath)
 						const highlightedCode = highlighter.codeToHtml(code, {
