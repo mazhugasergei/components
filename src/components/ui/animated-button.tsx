@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react"
 const EASING = "cubic-bezier(0.19,1,0.22,1)"
 
 const transitionIn = [
-	`opacity 600ms ease-in-out 50ms`,
+	`opacity 500ms ease-in-out 50ms`,
 	`filter 400ms ${EASING} 50ms`,
 	`scale 400ms ${EASING} 50ms`,
 ].join(", ")
