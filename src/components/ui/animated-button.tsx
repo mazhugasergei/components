@@ -1,7 +1,6 @@
 "use client"
 
 import { useMeasure } from "@/hooks/use-measure"
-import { cn } from "@/utils/classname"
 import { useEffect, useRef, useState } from "react"
 
 const EASING = "cubic-bezier(0.19,1,0.22,1)"
@@ -42,10 +41,7 @@ export function AnimatedButton({ children, className, ...props }: React.Componen
 	return (
 		<button
 			style={{ width }}
-			className={cn(
-				"bg-primary flex cursor-pointer items-center justify-center rounded-lg border py-1.5 transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] active:scale-95",
-				className
-			)}
+			className={`bg-primary flex cursor-pointer items-center justify-center rounded-lg border py-1.5 transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] active:scale-95 ${className ?? ""}`}
 			{...props}
 		>
 			<div ref={ref}>
