@@ -4,7 +4,6 @@ import { useMeasure } from "@/hooks/use-measure"
 import { cn } from "@/utils/classname"
 import { AnimatePresence, MotionConfig, motion } from "motion/react"
 import React, { cloneElement, useState } from "react"
-import { Button } from "./button"
 
 interface ExpandableProps extends React.ComponentProps<"div"> {
 	expandedContent: React.ReactNode
@@ -56,7 +55,13 @@ export function Expandable({
 						onClick: handleToggle,
 					})
 				) : (
-					<Button onClick={handleToggle}>{expanded ? "See less" : "See more"}</Button>
+					<button
+						type="button"
+						onClick={handleToggle}
+						className="bg-primary text-primary-foreground flex cursor-pointer items-center justify-center rounded-lg border px-4 py-1.5 text-sm font-medium whitespace-nowrap active:scale-95"
+					>
+						{expanded ? "See less" : "See more"}
+					</button>
 				)}
 			</div>
 		</MotionConfig>

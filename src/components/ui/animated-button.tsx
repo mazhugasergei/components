@@ -33,7 +33,7 @@ export function AnimatedButton({ children, className, ...props }: React.Componen
 			<motion.button
 				animate={{ width: bounds.width > 0 ? bounds.width : "auto" }}
 				className={cn(
-					"bg-primary flex cursor-pointer items-center justify-center rounded-lg border px-4 py-1 active:scale-95",
+					"bg-primary flex cursor-pointer items-center justify-center rounded-lg border py-1.5 active:scale-95",
 					className
 				)}
 				{...props}
@@ -42,7 +42,7 @@ export function AnimatedButton({ children, className, ...props }: React.Componen
 					<motion.span
 						{...animation}
 						key={children?.toString()}
-						className="text-primary-foreground px-4 py-2 text-sm font-medium whitespace-nowrap"
+						className="text-primary-foreground px-4 text-sm font-medium whitespace-nowrap"
 					>
 						{children}
 					</motion.span>
