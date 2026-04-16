@@ -1,25 +1,11 @@
 import { logger } from "@/utils/logger"
 import { createHighlighter } from "shiki"
 import { components } from "./constants"
+import { ProcessedCodeBlock, ProcessedComponent } from "./types"
 
 let highlighter: any = null
 
-interface ProcessedCodeBlock {
-	title: string
-	filePath?: string
-	highlightedCode: string
-	themeBackground?: string
-}
-
-export async function processCodeBlocks(): Promise<
-	Array<{
-		title: string
-		description: string
-		badgeColor: "blue" | "green"
-		codeBlocks: ProcessedCodeBlock[]
-		examples: any[]
-	}>
-> {
+export async function processCodeBlocks(): Promise<ProcessedComponent[]> {
 	try {
 		// Fetch theme
 		const themeResponse = await fetch(
