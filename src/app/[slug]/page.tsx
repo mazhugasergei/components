@@ -11,8 +11,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 	if (!component) return notFound()
 
 	return (
-		<main className="mx-auto max-w-4xl flex-1 space-y-12 p-4 pt-6">
-			<PageHeader title={component.title} description={component.description} />
+		<main className="mx-auto max-w-4xl flex-1 p-4">
+			<PageHeader title={component.title} description={component.description} className="py-12" />
 
 			<div className="space-y-8">
 				<div className="bg-card grid place-content-center rounded-lg border p-10">{component.examples[0]}</div>
