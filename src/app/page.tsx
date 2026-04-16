@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function Home() {
 	return (
 		<main className="mx-auto max-w-2xl px-4">
-			<PageHeader title="Components" description="Personal collection of reusable components." />
+			<PageHeader title="Components" description="Personal collection of reusable components." className="py-12" />
 
 			<div className="space-y-6">
 				{components.map((component, index) => {
