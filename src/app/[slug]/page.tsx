@@ -33,28 +33,26 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 		<>
 			<Header title={component.title} backHref="/" />
 
-			<main>
-				<div className="mx-auto max-w-2xl space-y-12 p-4">
-					<PageHeader title={component.title} description={component.description} />
+			<main className="mx-auto max-w-4xl flex-1 space-y-12 p-4 pt-6">
+				<PageHeader title={component.title} description={component.description} />
 
-					<div className="space-y-8">
-						<div className="bg-card grid place-content-center rounded-lg border p-10">{component.examples[0]}</div>
+				<div className="space-y-8">
+					<div className="bg-card grid place-content-center rounded-lg border p-10">{component.examples[0]}</div>
 
-						<div className="space-y-6">
-							{component.codeBlocks.map((block, index) => (
-								<div key={index} className="bg-card rounded-lg border">
-									<div className="flex items-center justify-between gap-2 px-3 py-1 text-xs">
-										<h3 className="text-foreground font-mono font-medium">{block.title}</h3>
-										<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
-									</div>
-									<CodeBlock
-										highlightedCode={block.highlightedCode}
-										themeBackground={block.themeBackground}
-										className="-m-0.25"
-									/>
+					<div className="space-y-6">
+						{component.codeBlocks.map((block, index) => (
+							<div key={index} className="bg-card rounded-lg border">
+								<div className="flex items-center justify-between gap-2 px-3 py-1 text-xs">
+									<h3 className="text-foreground font-mono font-medium">{block.title}</h3>
+									<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
 								</div>
-							))}
-						</div>
+								<CodeBlock
+									highlightedCode={block.highlightedCode}
+									themeBackground={block.themeBackground}
+									className="-m-0.25"
+								/>
+							</div>
+						))}
 					</div>
 				</div>
 			</main>

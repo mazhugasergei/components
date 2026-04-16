@@ -17,9 +17,7 @@ export function CodeBlock({ highlightedCode, themeBackground, className, ...prop
 		>
 			<div
 				className="code-block-scrollbars max-h-96 overflow-auto text-white [&>pre]:inline-block [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:[tab-size:2]"
-				dangerouslySetInnerHTML={{
-					__html: highlightedCode,
-				}}
+				dangerouslySetInnerHTML={{ __html: highlightedCode }}
 			/>
 			<CopyButton
 				text={highlightedCode.replace(/<[^>]*>/g, "")}
