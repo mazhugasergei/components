@@ -12,16 +12,10 @@ interface Props extends React.ComponentProps<"aside"> {
 	backHref?: string | "~"
 }
 
-const LINKS = [
-	{
-		href: "/",
-		label: "Home",
-	},
-	...components.map((component) => ({
-		href: `/${toKebabCase(component.title)}`,
-		label: component.title,
-	})),
-]
+const LINKS = components.map((component) => ({
+	href: `/${toKebabCase(component.title)}`,
+	label: component.title,
+}))
 
 export function Aside({ backHref, className, ...props }: Props) {
 	const pathname = usePathname()
@@ -38,13 +32,13 @@ export function Aside({ backHref, className, ...props }: Props) {
 					href="/"
 					className={buttonVariants({
 						variant: "transparent",
-						className: "text-foreground font-mono text-lg font-medium",
+						className: "text-foreground! font-mono text-lg font-medium",
 					})}
 				>
 					Components
 				</Link>
 
-				<ul className="space-y-1">
+				<ul>
 					{LINKS.map((link, index) => {
 						const isActive = pathname === link.href
 
@@ -54,7 +48,7 @@ export function Aside({ backHref, className, ...props }: Props) {
 									href={link.href}
 									className={buttonVariants({
 										variant: "transparent",
-										className: cn("w-full justify-start", isActive && "text-foreground!"),
+										className: cn("w-full justify-start font-mono", isActive && "text-foreground!"),
 									})}
 								>
 									{link.label}
