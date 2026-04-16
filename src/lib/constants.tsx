@@ -5,7 +5,6 @@ export const components = [
 	{
 		title: "AnimatedButton",
 		description: "Smooth width transitions when button content changes.",
-		badgeColor: "blue" as const,
 		codeBlocks: [
 			{
 				title: "Hook",
@@ -28,7 +27,6 @@ export const components = [
 	{
 		title: "Expandable",
 		description: "Smooth animations for expandable content.",
-		badgeColor: "green" as const,
 		codeBlocks: [
 			{
 				title: "Installation",

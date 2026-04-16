@@ -1,9 +1,8 @@
+import { ComponentCard } from "@/components/component-card"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
-import { preventOrphan, toKebabCase } from "@/utils/text"
-import { ChevronRightIcon } from "lucide-react"
+import { toKebabCase } from "@/utils/text"
 import type { Metadata } from "next"
-import Link from "next/link"
 
 export const metadata: Metadata = {
 	title: "Components",
@@ -24,30 +23,29 @@ export const metadata: Metadata = {
 
 export default function Home() {
 	return (
-		<main className="mx-auto max-w-2xl px-4">
-			<PageHeader title="Components" description="Personal collection of reusable components." className="py-12" />
+		<main className="from-background via-background to-muted/20 min-h-screen bg-linear-to-br">
+			<div className="mx-auto max-w-4xl px-4 py-16">
+				<PageHeader
+					title="Components"
+					description="Personal collection of reusable components."
+					className="py-12 text-center"
+				/>
 
-			<div className="space-y-6">
-				{components.map((component, index) => {
-					const slug = toKebabCase(component.title)
-					return (
-						<Link
+				<div className="grid gap-6 md:grid-cols-2">
+					{components.map((component, index) => (
+						<ComponentCard
 							key={index}
-							href={`/${slug}`}
-							className="group border-border bg-card hover:bg-accent block rounded-lg border p-6 transition-colors"
-						>
-							<div className="flex items-center justify-between">
-								<div>
-									<h2 className="text-foreground group-hover:text-primary font-mono text-lg font-medium">
-										{component.title}
-									</h2>
-									<p className="text-muted-foreground mt-1 text-sm">{preventOrphan(component.description)}</p>
-								</div>
-								<ChevronRightIcon className="text-muted-foreground group-hover:text-primary transition-colors" />
-							</div>
-						</Link>
-					)
-				})}
+							href={`/${toKebabCase(component.title)}`}
+							title={component.title}
+							description={component.description}
+							codeBlocksCount={component.codeBlocks.length}
+						/>
+					))}
+				</div>
+
+				<div className="mt-16 text-center">
+					<p className="text-muted-foreground text-sm">Built with Next.js, TypeScript, and Tailwind CSS</p>
+				</div>
 			</div>
 		</main>
 	)
