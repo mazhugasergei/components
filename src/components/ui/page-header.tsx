@@ -1,12 +1,12 @@
 import { cn } from "@/utils/classname"
 import { preventOrphan } from "@/utils/text"
 
-interface PageHeaderProps {
+interface Props {
 	title: string
 	description: string
 }
 
-export function PageHeader({ title, description }: PageHeaderProps) {
+export function PageHeader({ title, description }: Props) {
 	return (
 		<div className="space-y-2">
 			<h1 className={cn("text-foreground font-mono text-3xl font-bold")}>{title}</h1>

@@ -5,20 +5,13 @@ import { cn } from "@/utils/classname"
 import { AnimatePresence, MotionConfig, motion } from "motion/react"
 import React, { cloneElement, useState } from "react"
 
-interface ExpandableProps extends React.ComponentProps<"div"> {
+interface Props extends React.ComponentProps<"div"> {
 	expandedContent: React.ReactNode
 	expandTrigger?: [React.ReactNode, React.ReactNode]
 	onExpandedChange?: (expanded: boolean) => void
 }
 
-export function Expandable({
-	children,
-	expandedContent,
-	onExpandedChange,
-	expandTrigger,
-	className,
-	...props
-}: ExpandableProps) {
+export function Expandable({ children, expandedContent, onExpandedChange, expandTrigger, className, ...props }: Props) {
 	const [ref, bounds] = useMeasure()
 	const [expanded, setExpanded] = useState(false)
 
