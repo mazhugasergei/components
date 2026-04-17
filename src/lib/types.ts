@@ -1,3 +1,17 @@
+export interface Component {
+	title: string
+	description: string
+	codeBlocks: CodeBlock[]
+	examples: React.ReactNode[]
+}
+
+export interface CodeBlock {
+	title: string
+	codeUrl?: string
+	filePath?: string
+	code?: string
+}
+
 export interface ProcessedCodeBlock {
 	title: string
 	filePath?: string

@@ -1,7 +1,8 @@
 import { AnimatedButtonExample } from "@/components/examples/animated-button"
 import { ExpandableExample } from "@/components/examples/expandable"
+import type { Component } from "./types"
 
-export const components = [
+export const components: Component[] = [
 	{
 		title: "AnimatedButton",
 		description: "Smooth width transitions when button content changes.",
