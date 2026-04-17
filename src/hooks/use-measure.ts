@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import React from "react"
 
 interface Bounds {
 	width: number
@@ -8,14 +8,14 @@ interface Bounds {
 type UseMeasureReturn<T extends HTMLElement> = [(node: T | null) => void, Bounds]
 
 export function useMeasure<T extends HTMLElement = HTMLElement>(): UseMeasureReturn<T> {
-	const [element, setElement] = useState<T | null>(null)
-	const [bounds, setBounds] = useState<Bounds>({ width: 0, height: 0 })
+	const [element, setElement] = React.useState<T | null>(null)
+	const [bounds, setBounds] = React.useState<Bounds>({ width: 0, height: 0 })
 
-	const ref = useCallback((node: T | null) => {
+	const ref = React.useCallback((node: T | null) => {
 		setElement(node)
 	}, [])
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (!element) return
 
 		const observer = new ResizeObserver(([entry]) => {
