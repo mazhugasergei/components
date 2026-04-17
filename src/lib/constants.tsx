@@ -29,10 +29,6 @@ export const components = [
 		description: "Smooth animations for expandable content.",
 		codeBlocks: [
 			{
-				title: "Installation",
-				code: "npm install motion",
-			},
-			{
 				title: "Hook",
 				codeUrl: "hooks/use-measure.ts",
 				filePath: "hooks/use-measure.ts",

@@ -27,7 +27,9 @@ export function ComponentCard({ href, title, description, codeBlocksCount, ...pr
 				</div>
 
 				<div className="text-muted-foreground mt-6 flex items-center gap-2 text-xs">
-					<span className="font-mono">{codeBlocksCount} files</span>
+					<span className="font-mono">
+						{codeBlocksCount} file{codeBlocksCount !== 1 ? "s" : ""}
+					</span>
 					<DotIcon className="-mx-1 h-3 w-3" />
 					<span className="flex items-center gap-1">
 						View documentation <ChevronRightIcon className="mt-0.5 h-3 w-3" />
