@@ -2,24 +2,6 @@ import { ComponentCard } from "@/components/component-card"
 import { PageHeader } from "@/components/ui/page-header"
 import { components } from "@/lib/constants"
 import { toKebabCase } from "@/utils/text"
-import type { Metadata } from "next"
-
-export const metadata: Metadata = {
-	title: "Components",
-	description: "Personal collection of reusable components.",
-	keywords: ["components", "react", "ui", "typescript", "next.js"],
-	authors: [{ name: "Components" }],
-	openGraph: {
-		title: "Components",
-		description: "Personal collection of reusable components",
-		type: "website",
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "Components",
-		description: "Personal collection of reusable components",
-	},
-}
 
 export default function Home() {
 	return (

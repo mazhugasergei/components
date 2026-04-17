@@ -5,7 +5,19 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
 	title: "Components",
-	description: "Animated components with smooth dimension animations",
+	description: "Personal collection of reusable copy-paste components.",
+	keywords: ["components", "react", "ui", "typescript", "next.js"],
+	authors: [{ name: "Components" }],
+	openGraph: {
+		title: "Components",
+		description: "Personal collection of reusable copy-paste components",
+		type: "website",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Components",
+		description: "Personal collection of reusable copy-paste components",
+	},
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
