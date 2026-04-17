@@ -6,7 +6,7 @@ export function ExpandableExample() {
 	return (
 		<Expandable
 			expandedContent={
-				<p className="text-sm leading-relaxed">
+				<p className="mt-2 text-sm leading-relaxed">
 					This technique uses a ref to track the height of the inner content. When the content changes, the measured
 					height updates and the outer container animates to match.
 				</p>
