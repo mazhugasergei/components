@@ -1,7 +1,7 @@
 "use client"
 
 import { useMeasure } from "@/hooks/use-measure"
-import { useEffect, useRef, useState } from "react"
+import React from "react"
 
 const EASING = "cubic-bezier(0.19,1,0.22,1)"
 
@@ -13,16 +13,16 @@ const transitionIn = [
 
 export function AnimatedButton({ children, className, ...props }: React.ComponentProps<"button">) {
 	const [ref, bounds] = useMeasure()
-	const [width, setWidth] = useState("auto")
-	const [displayedChildren, setDisplayedChildren] = useState(children)
-	const [visible, setVisible] = useState(true)
-	const isFirstRender = useRef(true)
+	const [width, setWidth] = React.useState("auto")
+	const [displayedChildren, setDisplayedChildren] = React.useState(children)
+	const [visible, setVisible] = React.useState(true)
+	const isFirstRender = React.useRef(true)
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (bounds.width > 0) setWidth(`${bounds.width}px`)
 	}, [bounds.width])
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (isFirstRender.current) {
 			isFirstRender.current = false
 			return

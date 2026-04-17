@@ -18,7 +18,7 @@ export function Expandable({ children, expandedContent, onExpandedChange, expand
 	}
 
 	return (
-		<div className={"bg-background flex w-full max-w-md flex-col rounded-xl border p-5 " + className} {...props}>
+		<div className={`bg-background flex w-full max-w-md flex-col rounded-xl border p-5 ${className ?? ""}`} {...props}>
 			{children}
 			<div
 				className="grid overflow-hidden transition-[grid-template-rows,opacity,filter] duration-300 ease-out"
