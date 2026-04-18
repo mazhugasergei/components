@@ -7,8 +7,8 @@ export function ExpandableExample() {
 		<Expandable
 			expandedContent={
 				<p className="mt-2 text-sm leading-relaxed">
-					This technique uses a ref to track the height of the inner content. When the content changes, the measured
-					height updates and the outer container animates to match.
+					This technique uses CSS grid template rows to create smooth height animations. The grid transitions between
+					states, allowing the content to naturally expand and collapse without JavaScript measurement.
 				</p>
 			}
 		>
