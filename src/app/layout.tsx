@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
 					<div className="min-h-100dvh grid-cols-[15rem_1fr] lg:grid">
-						<Aside backHref="~" className="max-lg:hidden" />
+						<Aside className="max-lg:hidden" />
 						<div className="min-w-0">{children}</div>
 					</div>
 				</ThemeProvider>

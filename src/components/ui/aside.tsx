@@ -5,25 +5,15 @@ import { cn } from "@/utils/classname"
 import { toKebabCase } from "@/utils/text"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
 import { buttonVariants } from "./button"
-
-interface Props extends React.ComponentProps<"aside"> {
-	backHref?: string | "~"
-}
 
 const LINKS = components.map((component) => ({
 	href: `/${toKebabCase(component.title)}`,
 	label: component.title,
 }))
 
-export function Aside({ backHref, className, ...props }: Props) {
+export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 	const pathname = usePathname()
-	const [href, setHref] = useState<string | undefined>(backHref)
-
-	useEffect(() => {
-		if (backHref === "~") setHref(typeof window !== "undefined" ? window.location.origin.replace(/\/[^/]*$/, "") : "/")
-	}, [backHref])
 
 	return (
 		<aside className={cn("border-r", className)} {...props}>
@@ -48,7 +38,7 @@ export function Aside({ backHref, className, ...props }: Props) {
 									href={link.href}
 									className={buttonVariants({
 										variant: "transparent",
-										className: cn("w-full justify-start font-mono", isActive && "text-foreground!"),
+										className: cn("w-full justify-start font-mono", isActive && "text-foreground! underline"),
 									})}
 								>
 									{link.label}
