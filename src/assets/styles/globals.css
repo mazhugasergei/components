@@ -66,80 +66,34 @@
 	}
 }
 
-/* Custom scrollbars for code blocks */
-.code-block-scrollbars {
+.custom-scrollbar {
 	scrollbar-width: thin;
 	scrollbar-color: #ffffff4d transparent;
 }
 
-.code-block-scrollbars::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+.custom-scrollbar::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
 	background: transparent;
 }
 
-.code-block-scrollbars::-webkit-scrollbar-track {
-	background: #ffffff0d;
-	border-radius: 4px;
-	margin: 2px;
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
 }
 
-.code-block-scrollbars::-webkit-scrollbar-thumb {
-	background: #ffffff;
-	border: 1px solid #ffffff33;
-	border-radius: 0px;
-	box-shadow: 0 0 6px #0000004d;
-	transition: all 0.2s ease;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: #ffffff4d;
+	border-radius: 999px;
 }
 
-.code-block-scrollbars::-webkit-scrollbar-thumb:hover {
-	background: #f0f0f0;
-	border-color: #ffffff66;
-	box-shadow: 0 0 8px #00000080;
-	transform: scale(1.1);
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: #ffffff80;
 }
 
-/* Hide scrollbars on desktop, show on hover or mobile */
-@media (min-width: 1024px) {
-	/* .code-block-scrollbars {
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-	} */
+.custom-scrollbar::-webkit-scrollbar-button {
+	display: none;
+}
 
-	/* .code-block-scrollbars::-webkit-scrollbar {
-		display: none;
-	} */
-
-	.group:hover .code-block-scrollbars {
-		scrollbar-width: thin;
-		scrollbar-color: #ffffff4d transparent;
-	}
-
-	.group:hover .code-block-scrollbars::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
-		background: transparent;
-		/* display: block; */
-	}
-
-	.group:hover .code-block-scrollbars::-webkit-scrollbar-track {
-		background: #ffffff0d;
-		border-radius: 4px;
-		margin: 2px;
-	}
-
-	.group:hover .code-block-scrollbars::-webkit-scrollbar-thumb {
-		background: #ffffff;
-		border: 1px solid #ffffff33;
-		border-radius: 0px;
-		box-shadow: 0 0 6px #0000004d;
-		transition: all 0.2s ease;
-	}
-
-	.group:hover .code-block-scrollbars::-webkit-scrollbar-thumb:hover {
-		background: #f0f0f0;
-		border-color: #ffffff66;
-		box-shadow: 0 0 8px #00000080;
-		transform: scale(1.1);
-	}
+.custom-scrollbar::-webkit-scrollbar-corner {
+	background: transparent;
 }
