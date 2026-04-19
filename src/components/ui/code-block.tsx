@@ -15,7 +15,7 @@ export function CodeBlock({ highlightedCode, themeBackground, className, ...prop
 			{...props}
 		>
 			<div
-				className="custom-scrollbar max-h-96 overflow-auto text-white [&>pre]:inline-block [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:[tab-size:2]"
+				className="custom-scrollbar max-h-80 overflow-auto text-white [&>pre]:inline-block [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:[tab-size:2]"
 				dangerouslySetInnerHTML={{ __html: highlightedCode }}
 			/>
 		</div>
