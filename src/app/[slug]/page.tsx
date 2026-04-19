@@ -1,4 +1,5 @@
 import { CodeBlock } from "@/components/ui/code-block"
+import { CopyButton } from "@/components/ui/copy-button"
 import { PageHeader } from "@/components/ui/page-header"
 import { processCodeBlocks } from "@/lib/code-loader"
 import { toKebabCase } from "@/utils/text"
@@ -20,9 +21,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 				<div className="space-y-6">
 					{component.codeBlocks.map((block, index) => (
 						<div key={index} className="bg-card rounded-lg border">
-							<div className="flex items-center justify-between gap-2 px-3 py-1 text-xs">
-								<h3 className="text-foreground font-mono font-medium">{block.title}</h3>
+							<div className="flex items-center justify-between gap-2 p-1 pl-3 text-xs">
 								<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
+								<CopyButton text={block.highlightedCode.replace(/<[^>]*>/g, "")} />
 							</div>
 							<CodeBlock
 								highlightedCode={block.highlightedCode}
