@@ -25,7 +25,7 @@ export function CopyButton({ text, className, ...props }: Props) {
 
 	return (
 		<Button
-			variant="outline"
+			variant="ghost"
 			size="xs"
 			onClick={handleCopy}
 			className={cn("group text-muted-foreground", className)}
