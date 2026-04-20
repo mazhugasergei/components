@@ -12,13 +12,13 @@ import {
 	CommandShortcut,
 	CommandTrigger,
 } from "@/components/ui/command"
-import { useEffect, useState } from "react"
+import React from "react"
 
 export function CommandExample() {
-	const [open, setOpen] = useState(false)
-	const [isMac, setIsMac] = useState(false)
+	const [open, setOpen] = React.useState(false)
+	const [isMac, setIsMac] = React.useState(false)
 
-	useEffect(() => {
+	React.useEffect(() => {
 		setIsMac(navigator.platform.toLowerCase().includes("mac"))
 	}, [])
 

@@ -1,15 +1,4 @@
-import React, {
-	Children,
-	createContext,
-	isValidElement,
-	KeyboardEvent,
-	useCallback,
-	useContext,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react"
+import React from "react"
 import { createPortal } from "react-dom"
 
 // Inject animation styles
@@ -83,7 +72,7 @@ interface CommandContextType {
 	registerItem: (value: string, el: HTMLElement | null) => () => void
 	visibleItems: Array<{ value: string; el: HTMLElement | null }>
 	onSelect?: (value: string) => void
-	handleKeyDown: (e: KeyboardEvent) => void
+	handleKeyDown: (e: React.KeyboardEvent) => void
 }
 
 interface DialogContextType {
@@ -91,11 +80,11 @@ interface DialogContextType {
 	setOpen: (open: boolean) => void
 }
 
-const CommandContext = createContext<CommandContextType | null>(null)
-const useCommand = () => useContext(CommandContext)
+const CommandContext = React.createContext<CommandContextType | null>(null)
+const useCommand = () => React.useContext(CommandContext)
 
-const DialogContext = createContext<DialogContextType | null>(null)
-export const useCommandDialog = () => useContext(DialogContext)
+const DialogContext = React.createContext<DialogContextType | null>(null)
+export const useCommandDialog = () => React.useContext(DialogContext)
 
 // ---------------------------------------------------------------------------
 // CommandDialog — modal wrapper with backdrop + cmd+k / ctrl+k hotkey
@@ -113,17 +102,17 @@ export function CommandDialog({
 	className?: string
 }) {
 	const isControlled = controlledOpen !== undefined
-	const [internalOpen, setInternalOpen] = useState(false)
-	const [isClosing, setIsClosing] = useState(false)
+	const [internalOpen, setInternalOpen] = React.useState(false)
+	const [isClosing, setIsClosing] = React.useState(false)
 	const open = isControlled ? controlledOpen : internalOpen
 	const shouldShow = open || isClosing
 
 	// Inject animation styles on component mount
-	useEffect(() => {
+	React.useEffect(() => {
 		injectStyles()
 	}, [])
 
-	const setOpen = useCallback(
+	const setOpen = React.useCallback(
 		(val: boolean | ((prev: boolean) => boolean)) => {
 			const newValue = typeof val === "function" ? val(open) : val
 			if (!newValue && open) {
@@ -136,7 +125,7 @@ export function CommandDialog({
 	)
 
 	// global cmd+k / ctrl+k
-	useEffect(() => {
+	React.useEffect(() => {
 		const handler = (e: globalThis.KeyboardEvent) => {
 			if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault()
@@ -148,7 +137,7 @@ export function CommandDialog({
 	}, [setOpen])
 
 	// Escape closes
-	useEffect(() => {
+	React.useEffect(() => {
 		if (!open) return
 		const handler = (e: globalThis.KeyboardEvent) => {
 			if (e.key === "Escape") setOpen(false)
@@ -158,8 +147,12 @@ export function CommandDialog({
 	}, [open, setOpen])
 
 	// separate trigger children (rendered always) from dialog children
-	const triggerChildren = Children.toArray(children).filter((c) => isValidElement(c) && c.type === CommandTrigger)
-	const dialogChildren = Children.toArray(children).filter((c) => !(isValidElement(c) && c.type === CommandTrigger))
+	const triggerChildren = React.Children.toArray(children).filter(
+		(c) => React.isValidElement(c) && c.type === CommandTrigger
+	)
+	const dialogChildren = React.Children.toArray(children).filter(
+		(c) => !(React.isValidElement(c) && c.type === CommandTrigger)
+	)
 
 	const ctx = { open, setOpen }
 
@@ -220,14 +213,14 @@ export function CommandTrigger({
 	className?: string
 	asChild?: boolean
 }) {
-	const ctx = useContext(DialogContext)
+	const ctx = React.useContext(DialogContext)
 
 	const handleClick = (e: React.MouseEvent) => {
 		e.stopPropagation()
 		ctx?.setOpen(true)
 	}
 
-	if (asChild && isValidElement(children)) {
+	if (asChild && React.isValidElement(children)) {
 		const childElement = children as React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>
 		const original = childElement.props.onClick
 		return React.cloneElement(childElement, {
@@ -260,11 +253,11 @@ export function Command({
 	onSelect?: (value: string) => void
 	[key: string]: unknown
 }) {
-	const [query, setQuery] = useState("")
-	const [activeIndex, setActiveIndex] = useState(-1)
-	const [items, setItems] = useState<Array<{ value: string; el: HTMLElement | null }>>([])
+	const [query, setQuery] = React.useState("")
+	const [activeIndex, setActiveIndex] = React.useState(-1)
+	const [items, setItems] = React.useState<Array<{ value: string; el: HTMLElement | null }>>([])
 
-	const registerItem = useCallback((value: string, el: HTMLElement | null) => {
+	const registerItem = React.useCallback((value: string, el: HTMLElement | null) => {
 		setItems((prev) => {
 			if (el && !prev.find((i) => i.value === value)) {
 				return [...prev, { value, el }]
@@ -276,12 +269,12 @@ export function Command({
 		}
 	}, [])
 
-	const visibleItems = useMemo(() => {
+	const visibleItems = React.useMemo(() => {
 		if (!query) return items
 		return items.filter((i) => i.value.toLowerCase().includes(query.toLowerCase()))
 	}, [query, items])
 
-	const handleKeyDown = useCallback(
+	const handleKeyDown = React.useCallback(
 		(e: React.KeyboardEvent) => {
 			if (e.key === "ArrowDown") {
 				e.preventDefault()
@@ -342,10 +335,10 @@ export function CommandInput({
 	const ctx = useCommand()
 	if (!ctx) return null
 	const { query, setQuery, setActiveIndex } = ctx
-	const inputRef = useRef<HTMLInputElement>(null)
+	const inputRef = React.useRef<HTMLInputElement>(null)
 
 	// auto-focus when mounted inside the dialog
-	useEffect(() => {
+	React.useEffect(() => {
 		const t = setTimeout(() => inputRef.current?.focus(), 0)
 		return () => clearTimeout(t)
 	}, [])
@@ -431,10 +424,10 @@ export function CommandGroup({
 	if (!ctx) return null
 	const { query } = ctx
 
-	const values = useMemo(() => {
+	const values = React.useMemo(() => {
 		const vals: string[] = []
-		Children.forEach(children, (child) => {
-			if (!isValidElement(child)) return
+		React.Children.forEach(children, (child) => {
+			if (!React.isValidElement(child)) return
 			const childProps = child.props as { value?: string; children?: React.ReactNode }
 			if (childProps.value != null) vals.push(String(childProps.value))
 			else if (typeof childProps.children === "string") vals.push(childProps.children)
@@ -442,7 +435,7 @@ export function CommandGroup({
 		return vals
 	}, [children])
 
-	const hasVisible = useMemo(() => {
+	const hasVisible = React.useMemo(() => {
 		if (!query) return true
 		return values.some((v) => v.toLowerCase().includes(query.toLowerCase()))
 	}, [query, values])
@@ -491,9 +484,9 @@ export function CommandItem({
 	const ctx = useCommand()
 	if (!ctx) return null
 	const resolvedValue = value ?? (typeof children === "string" ? children : "")
-	const elRef = useRef<HTMLDivElement>(null)
+	const elRef = React.useRef<HTMLDivElement>(null)
 
-	useEffect(() => {
+	React.useEffect(() => {
 		return ctx.registerItem(resolvedValue, elRef.current)
 	}, [resolvedValue])
 
@@ -546,9 +539,9 @@ export function CommandShortcut({ children, className = "" }: { children: React.
 // ---------------------------------------------------------------------------
 
 export function CommandFooter({ className = "" }: { className?: string }) {
-	const [isMac, setIsMac] = useState(false)
+	const [isMac, setIsMac] = React.useState(false)
 
-	useEffect(() => {
+	React.useEffect(() => {
 		setIsMac(navigator.platform.toLowerCase().includes("mac"))
 	}, [])
 

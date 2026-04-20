@@ -52,16 +52,16 @@ export const components: Component[] = [
 		title: "Command",
 		description: "Accessible command palette with keyboard navigation and search functionality.",
 		codeBlocks: [
-			// {
-			// 	title: "Component",
-			// 	codeUrl: "components/ui/command.tsx",
-			// 	filePath: "components/ui/command.tsx",
-			// },
-			// {
-			// 	title: "Usage",
-			// 	codeUrl: "components/examples/command.tsx",
-			// 	filePath: "components/examples/command.tsx",
-			// },
+			{
+				title: "Component",
+				codeUrl: "components/ui/command.tsx",
+				filePath: "components/ui/command.tsx",
+			},
+			{
+				title: "Usage",
+				codeUrl: "components/examples/command.tsx",
+				filePath: "components/examples/command.tsx",
+			},
 		],
 		examples: [<CommandExample />],
 	},
