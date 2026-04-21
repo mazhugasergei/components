@@ -28,7 +28,7 @@ const animationStyles = `
 	animation-fill-mode: both;
 }
 
-.fade-in-0 {
+.fade-in {
 	animation-name: fade-in;
 }
 
@@ -41,7 +41,7 @@ const animationStyles = `
 	animation-fill-mode: both;
 }
 
-.fade-out-0 {
+.fade-out {
 	animation-name: fade-out;
 }
 
@@ -160,7 +160,7 @@ export function CommandDialog({
 		? createPortal(
 				<div
 					className={`fixed inset-0 z-50 flex items-start justify-center pt-[20vh] backdrop-blur-sm ${
-						open ? "animate-in fade-in-0 scale-in duration-200" : "animate-out fade-out-0 scale-out duration-150"
+						open ? "animate-in fade-in scale-in duration-200" : "animate-out fade-out scale-out duration-150"
 					}`}
 					aria-modal="true"
 					role="dialog"
@@ -174,14 +174,14 @@ export function CommandDialog({
 					{/* backdrop */}
 					<div
 						className={`bg-background/80 absolute inset-0 backdrop-blur-sm ${
-							open ? "animate-in fade-in-0 duration-200" : "animate-out fade-out-0 duration-150"
+							open ? "animate-in fade-in duration-200" : "animate-out fade-out duration-150"
 						}`}
 						onClick={() => setOpen(false)}
 					/>
 					{/* panel */}
 					<div
 						className={`relative z-10 w-full max-w-lg ${
-							open ? "animate-in fade-in-0 scale-in duration-200" : "animate-out fade-out-0 scale-out duration-150"
+							open ? "animate-in fade-in scale-in duration-200" : "animate-out fade-out scale-out duration-150"
 						} ${className}`}
 						onClick={(e) => e.stopPropagation()}
 					>
