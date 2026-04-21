@@ -7,7 +7,7 @@ export default function Home() {
 			<div className="mx-auto max-w-4xl px-4 py-16">
 				<PageHeader
 					title="Components"
-					description="Personal collection of reusable components."
+					description="Personal collection of reusable components. Dependency-free. Copy-paste ready."
 					className="py-12 text-center"
 				/>
 

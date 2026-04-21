@@ -5,18 +5,18 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
 	title: "Components",
-	description: "Personal collection of reusable copy-paste components.",
+	description: "Personal collection of reusable components. Dependency-free. Copy-paste ready.",
 	keywords: ["components", "react", "ui", "typescript", "next.js"],
 	authors: [{ name: "Components" }],
 	openGraph: {
 		title: "Components",
-		description: "Personal collection of reusable copy-paste components",
+		description: "Personal collection of reusable components. Dependency-free. Copy-paste ready.",
 		type: "website",
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "Components",
-		description: "Personal collection of reusable copy-paste components",
+		description: "Personal collection of reusable components. Dependency-free. Copy-paste ready.",
 	},
 }
 
