@@ -4,7 +4,7 @@ import { cn } from "@/utils/classname"
 import { ChevronLeftIcon } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { buttonVariants } from "./button"
+import { buttonVariants } from "./ui/button"
 
 interface Props extends React.ComponentProps<typeof Link> {
 	href: string | "~"

@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, ButtonProps } from "@/components/button"
+import { Button, ButtonProps } from "@/components/ui/button"
 import { MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 

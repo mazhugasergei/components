@@ -5,7 +5,7 @@ import { cn } from "@/utils/classname"
 import { toKebabCase } from "@/utils/text"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { buttonVariants } from "./button"
+import { buttonVariants } from "./ui/button"
 
 const LINKS = components.map((component) => ({
 	href: `/${toKebabCase(component.title)}`,
