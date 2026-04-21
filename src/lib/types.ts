@@ -12,7 +12,6 @@ export interface CodeBlock {
 }
 
 export interface ProcessedCodeBlock {
-	title: string
 	filePath?: string
 	highlightedCode: string
 	themeBackground?: string

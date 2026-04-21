@@ -49,7 +49,7 @@ export async function processCodeBlocks(): Promise<ProcessedComponent[]> {
 							// Use inline code
 							code = block.code
 						} else {
-							throw new Error(`code block "${block.title}" must have either codeUrl or code`)
+							throw new Error(`code block "${block.filePath}" must have either codeUrl or code`)
 						}
 
 						const lang = getLang(block.filePath)
@@ -61,7 +61,6 @@ export async function processCodeBlocks(): Promise<ProcessedComponent[]> {
 						})
 
 						return {
-							title: block.title,
 							filePath: block.filePath,
 							highlightedCode,
 							themeBackground: theme.colors?.["editor.background"],
