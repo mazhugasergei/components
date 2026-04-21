@@ -36,7 +36,7 @@ export function buttonVariants({
 	variant = "default",
 	size = "default",
 	className,
-}: Pick<ButtonProps, "variant" | "size" | "className">) {
+}: Pick<ButtonProps, "variant" | "size" | "className"> | undefined = {}) {
 	return [classes.base, classes.variant[variant], classes.size[size], className].filter(Boolean).join(" ")
 }
 
