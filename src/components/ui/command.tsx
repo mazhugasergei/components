@@ -162,15 +162,11 @@ export function CommandDialog({
 					aria-modal="true"
 					role="dialog"
 					aria-label="Command palette"
-					onAnimationEnd={() => {
-						if (!open) {
-							setIsClosing(false)
-						}
-					}}
+					onAnimationEnd={() => !open && setIsClosing(false)}
 				>
 					{/* backdrop */}
 					<div
-						className={`bg-background/80 absolute inset-0 backdrop-blur-sm ${
+						className={`bg-background/80 absolute inset-0 ${
 							open ? "animate-in fade-in duration-200" : "animate-out fade-out duration-150"
 						}`}
 						onClick={() => setOpen(false)}
