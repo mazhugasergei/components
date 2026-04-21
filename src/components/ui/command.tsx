@@ -3,63 +3,59 @@ import { createPortal } from "react-dom"
 
 let stylesInjected = false
 const injectStyles = () => {
-	if (!stylesInjected && typeof document !== "undefined") {
-		const styleEl = document.createElement("style")
-		styleEl.textContent = `
-			@keyframes fade-in {
-				from { opacity: 0; }
-				to { opacity: 1; }
-			}
+	if (stylesInjected || typeof document === "undefined") return
 
-			@keyframes scale-in {
-				from { opacity: 0; transform: scale(0.97); }
-				to { opacity: 1; transform: scale(1); }
-			}
+	const styleEl = document.createElement("style")
+	styleEl.textContent = `
+		@keyframes fade-in {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
 
-			@keyframes fade-out {
-				from { opacity: 1; }
-				to { opacity: 0; }
-			}
+		@keyframes scale-in {
+			from { opacity: 0; transform: scale(0.97); }
+			to { opacity: 1; transform: scale(1); }
+		}
 
-			@keyframes scale-out {
-				from { opacity: 1; transform: scale(1); }
-				to { opacity: 0; transform: scale(0.97); }
-			}
+		@keyframes fade-out {
+			from { opacity: 1; }
+			to { opacity: 0; }
+		}
 
-			.animate-in {
-				animation-duration: 200ms;
-				animation-fill-mode: both;
-			}
+		@keyframes scale-out {
+			from { opacity: 1; transform: scale(1); }
+			to { opacity: 0; transform: scale(0.97); }
+		}
 
-			.fade-in {
-				animation-name: fade-in;
-			}
+		.animate-in {
+			animation-duration: 200ms;
+			animation-fill-mode: both;
+		}
 
-			.scale-in {
-				animation-name: scale-in;
-			}
+		.fade-in {
+			animation-name: fade-in;
+		}
 
-			.animate-out {
-				animation-duration: 150ms;
-				animation-fill-mode: both;
-			}
+		.scale-in {
+			animation-name: scale-in;
+		}
 
-			.fade-out {
-				animation-name: fade-out;
-			}
+		.animate-out {
+			animation-duration: 150ms;
+			animation-fill-mode: both;
+		}
 
-			.scale-out {
-				animation-name: scale-out;
-			}
-		`
-		document.head.appendChild(styleEl)
-		stylesInjected = true
-	}
+		.fade-out {
+			animation-name: fade-out;
+		}
+
+		.scale-out {
+			animation-name: scale-out;
+		}
+	`
+	document.head.appendChild(styleEl)
+	stylesInjected = true
 }
-
-// ---------------------------------------------------------------------------
-// Context
-// ---------------------------------------------------------------------------
 
 interface CommandContextType {
 	query: string
@@ -83,21 +79,20 @@ const useCommand = () => React.useContext(CommandContext)
 const DialogContext = React.createContext<DialogContextType | null>(null)
 export const useCommandDialog = () => React.useContext(DialogContext)
 
-// ---------------------------------------------------------------------------
-// CommandDialog — modal wrapper with backdrop + cmd+k / ctrl+k hotkey
-// ---------------------------------------------------------------------------
+export interface CommandDialogProps extends React.ComponentProps<"div"> {
+	children: React.ReactNode
+	open?: boolean
+	onOpenChange?: (open: boolean) => void
+	className?: string
+}
 
 export function CommandDialog({
 	children,
 	open: controlledOpen,
 	onOpenChange,
 	className = "",
-}: {
-	children: React.ReactNode
-	open?: boolean
-	onOpenChange?: (open: boolean) => void
-	className?: string
-}) {
+	...props
+}: CommandDialogProps) {
 	const isControlled = controlledOpen !== undefined
 	const [internalOpen, setInternalOpen] = React.useState(false)
 	const [isClosing, setIsClosing] = React.useState(false)
@@ -105,16 +100,12 @@ export function CommandDialog({
 	const shouldShow = open || isClosing
 
 	// Inject animation styles on component mount
-	React.useEffect(() => {
-		injectStyles()
-	}, [])
+	React.useEffect(injectStyles, [])
 
 	const setOpen = React.useCallback(
 		(val: boolean | ((prev: boolean) => boolean)) => {
 			const newValue = typeof val === "function" ? val(open) : val
-			if (!newValue && open) {
-				setIsClosing(true)
-			}
+			if (!newValue && open) setIsClosing(true)
 			if (!isControlled) setInternalOpen(newValue)
 			onOpenChange?.(newValue)
 		},
@@ -145,10 +136,10 @@ export function CommandDialog({
 
 	// separate trigger children (rendered always) from dialog children
 	const triggerChildren = React.Children.toArray(children).filter(
-		(c) => React.isValidElement(c) && c.type === CommandTrigger
+		(child) => React.isValidElement(child) && child.type === CommandTrigger
 	)
 	const dialogChildren = React.Children.toArray(children).filter(
-		(c) => !(React.isValidElement(c) && c.type === CommandTrigger)
+		(child) => !(React.isValidElement(child) && child.type === CommandTrigger)
 	)
 
 	const ctx = { open, setOpen }
@@ -163,6 +154,7 @@ export function CommandDialog({
 					role="dialog"
 					aria-label="Command palette"
 					onAnimationEnd={() => !open && setIsClosing(false)}
+					{...props}
 				>
 					{/* backdrop */}
 					<div
@@ -192,10 +184,6 @@ export function CommandDialog({
 		</DialogContext.Provider>
 	)
 }
-
-// ---------------------------------------------------------------------------
-// CommandTrigger — wraps any children; opens dialog on click
-// ---------------------------------------------------------------------------
 
 export function CommandTrigger({
 	children,
@@ -231,11 +219,7 @@ export function CommandTrigger({
 	)
 }
 
-// ---------------------------------------------------------------------------
-// Command — inner palette widget (no modal chrome)
-// ---------------------------------------------------------------------------
-
-export function Command({
+export function CommandBody({
 	children,
 	className = "",
 	onSelect,
@@ -312,10 +296,6 @@ export function Command({
 	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandInput
-// ---------------------------------------------------------------------------
-
 export function CommandInput({
 	placeholder = "",
 	className = "",
@@ -372,47 +352,35 @@ export function CommandInput({
 	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandList
-// ---------------------------------------------------------------------------
-
-export function CommandList({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+export function CommandList({ children, className = "", ...props }: React.ComponentProps<"div">) {
 	return (
-		<div role="listbox" className={`custom-scrollbar max-h-100 overflow-x-hidden overflow-y-auto ${className}`}>
+		<div
+			role="listbox"
+			className={`custom-scrollbar max-h-100 overflow-x-hidden overflow-y-auto ${className}`}
+			{...props}
+		>
 			{children}
 		</div>
 	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandEmpty
-// ---------------------------------------------------------------------------
-
-export function CommandEmpty({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+export function CommandEmpty({ children, className = "", ...props }: React.ComponentProps<"div">) {
 	const ctx = useCommand()
 	if (!ctx) return null
 	const { visibleItems } = ctx
 	if (visibleItems.length > 0) return null
 	return (
-		<div className={`text-muted-foreground py-6 text-center text-sm ${className}`} role="presentation">
+		<div className={`text-muted-foreground py-6 text-center text-sm ${className}`} role="presentation" {...props}>
 			{children}
 		</div>
 	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandGroup
-// ---------------------------------------------------------------------------
-
-export function CommandGroup({
-	heading,
-	children,
-	className = "",
-}: {
+export interface CommandGroupProps extends React.ComponentProps<"div"> {
 	heading?: string
-	children: React.ReactNode
-	className?: string
-}) {
+}
+
+export function CommandGroup({ heading, children, className = "", ...props }: CommandGroupProps) {
 	const ctx = useCommand()
 	if (!ctx) return null
 	const { query } = ctx
@@ -436,28 +404,20 @@ export function CommandGroup({
 	if (!hasVisible) return null
 
 	return (
-		<div role="group" aria-label={heading} className={`space-y-1 overflow-hidden p-2 ${className}`}>
+		<div role="group" aria-label={heading} className={`space-y-1 overflow-hidden p-2 ${className}`} {...props}>
 			{heading && <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">{heading}</div>}
 			{children}
 		</div>
 	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandSeparator
-// ---------------------------------------------------------------------------
-
-export function CommandSeparator({ className = "" }: { className?: string }) {
+export function CommandSeparator({ className = "", ...props }: React.ComponentProps<"hr">) {
 	const ctx = useCommand()
 	if (!ctx) return null
 	const { visibleItems } = ctx
 	if (visibleItems.length === 0) return null
-	return <hr className={`bg-border -mx-1 h-px border-0 ${className}`} />
+	return <hr className={`bg-border -mx-1 h-px border-0 ${className}`} {...props} />
 }
-
-// ---------------------------------------------------------------------------
-// CommandItem
-// ---------------------------------------------------------------------------
 
 export function CommandItem({
 	children,
@@ -519,23 +479,19 @@ export function CommandItem({
 	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandShortcut — right-aligned kbd hint inside a CommandItem
-// ---------------------------------------------------------------------------
-
-export function CommandShortcut({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-	return <span className={`text-muted-foreground ml-auto text-xs tracking-widest ${className}`}>{children}</span>
+export function CommandShortcut({ children, className = "", ...props }: React.ComponentProps<"div">) {
+	return (
+		<span className={`text-muted-foreground ml-auto text-xs tracking-widest ${className}`} {...props}>
+			{children}
+		</span>
+	)
 }
 
-// ---------------------------------------------------------------------------
-// CommandFooter
-// ---------------------------------------------------------------------------
-
-export function CommandFooter({ className = "" }: { className?: string }) {
+export function CommandFooter({ className = "", ...props }: React.ComponentProps<"footer">) {
 	const [isMac, setIsMac] = React.useState(false)
 
 	React.useEffect(() => {
-		setIsMac(navigator.platform.toLowerCase().includes("mac"))
+		setIsMac(navigator.userAgent.toLowerCase().includes("mac"))
 	}, [])
 
 	const shortcuts = isMac
@@ -551,7 +507,7 @@ export function CommandFooter({ className = "" }: { className?: string }) {
 			]
 
 	return (
-		<div className={`border-t px-3 py-2 ${className}`}>
+		<footer className={`border-t px-3 py-2 ${className}`} {...props}>
 			<div className="text-muted-foreground flex gap-5 text-xs">
 				{shortcuts.map((shortcut, index) => (
 					<div key={index} className="flex items-center gap-2">
@@ -569,6 +525,6 @@ export function CommandFooter({ className = "" }: { className?: string }) {
 					</div>
 				))}
 			</div>
-		</div>
+		</footer>
 	)
 }
