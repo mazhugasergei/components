@@ -1,6 +1,6 @@
 import "@/assets/styles/globals.css"
+import { Aside } from "@/components/aside"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Aside } from "@/components/ui/aside"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {

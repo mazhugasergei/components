@@ -1,4 +1,4 @@
-import { Header } from "@/components/ui/header"
+import { Header } from "@/components/header"
 import { components } from "@/lib/constants"
 import { toKebabCase } from "@/utils/text"
 import { notFound } from "next/navigation"

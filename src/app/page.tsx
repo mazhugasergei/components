@@ -1,5 +1,5 @@
 import { ComponentCard } from "@/components/component-card"
-import { PageHeader } from "@/components/ui/page-header"
+import { PageHeader } from "@/components/page-header"
 import { components } from "@/lib/constants"
 import { toKebabCase } from "@/utils/text"
 
