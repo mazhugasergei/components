@@ -25,9 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en" suppressHydrationWarning>
 			<body>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-					<div className="min-h-100dvh grid-cols-[15rem_1fr] lg:grid">
-						<Aside className="max-lg:hidden" />
-						<div className="min-w-0">{children}</div>
+					<div className="h-100dvh grid-cols-[15rem_1fr] lg:grid">
+						<Aside className="overflow-hidden max-lg:hidden" />
+						<div className="flex min-w-0 flex-col overflow-hidden">{children}</div>
 					</div>
 				</ThemeProvider>
 			</body>

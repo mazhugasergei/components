@@ -1,14 +1,15 @@
 "use client"
 
+import { buttonVariants } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { components } from "@/lib/constants"
 import { cn } from "@/utils/classname"
 import { toKebabCase } from "@/utils/text"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { buttonVariants } from "./ui/button"
 
 const LINKS = components.map((component) => ({
-	href: `/${toKebabCase(component.title)}`,
+	href: "/" + toKebabCase(component.title),
 	label: component.title,
 }))
 
@@ -16,18 +17,18 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 	const pathname = usePathname()
 
 	return (
-		<aside className={cn("border-r", className)} {...props}>
-			<div className="sticky top-0 space-y-4 py-4">
-				<Link
-					href="/"
-					className={buttonVariants({
-						variant: "transparent",
-						className: "text-foreground! font-mono text-lg font-medium",
-					})}
-				>
-					Components
-				</Link>
+		<aside className={cn("flex flex-col border-r", className)} {...props}>
+			<Link
+				href="/"
+				className={buttonVariants({
+					variant: "transparent",
+					className: "text-foreground! my-4 self-start font-mono font-bold",
+				})}
+			>
+				Components
+			</Link>
 
+			<ScrollArea>
 				<ul>
 					{LINKS.map((link, index) => {
 						const isActive = pathname === link.href
@@ -47,7 +48,7 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 						)
 					})}
 				</ul>
-			</div>
+			</ScrollArea>
 		</aside>
 	)
 }

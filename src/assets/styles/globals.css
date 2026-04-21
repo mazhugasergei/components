@@ -65,35 +65,3 @@
 		@apply backdrop-blur-xl;
 	}
 }
-
-.custom-scrollbar {
-	scrollbar-width: thin;
-	scrollbar-color: #ffffff4d transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
-	background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-	background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-	background: #ffffff4d;
-	border-radius: 999px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-	background: #ffffff80;
-}
-
-.custom-scrollbar::-webkit-scrollbar-button {
-	display: none;
-}
-
-.custom-scrollbar::-webkit-scrollbar-corner {
-	background: transparent;
-}

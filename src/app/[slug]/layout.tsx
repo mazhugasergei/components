@@ -1,4 +1,5 @@
 import { Header } from "@/components/header"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { components } from "@/lib/constants"
 import { toKebabCase } from "@/utils/text"
 import { notFound } from "next/navigation"
@@ -32,9 +33,9 @@ export default async function Layout({
 	if (!component) return notFound()
 
 	return (
-		<>
+		<ScrollArea>
 			<Header title={component.title} backHref="/" />
 			{children}
-		</>
+		</ScrollArea>
 	)
 }
