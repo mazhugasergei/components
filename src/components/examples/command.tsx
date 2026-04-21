@@ -15,11 +15,10 @@ import {
 import React from "react"
 
 export function CommandExample() {
-	const [open, setOpen] = React.useState(false)
 	const [isMac, setIsMac] = React.useState(false)
 
 	React.useEffect(() => {
-		setIsMac(navigator.platform.toLowerCase().includes("mac"))
+		setIsMac(navigator.userAgent.toLowerCase().includes("mac"))
 	}, [])
 
 	const shortcutKey = isMac ? "⌘K" : "Ctrl+K"
@@ -34,7 +33,7 @@ export function CommandExample() {
 
 	return (
 		<div className="grid place-items-center gap-4">
-			<CommandDialog open={open} onOpenChange={setOpen}>
+			<CommandDialog>
 				<CommandTrigger asChild>
 					<button className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 cursor-pointer rounded-md px-4 py-2 text-sm font-medium">
 						Open
