@@ -10,17 +10,14 @@ export const components: Component[] = [
 		description: "Smooth width transitions when button content changes.",
 		codeBlocks: [
 			{
-				title: "Hook",
 				codeUrl: "hooks/use-measure.ts",
 				filePath: "hooks/use-measure.ts",
 			},
 			{
-				title: "Component",
 				codeUrl: "components/ui/animated-button.tsx",
 				filePath: "components/ui/animated-button.tsx",
 			},
 			{
-				title: "Usage",
 				codeUrl: "components/examples/animated-button.tsx",
 				filePath: "components/examples/animated-button.tsx",
 			},
@@ -32,12 +29,10 @@ export const components: Component[] = [
 		description: "Versatile button component with multiple variants and sizes.",
 		codeBlocks: [
 			{
-				title: "Component",
 				codeUrl: "components/ui/button.tsx",
 				filePath: "components/ui/button.tsx",
 			},
 			{
-				title: "Usage",
 				codeUrl: "components/examples/button.tsx",
 				filePath: "components/examples/button.tsx",
 			},
@@ -49,12 +44,10 @@ export const components: Component[] = [
 		description: "Accessible command palette with keyboard navigation and search functionality.",
 		codeBlocks: [
 			{
-				title: "Component",
 				codeUrl: "components/ui/command.tsx",
 				filePath: "components/ui/command.tsx",
 			},
 			{
-				title: "Usage",
 				codeUrl: "components/examples/command.tsx",
 				filePath: "components/examples/command.tsx",
 			},
@@ -66,17 +59,14 @@ export const components: Component[] = [
 		description: "Smooth animations for expandable content.",
 		codeBlocks: [
 			{
-				title: "Hook",
 				codeUrl: "hooks/use-measure.ts",
 				filePath: "hooks/use-measure.ts",
 			},
 			{
-				title: "Component",
 				codeUrl: "components/ui/expandable.tsx",
 				filePath: "components/ui/expandable.tsx",
 			},
 			{
-				title: "Usage",
 				codeUrl: "components/examples/expandable.tsx",
 				filePath: "components/examples/expandable.tsx",
 			},

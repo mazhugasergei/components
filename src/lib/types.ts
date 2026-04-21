@@ -6,7 +6,6 @@ export interface Component {
 }
 
 export interface CodeBlock {
-	title: string
 	codeUrl?: string
 	filePath?: string
 	code?: string
