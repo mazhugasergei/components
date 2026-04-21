@@ -1,7 +1,5 @@
-import { ComponentCard } from "@/components/component-card"
+import { ComponentGrid } from "@/components/component-grid"
 import { PageHeader } from "@/components/page-header"
-import { components } from "@/lib/constants"
-import { toKebabCase } from "@/utils/text"
 
 export default function Home() {
 	return (
@@ -13,17 +11,7 @@ export default function Home() {
 					className="py-12 text-center"
 				/>
 
-				<div className="grid gap-6 md:grid-cols-2">
-					{components.map((component, index) => (
-						<ComponentCard
-							key={index}
-							href={`/${toKebabCase(component.title)}`}
-							title={component.title}
-							description={component.description}
-							codeBlocksCount={component.codeBlocks.length}
-						/>
-					))}
-				</div>
+				<ComponentGrid />
 
 				<div className="mt-16 text-center">
 					<p className="text-muted-foreground text-sm">Built with Next.js, TypeScript, and Tailwind CSS</p>
