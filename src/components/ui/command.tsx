@@ -1,60 +1,57 @@
 import React from "react"
 import { createPortal } from "react-dom"
 
-// Inject animation styles
-const animationStyles = `
-@keyframes fade-in {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
-
-@keyframes scale-in {
-	from { opacity: 0; transform: scale(0.97); }
-	to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fade-out {
-	from { opacity: 1; }
-	to { opacity: 0; }
-}
-
-@keyframes scale-out {
-	from { opacity: 1; transform: scale(1); }
-	to { opacity: 0; transform: scale(0.97); }
-}
-
-.animate-in {
-	animation-duration: 200ms;
-	animation-fill-mode: both;
-}
-
-.fade-in {
-	animation-name: fade-in;
-}
-
-.scale-in {
-	animation-name: scale-in;
-}
-
-.animate-out {
-	animation-duration: 150ms;
-	animation-fill-mode: both;
-}
-
-.fade-out {
-	animation-name: fade-out;
-}
-
-.scale-out {
-	animation-name: scale-out;
-}
-`
-
 let stylesInjected = false
 const injectStyles = () => {
 	if (!stylesInjected && typeof document !== "undefined") {
 		const styleEl = document.createElement("style")
-		styleEl.textContent = animationStyles
+		styleEl.textContent = `
+			@keyframes fade-in {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+			@keyframes scale-in {
+				from { opacity: 0; transform: scale(0.97); }
+				to { opacity: 1; transform: scale(1); }
+			}
+
+			@keyframes fade-out {
+				from { opacity: 1; }
+				to { opacity: 0; }
+			}
+
+			@keyframes scale-out {
+				from { opacity: 1; transform: scale(1); }
+				to { opacity: 0; transform: scale(0.97); }
+			}
+
+			.animate-in {
+				animation-duration: 200ms;
+				animation-fill-mode: both;
+			}
+
+			.fade-in {
+				animation-name: fade-in;
+			}
+
+			.scale-in {
+				animation-name: scale-in;
+			}
+
+			.animate-out {
+				animation-duration: 150ms;
+				animation-fill-mode: both;
+			}
+
+			.fade-out {
+				animation-name: fade-out;
+			}
+
+			.scale-out {
+				animation-name: scale-out;
+			}
+		`
 		document.head.appendChild(styleEl)
 		stylesInjected = true
 	}
@@ -549,12 +546,12 @@ export function CommandFooter({ className = "" }: { className?: string }) {
 		? [
 				{ keys: ["↑", "↓"], description: "Navigate" },
 				{ keys: ["Enter"], description: "Select" },
-				{ keys: ["Esc"], description: "Close" },
+				{ keys: ["Ctrl", "K"], description: "Close" },
 			]
 		: [
 				{ keys: ["↑", "↓"], description: "Navigate" },
 				{ keys: ["Enter"], description: "Select" },
-				{ keys: ["Esc"], description: "Close" },
+				{ keys: ["⌘", "K"], description: "Open menu" },
 			]
 
 	return (
@@ -567,7 +564,7 @@ export function CommandFooter({ className = "" }: { className?: string }) {
 							{shortcut.keys.map((key, keyIndex) => (
 								<span
 									key={keyIndex}
-									className="grid min-h-6 min-w-6 place-items-center rounded-md border px-2 py-1 font-medium select-none"
+									className={`grid min-h-6 min-w-6 place-items-center rounded-md border font-medium select-none ${key.length > 1 ? "px-2" : ""}`}
 								>
 									{key}
 								</span>
