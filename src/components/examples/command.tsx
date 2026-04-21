@@ -1,7 +1,7 @@
 "use client"
 
 import {
-	Command,
+	CommandBody,
 	CommandDialog,
 	CommandEmpty,
 	CommandGroup,
@@ -36,11 +36,14 @@ export function CommandExample() {
 			<CommandDialog>
 				<CommandTrigger asChild>
 					<button className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 cursor-pointer rounded-md px-4 py-2 text-sm font-medium">
-						Open
+						Open{" "}
+						<span className="text-muted-foreground text-xs">
+							<span className="relative bottom-0.25">|</span> {shortcutKey}
+						</span>
 					</button>
 				</CommandTrigger>
 
-				<Command className="w-full">
+				<CommandBody>
 					<CommandInput placeholder="Type a command or search..." />
 					<CommandList>
 						<CommandEmpty>No results found.</CommandEmpty>
@@ -77,7 +80,7 @@ export function CommandExample() {
 							</CommandItem>
 						</CommandGroup>
 					</CommandList>
-				</Command>
+				</CommandBody>
 			</CommandDialog>
 		</div>
 	)
