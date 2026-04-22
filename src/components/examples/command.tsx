@@ -21,14 +21,14 @@ export function CommandExample() {
 		setIsMac(navigator.userAgent.toLowerCase().includes("mac"))
 	}, [])
 
-	const shortcutKey = isMac ? "⌘K" : "Ctrl+K"
+	const shortcutKey = isMac ? "⌘K" : "Ctrl + K"
 	const shortcuts = {
-		calendar: isMac ? "⌘C" : "Ctrl+C",
-		search: isMac ? "⌘E" : "Ctrl+E",
-		calculator: isMac ? "⌘+⌘" : "Ctrl++",
-		profile: isMac ? "⌘P" : "Ctrl+P",
-		billing: isMac ? "⌘B" : "Ctrl+B",
-		settings: isMac ? "⌘S" : "Ctrl+S",
+		calendar: isMac ? "⌘C" : "Ctrl + C",
+		search: isMac ? "⌘E" : "Ctrl + E",
+		calculator: isMac ? "⌘ + ⌘" : "Ctrl + +",
+		profile: isMac ? "⌘P" : "Ctrl + P",
+		billing: isMac ? "⌘B" : "Ctrl + B",
+		settings: isMac ? "⌘S" : "Ctrl + S",
 	}
 
 	return (
