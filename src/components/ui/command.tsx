@@ -492,21 +492,21 @@ export function CommandShortcut({ children, className = "", ...props }: React.Co
 export function CommandFooter({ className = "", ...props }: React.ComponentProps<"footer">) {
 	const [isMac, setIsMac] = React.useState(false)
 
-	React.useEffect(() => {
-		setIsMac(navigator.userAgent.toLowerCase().includes("mac"))
-	}, [])
-
 	const shortcuts = isMac
 		? [
 				{ keys: ["↑", "↓"], description: "Navigate" },
 				{ keys: ["Enter"], description: "Select" },
-				{ keys: ["Ctrl", "K"], description: "Close" },
+				{ keys: ["⌘", "K"], description: "Open menu" },
 			]
 		: [
 				{ keys: ["↑", "↓"], description: "Navigate" },
 				{ keys: ["Enter"], description: "Select" },
-				{ keys: ["⌘", "K"], description: "Open menu" },
+				{ keys: ["Ctrl", "K"], description: "Open menu" },
 			]
+
+	React.useEffect(() => {
+		setIsMac(navigator.userAgent.toLowerCase().includes("mac"))
+	}, [])
 
 	return (
 		<footer className={`border-t px-3 py-2 ${className}`} {...props}>
