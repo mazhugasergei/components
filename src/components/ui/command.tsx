@@ -149,9 +149,7 @@ export function CommandDialog({
 	const modal = shouldShow
 		? createPortal(
 				<div
-					className={`fixed inset-0 z-50 flex items-start justify-center pt-[20vh] backdrop-blur-sm ${
-						open ? "animate-in fade-in scale-in duration-200" : "animate-out fade-out scale-out duration-150"
-					}`}
+					className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] backdrop-blur-sm"
 					aria-modal="true"
 					role="dialog"
 					aria-label="Command palette"
