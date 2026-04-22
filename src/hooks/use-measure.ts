@@ -19,6 +19,8 @@ export function useMeasure<T extends HTMLElement = HTMLElement>(): UseMeasureRet
 		if (!element) return
 
 		const observer = new ResizeObserver(([entry]) => {
+			if (!entry) return
+
 			setBounds({
 				width: entry.contentRect.width,
 				height: entry.contentRect.height,
