@@ -43,10 +43,10 @@ export function ComponentGrid() {
 				{filteredComponents.map((component, index) => (
 					<ComponentCard
 						key={index}
-						href={`/${toKebabCase(component.title)}`}
+						href={"/" + toKebabCase(component.title)}
 						title={component.title}
 						description={component.description}
-						codeBlocksCount={component.codeBlocks.length}
+						codeBlocksCount={component.codeBlocks.length - 1}
 					/>
 				))}
 			</div>
