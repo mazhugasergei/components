@@ -28,20 +28,34 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 				Components
 			</Link>
 
-			<ScrollArea>
+			<ScrollArea className="h-full">
 				<ul>
 					{LINKS.map((link, index) => {
 						const isActive = pathname === link.href
 
 						return (
-							<li key={index}>
+							<li key={index} className="flex flex-col items-start">
+								{!!index &&
+									Array.from({ length: 3 }).map((_, i) => (
+										<div
+											key={i}
+											className={buttonVariants({
+												variant: "transparent",
+												className: cn("pointer-events-none h-0.25! py-0!", !!i && "mt-2"),
+											})}
+										>
+											<span className="block h-0.25 w-1 bg-white/40" />
+										</div>
+									))}
+
 								<Link
 									href={link.href}
 									className={buttonVariants({
 										variant: "transparent",
-										className: cn("w-full justify-start font-mono", isActive && "text-foreground! underline"),
+										className: cn("-my-2 h-auto w-full justify-start py-2! font-mono", isActive && "text-foreground!"),
 									})}
 								>
+									<span className={cn("block h-0.25", isActive ? "w-3 bg-white" : "w-2 bg-white/40")} />
 									{link.label}
 								</Link>
 							</li>
