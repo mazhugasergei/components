@@ -7,6 +7,7 @@ import { cn } from "@/utils/classname"
 import { toKebabCase } from "@/utils/text"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { LogoLink } from "./logo"
 
 const LINKS = components.map((component) => ({
 	href: "/" + toKebabCase(component.title),
@@ -18,15 +19,14 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 
 	return (
 		<aside className={cn("flex flex-col border-r", className)} {...props}>
-			<Link
-				href="/"
+			<LogoLink
 				className={buttonVariants({
 					variant: "transparent",
-					className: "text-foreground! my-4 self-start font-mono font-bold",
+					className: "text-foreground! my-4 self-start",
 				})}
 			>
 				Components
-			</Link>
+			</LogoLink>
 
 			<ScrollArea className="h-full">
 				<ul>

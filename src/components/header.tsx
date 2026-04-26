@@ -1,8 +1,10 @@
+import { Logo } from "@/components/logo"
+
 export function Header() {
 	return (
 		<header className="backdrop-blur-safe sticky top-0">
-			<div className="mx-auto flex max-w-3xl items-center justify-between px-8 py-4">
-				<span className="text-foreground font-medium">components</span>
+			<div className="mx-auto flex max-w-3xl items-center justify-between px-8 py-6">
+				<Logo />
 				<div className="flex items-center gap-8">
 					<a
 						href="https://github.com/mazhugasergei/components"
