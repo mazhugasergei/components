@@ -1,6 +1,7 @@
 export interface Component {
 	title: string
 	description: string
+	tag: string
 	codeBlocks: CodeBlock[]
 	examples: React.ReactNode[]
 }

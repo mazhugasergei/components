@@ -8,6 +8,7 @@ export const components: Component[] = [
 	{
 		title: "AnimatedButton",
 		description: "Smooth width transitions when button content changes.",
+		tag: "Animation",
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",
@@ -27,6 +28,7 @@ export const components: Component[] = [
 	{
 		title: "Button",
 		description: "Versatile button component with multiple variants and sizes.",
+		tag: "Input",
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/button.tsx",
@@ -42,6 +44,7 @@ export const components: Component[] = [
 	{
 		title: "Command",
 		description: "Accessible command palette with keyboard navigation and search functionality.",
+		tag: "Navigation",
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/command.tsx",
@@ -57,6 +60,7 @@ export const components: Component[] = [
 	{
 		title: "Expandable",
 		description: "Smooth animations for expandable content.",
+		tag: "Animation",
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",

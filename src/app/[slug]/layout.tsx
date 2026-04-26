@@ -1,4 +1,4 @@
-import { Header } from "@/components/header"
+import { Header } from "@/components/component-header"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { components } from "@/lib/constants"
 import { toKebabCase } from "@/utils/text"
