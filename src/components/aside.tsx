@@ -41,7 +41,7 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 											key={i}
 											className={buttonVariants({
 												variant: "transparent",
-												className: cn("pointer-events-none h-0.25! py-0!", !!i && "mt-2"),
+												className: cn("pointer-events-none h-0.25! py-0! pl-0", !!i && "mt-2"),
 											})}
 										>
 											<span className="block h-0.25 w-1 bg-white/40" />
@@ -52,7 +52,10 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 									href={link.href}
 									className={buttonVariants({
 										variant: "transparent",
-										className: cn("-my-2 h-auto w-full justify-start py-2! font-mono", isActive && "text-foreground!"),
+										className: cn(
+											"-my-2 h-auto w-full justify-start py-2! pl-0 font-mono",
+											isActive && "text-foreground!"
+										),
 									})}
 								>
 									<span className={cn("block h-0.25", isActive ? "w-3 bg-white" : "w-2 bg-white/40")} />
