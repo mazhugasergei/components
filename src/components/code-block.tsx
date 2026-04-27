@@ -16,7 +16,7 @@ export function CodeBlock({ highlightedCode, themeBackground, className, ...prop
 			{...props}
 		>
 			<ScrollArea
-				className="max-h-80 overflow-auto text-white [&>pre]:inline-block [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:[tab-size:2]"
+				className="max-h-60 overflow-auto text-white md:max-h-80 [&>pre]:inline-block [&>pre]:p-3 [&>pre]:font-mono [&>pre]:text-xs [&>pre]:[tab-size:2] md:[&>pre]:text-sm"
 				dangerouslySetInnerHTML={{ __html: highlightedCode }}
 			/>
 		</div>
