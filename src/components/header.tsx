@@ -1,9 +1,13 @@
 import { Logo } from "@/components/logo"
+import { cn } from "@/utils/classname"
+import React from "react"
 
-export function Header() {
+export interface Props extends React.ComponentProps<"header"> {}
+
+export function Header({ className, ...props }: Props) {
 	return (
-		<header className="backdrop-blur-safe sticky top-0">
-			<div className="mx-auto flex max-w-3xl items-center justify-between px-8 py-6">
+		<header className={cn("backdrop-blur-safe sticky top-0", className)} {...props}>
+			<div className="mx-auto flex max-w-3xl items-center justify-between px-8 py-6 xl:max-w-4xl">
 				<Logo />
 				<div className="flex items-center gap-8">
 					<a

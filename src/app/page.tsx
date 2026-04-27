@@ -19,15 +19,15 @@ export default function Home() {
 	)
 
 	return (
-		<main className="h-100dvh">
+		<div className="h-100dvh">
 			<ScrollArea className="h-full">
 				<Header />
 
-				<div className="mx-auto max-w-3xl px-8 pt-20">
+				<main className="mx-auto max-w-3xl px-8 pt-20 xl:max-w-4xl">
 					{/* Hero */}
 					<section className="mb-20">
 						<p className="text-muted-foreground mb-4 text-sm tracking-widest uppercase">Open source</p>
-						<h1 className="text-foreground mb-6 text-3xl leading-snug font-medium">
+						<h1 className="mb-6 text-3xl leading-snug font-medium">
 							Reusable components,
 							<br />
 							dependency-free.
@@ -89,8 +89,8 @@ export default function Home() {
 							))}
 						</div>
 					</footer>
-				</div>
+				</main>
 			</ScrollArea>
-		</main>
+		</div>
 	)
 }

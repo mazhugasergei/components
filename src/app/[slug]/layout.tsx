@@ -34,7 +34,7 @@ export default async function Layout({
 
 	return (
 		<ScrollArea>
-			<Header title={component.title} backHref="/" />
+			<Header title={component.title} backHref="/" className="lg:hidden" />
 			{children}
 		</ScrollArea>
 	)
