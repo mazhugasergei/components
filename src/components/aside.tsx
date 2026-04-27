@@ -18,11 +18,11 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 	const pathname = usePathname()
 
 	return (
-		<aside className={cn("flex flex-col border-r", className)} {...props}>
+		<aside className={cn("flex flex-col gap-2", className)} {...props}>
 			<LogoLink
 				className={buttonVariants({
 					variant: "transparent",
-					className: "text-foreground! my-4 self-start",
+					className: "text-foreground! my-4 self-start ml-0.5",
 				})}
 			>
 				Components
@@ -44,7 +44,7 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 												className: cn("pointer-events-none h-0.25! py-0! pl-0", !!i && "mt-2"),
 											})}
 										>
-											<span className="block h-0.25 w-1 bg-white/40" />
+											<span className="block h-0.25 w-1.5 bg-white/40" />
 										</div>
 									))}
 
@@ -58,7 +58,7 @@ export function Aside({ className, ...props }: React.ComponentProps<"aside">) {
 										),
 									})}
 								>
-									<span className={cn("block h-0.25", isActive ? "w-3 bg-white" : "w-2 bg-white/40")} />
+									<span className={cn("block h-0.25", isActive ? "w-3.5 bg-white" : "w-2.5 bg-white/40")} />
 									{link.label}
 								</Link>
 							</li>
