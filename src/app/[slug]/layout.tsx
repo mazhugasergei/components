@@ -18,6 +18,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 	return {
 		title: component.title,
 		description: component.description,
+		openGraph: {
+			images: [`/og/${slug}.png`],
+		},
+		twitter: {
+			card: "summary_large_image",
+			images: [`/og/${slug}.png`],
+		},
 	}
 }
 

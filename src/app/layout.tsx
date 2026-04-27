@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://mazhugasergei.github.io/components"),
 	title: "Components",
 	description: "Personal collection of reusable components. Dependency-free. Copy-paste ready.",
 	keywords: ["components", "react", "ui", "typescript", "next.js"],
