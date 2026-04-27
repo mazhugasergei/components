@@ -12,11 +12,13 @@ export const metadata: Metadata = {
 		title: "Components",
 		description: "Personal collection of reusable components. Dependency-free. Copy-paste ready.",
 		type: "website",
+		images: ["/og/index.png"],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "Components",
 		description: "Personal collection of reusable components. Dependency-free. Copy-paste ready.",
+		images: ["/og/index.png"],
 	},
 }
 
