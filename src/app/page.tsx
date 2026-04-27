@@ -23,7 +23,7 @@ export default function Home() {
 			<ScrollArea className="h-full">
 				<Header />
 
-				<main className="mx-auto max-w-3xl px-8 pt-20 xl:max-w-4xl">
+				<main className="mx-auto max-w-3xl px-8 py-20 xl:max-w-4xl">
 					{/* Hero */}
 					<section className="mb-20">
 						<p className="text-muted-foreground mb-4 text-sm tracking-widest uppercase">Open source</p>
@@ -78,17 +78,6 @@ export default function Home() {
 							</Link>
 						))}
 					</div>
-
-					<footer className="mt-20 flex items-center justify-between border-t py-8">
-						<span className="text-muted-foreground text-sm">{components.length} components</span>
-						<div className="flex gap-6">
-							{["Next.js", "TypeScript", "Tailwind CSS"].map((tech) => (
-								<span key={tech} className="text-muted-foreground text-sm">
-									{tech}
-								</span>
-							))}
-						</div>
-					</footer>
 				</main>
 			</ScrollArea>
 		</div>
