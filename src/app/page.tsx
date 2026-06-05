@@ -33,9 +33,7 @@ export default function Home() {
 							dependency-free.
 						</h1>
 						<Paragraph className="text-muted-foreground max-w-md text-pretty">
-							{preventOrphan(
-								"A personal collection of copy-paste ready UI primitives. Built with Next.js, TypeScript, and Tailwind CSS."
-							)}
+							A personal collection of copy-paste ready UI primitives. Built with Next.js, TypeScript, and Tailwind CSS.
 						</Paragraph>
 					</section>
 
