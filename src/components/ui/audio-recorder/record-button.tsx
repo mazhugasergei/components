@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button"
 import { ComponentProps } from "react"
-import { Button } from "./button"
 import { RecordIcon } from "./icons"
 
 export interface RecordButtonProps extends ComponentProps<"button"> {
@@ -9,6 +9,8 @@ export interface RecordButtonProps extends ComponentProps<"button"> {
 export function RecordButton({ isRecording, ...props }: RecordButtonProps) {
 	return (
 		<Button
+			variant="outline"
+			size="icon"
 			className={`${isRecording ? "border-red-400! bg-red-400/5! text-red-400! hover:bg-red-400/10!" : ""}`}
 			{...props}
 		>

@@ -1,7 +1,7 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { Button } from "./button"
 import { DownloadIcon, LoaderIcon } from "./icons"
 import { audioBufferToWav } from "./utils"
 
@@ -45,7 +45,7 @@ export function Converter({ blob, originalName = "recording", disabled, ...props
 	}
 
 	return (
-		<Button onClick={convertToWav} disabled={!blob || loading || disabled} {...props}>
+		<Button variant="outline" size="icon" onClick={convertToWav} disabled={!blob || loading || disabled} {...props}>
 			{loading ? <LoaderIcon className="animate-spin" /> : <DownloadIcon />}
 		</Button>
 	)
