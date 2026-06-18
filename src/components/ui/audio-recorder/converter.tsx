@@ -45,7 +45,14 @@ export function Converter({ blob, originalName = "recording", disabled, ...props
 	}
 
 	return (
-		<Button variant="outline" size="icon" onClick={convertToWav} disabled={!blob || loading || disabled} {...props}>
+		<Button
+			aria-label="Download the recording"
+			variant="outline"
+			size="icon"
+			onClick={convertToWav}
+			disabled={!blob || loading || disabled}
+			{...props}
+		>
 			{loading ? <LoaderIcon className="animate-spin" /> : <DownloadIcon />}
 		</Button>
 	)

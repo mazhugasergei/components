@@ -8,7 +8,7 @@ export interface PlayButtonProps extends ComponentProps<"button"> {
 
 export function PlayButton({ isPlaying, ...props }: PlayButtonProps) {
 	return (
-		<Button variant="outline" size="icon" aria-label={isPlaying ? "Pause" : "Play"} {...props}>
+		<Button aria-label={isPlaying ? "Pause" : "Play"} variant="outline" size="icon" {...props}>
 			{isPlaying ? <PauseIcon /> : <PlayIcon />}
 		</Button>
 	)

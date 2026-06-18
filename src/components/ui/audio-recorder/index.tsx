@@ -85,12 +85,10 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 		setIsPlaying(!isPlaying)
 	}, [isPlaying, hasRecording])
 
-	const seekAudio = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+	const seekAudio = useCallback((value: number) => {
 		const player = audioPlayerRef.current
 		if (!player || !player.duration) return
-		const rect = e.currentTarget.getBoundingClientRect()
-		const pct = (e.clientX - rect.left) / rect.width
-		player.currentTime = pct * player.duration
+		player.currentTime = (value / 100) * player.duration
 	}, [])
 
 	useEffect(() => {
@@ -133,7 +131,7 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 			<div className="flex items-center gap-3">
 				<RecordButton isRecording={isRecording} onClick={toggleRecord} disabled={isPlaying} />
 				<PlayButton isPlaying={isPlaying} disabled={!hasRecording || isRecording} onClick={togglePlay} />
-				<SeekBar progress={progress} onClick={seekAudio} disabled={!hasRecording || isRecording} />
+				<SeekBar progress={progress} onSeek={seekAudio} disabled={!hasRecording || isRecording} />
 				<Duration time={displayTime} />
 				<Converter blob={audioBlobRef.current} originalName="recording" disabled={!hasRecording || isRecording} />
 				<audio ref={audioPlayerRef} className="hidden" />
