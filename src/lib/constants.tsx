@@ -26,6 +26,50 @@ export const components: Component[] = [
 		examples: [<AnimatedButtonExample />],
 	},
 	{
+		title: "AudioRecorder",
+		description: "Audio recording component with playback capabilities.",
+		tag: "Media",
+		codeBlocks: [
+			{
+				codeUrl: "components/ui/audio-recorder/index.tsx",
+				filePath: "components/ui/audio-recorder/index.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/screen.tsx",
+				filePath: "components/ui/audio-recorder/screen.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/record-button.tsx",
+				filePath: "components/ui/audio-recorder/record-button.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/play-button.tsx",
+				filePath: "components/ui/audio-recorder/play-button.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/seek-bar.tsx",
+				filePath: "components/ui/audio-recorder/seek-bar.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/duration.tsx",
+				filePath: "components/ui/audio-recorder/duration.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/converter.tsx",
+				filePath: "components/ui/audio-recorder/converter.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/decorative-speakers.tsx",
+				filePath: "components/ui/audio-recorder/decorative-speakers.tsx",
+			},
+			{
+				codeUrl: "components/ui/audio-recorder/icons.tsx",
+				filePath: "components/ui/audio-recorder/icons.tsx",
+			},
+		],
+		examples: [],
+	},
+	{
 		title: "Button",
 		description: "Versatile button component with multiple variants and sizes.",
 		tag: "Input",
