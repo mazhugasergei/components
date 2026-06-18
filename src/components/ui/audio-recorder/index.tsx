@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { ComponentProps, useCallback, useEffect, useRef, useState } from "react"
 import { Converter } from "./converter"
 import { DecorativeSpeakers } from "./decorative-speakers"
 import { Duration } from "./duration"
@@ -9,7 +9,7 @@ import { RecordButton } from "./record-button"
 import { Screen } from "./screen"
 import { SeekBar } from "./seek-bar"
 
-export function AudioRecorder() {
+export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 	const audioPlayerRef = useRef<HTMLAudioElement>(null)
 	const mediaRecorderRef = useRef<MediaRecorder | null>(null)
 	const chunksRef = useRef<Blob[]>([])
@@ -122,7 +122,10 @@ export function AudioRecorder() {
 	const displayTime = isRecording ? elapsed : (playbackTime ?? elapsed)
 
 	return (
-		<div className="w-full max-w-md space-y-4 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4">
+		<div
+			className={`w-full max-w-md space-y-4 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4 ${className || ""}`}
+			{...props}
+		>
 			<p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase">audio recorder</p>
 
 			<Screen analyser={analyser} isRecording={isRecording} status={status} />

@@ -1,4 +1,5 @@
 import { AnimatedButtonExample } from "@/components/examples/animated-button"
+import { AudioRecorderExample } from "@/components/examples/audio-recorder"
 import { ButtonExample } from "@/components/examples/button"
 import { CommandExample } from "@/components/examples/command"
 import { ExpandableExample } from "@/components/examples/expandable"
@@ -27,7 +28,7 @@ export const components: Component[] = [
 	},
 	{
 		title: "AudioRecorder",
-		description: "Audio recording component with playback capabilities.",
+		description: "Audio recording component with playback and save capabilities.",
 		tag: "Media",
 		codeBlocks: [
 			{
@@ -66,8 +67,12 @@ export const components: Component[] = [
 				codeUrl: "components/ui/audio-recorder/icons.tsx",
 				filePath: "components/ui/audio-recorder/icons.tsx",
 			},
+			{
+				codeUrl: "components/examples/audio-recorder.tsx",
+				filePath: "components/examples/audio-recorder.tsx",
+			},
 		],
-		examples: [],
+		examples: [<AudioRecorderExample />],
 	},
 	{
 		title: "Button",

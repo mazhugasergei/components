@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 				<PageHeader title={component.title} description={component.description} />
 
 				<div className="space-y-8">
-					<div className="bg-card grid place-content-center rounded-lg border p-10">{component.examples[0]}</div>
+					<div className="bg-card flex justify-center rounded-lg border p-10">{component.examples[0]}</div>
 
 					<div className="space-y-6">
 						{component.codeBlocks.map((block, index) => (

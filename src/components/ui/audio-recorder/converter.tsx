@@ -1,12 +1,9 @@
 "use client"
 
-import { FFmpeg } from "@ffmpeg/ffmpeg"
-import { fetchFile } from "@ffmpeg/util"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { Button } from "./button"
 import { DownloadIcon, LoaderIcon } from "./icons"
-
-const FORMAT = "wav"
+import { audioBufferToWav } from "./utils"
 
 export interface ConverterProps extends React.ComponentProps<typeof Button> {
 	blob: Blob | null
@@ -14,34 +11,41 @@ export interface ConverterProps extends React.ComponentProps<typeof Button> {
 }
 
 export function Converter({ blob, originalName = "recording", disabled, ...props }: ConverterProps) {
-	const ffmpegRef = useRef<FFmpeg | null>(null)
 	const [loading, setLoading] = useState(false)
 
-	const convert = async () => {
+	const convertToWav = async () => {
 		if (!blob) return
 		setLoading(true)
+
 		try {
-			const ff = ffmpegRef.current!
+			const arrayBuffer = await blob.arrayBuffer()
+			const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
 
-			await ff.writeFile("input.webm", await fetchFile(blob))
+			const audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
 
-			await ff.exec(["-i", "input.webm", "-ar", "22050", "-ac", "1", `output.${FORMAT}`])
-			const data = await ff.readFile(`output.${FORMAT}`)
-			const converted = new Blob([data as BlobPart], { type: `audio/${FORMAT}` })
+			const wavBuffer = audioBufferToWav(audioBuffer) // pure JS function below
 
-			const url = URL.createObjectURL(converted)
+			const wavBlob = new Blob([wavBuffer], { type: "audio/wav" })
+
+			const url = URL.createObjectURL(wavBlob)
 			const a = document.createElement("a")
 			a.href = url
-			a.download = `${originalName}-${Date.now()}.${FORMAT}`
+			a.download = `${originalName}-${Date.now()}.wav`
 			a.click()
 			URL.revokeObjectURL(url)
+
+			// Optional: close context to free memory
+			audioContext.close()
+		} catch (err) {
+			console.error("Conversion failed:", err)
+			alert("Failed to convert audio. Try recording in a different format or browser.")
 		} finally {
 			setLoading(false)
 		}
 	}
 
 	return (
-		<Button onClick={convert} disabled={!blob || loading || disabled} {...props}>
+		<Button onClick={convertToWav} disabled={!blob || loading || disabled} {...props}>
 			{loading ? <LoaderIcon className="animate-spin" /> : <DownloadIcon />}
 		</Button>
 	)
