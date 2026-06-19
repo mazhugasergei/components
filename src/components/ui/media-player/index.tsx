@@ -7,9 +7,9 @@ import { PlayList } from "./playlist"
 import { Screen } from "./screen"
 
 export const TRACKS = [
-	"/audio/Elysium_Sound_-_Cosmic_Dreamer_-_Synthwave_Cyberpunk.mp3",
-	"/audio/Greg_Kirkelie_-_1980s_Synthwave.mp3",
-	"/audio/Elysium_Sound_-_Stellar_Sunset_Middle_-_Synth_Pop_Retro_Music.mp3",
+	`${process.env["NEXT_PUBLIC_BASE_PATH"]}/audio/Elysium_Sound_-_Cosmic_Dreamer_-_Synthwave_Cyberpunk.mp3`,
+	`${process.env["NEXT_PUBLIC_BASE_PATH"]}/audio/Greg_Kirkelie_-_1980s_Synthwave.mp3`,
+	`${process.env["NEXT_PUBLIC_BASE_PATH"]}/audio/Elysium_Sound_-_Stellar_Sunset_Middle_-_Synth_Pop_Retro_Music.mp3`,
 ]
 
 const formatTime = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`
