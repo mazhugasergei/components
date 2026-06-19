@@ -17,7 +17,7 @@ const TRACKS: Track[] = [
 
 const getFilenameFromSrc = (src: string): string => {
 	const filename = src.split("/").pop() || src
-	return filename.replace(/\.[^/.]+$/, "") // remove extension
+	return filename.replace(/\.[^/.]+$/, "").replace(/-/g, " ") // clean display name
 }
 
 export interface MediaPlayerProps extends ComponentProps<"div"> {
