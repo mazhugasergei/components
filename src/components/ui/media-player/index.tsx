@@ -10,9 +10,9 @@ interface Track {
 }
 
 const TRACKS: Track[] = [
-	{ src: "/audio/Elysium-Sound-Cosmic-Dreamer-Synthwave-Cyberpunk.mp3" },
-	{ src: "/audio/Greg-Kirkelie-1980s-Synthwave.mp3" },
-	{ src: "/audio/Elysium-Sound-Stellar-Sunset-Middle.mp3" },
+	{ src: "/audio/Elysium_Sound_-_Cosmic_Dreamer_-_Synthwave_Cyberpunk.mp3" },
+	{ src: "/audio/Greg_Kirkelie_-_1980s_Synthwave.mp3" },
+	{ src: "/audio/Elysium_Sound_-_Stellar_Sunset_Middle_-_Synth_Pop_Retro_Music.mp3" },
 ]
 
 const getFilenameFromSrc = (src: string): string => {
