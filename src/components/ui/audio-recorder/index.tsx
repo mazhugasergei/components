@@ -121,9 +121,16 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 			className={`w-full max-w-md space-y-4 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4 ${className || ""}`}
 			{...props}
 		>
-			<p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase">audio recorder</p>
+			<div className="flex justify-between gap-4">
+				<p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase">audio recorder</p>
+				{status && <p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500">{status}</p>}
+			</div>
 
-			<Screen analyser={analyser} isRecording={isRecording} status={status} />
+			<Screen
+				analyser={analyser}
+				isActive={isRecording}
+				className="rounded-xl border border-neutral-800 bg-neutral-900"
+			/>
 
 			<div className="flex items-center gap-3">
 				<RecordButton isRecording={isRecording} onClick={toggleRecord} disabled={isPlaying} />
