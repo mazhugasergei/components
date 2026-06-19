@@ -3,6 +3,7 @@ import { CopyButton } from "@/components/copy-button"
 import { Header } from "@/components/header"
 import { PageHeader } from "@/components/page-header"
 import { processCodeBlocks } from "@/lib/code-loader"
+import { cn } from "@/utils/classname"
 import { toKebabCase } from "@/utils/text"
 import { LightbulbIcon } from "lucide-react"
 import { notFound } from "next/navigation"
@@ -31,15 +32,26 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 					)}
 
 					<div className="space-y-6">
-						{component.codeBlocks.map((block, index) => (
-							<div key={index} className="bg-card rounded-lg border">
-								<div className="flex items-center justify-between gap-2 p-1 pl-3 text-xs">
-									<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
-									<CopyButton text={block.highlightedCode.replace(/<[^>]*>/g, "")} />
+						{component.codeBlocks.map((block, index) => {
+							const textToCopy = block.highlightedCode.replace(/<[^>]*>/g, "")
+							return (
+								<div key={index} className={cn("relative rounded-lg", block.filePath && "bg-card border")}>
+									{block.filePath ? (
+										<div className="flex items-center justify-between gap-2 p-1 pl-3 text-xs">
+											<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
+											<CopyButton text={textToCopy} />
+										</div>
+									) : (
+										<CopyButton text={textToCopy} className="absolute top-1 right-1 z-10" />
+									)}
+									<CodeBlock
+										highlightedCode={block.highlightedCode}
+										themeBackground={block.themeBackground}
+										className={cn(block.filePath && "-mx-px -mb-px")}
+									/>
 								</div>
-								<CodeBlock highlightedCode={block.highlightedCode} themeBackground={block.themeBackground} />
-							</div>
-						))}
+							)
+						})}
 					</div>
 				</div>
 			</main>

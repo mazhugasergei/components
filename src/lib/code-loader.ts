@@ -49,10 +49,10 @@ export async function processCodeBlocks(): Promise<ProcessedComponent[]> {
 							// Use inline code
 							code = block.code
 						} else {
-							throw new Error(`code block "${block.filePath}" must have either codeUrl or code`)
+							throw new Error(`code block "${block.filePath ?? block.codeUrl}" must have either codeUrl or code`)
 						}
 
-						const lang = getLang(block.filePath)
+						const lang = getLang(block.filePath ?? block.codeUrl)
 
 						// Generate HTML using the fetched theme name
 						const highlightedCode = highlighter.codeToHtml(code, {
@@ -61,7 +61,7 @@ export async function processCodeBlocks(): Promise<ProcessedComponent[]> {
 						})
 
 						return {
-							filePath: block.filePath,
+							filePath: block.filePath ?? block.codeUrl,
 							highlightedCode,
 							themeBackground: theme.colors?.["editor.background"],
 						}

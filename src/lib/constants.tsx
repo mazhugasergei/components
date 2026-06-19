@@ -17,15 +17,12 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",
-				filePath: "hooks/use-measure.ts",
 			},
 			{
 				codeUrl: "components/ui/animated-button.tsx",
-				filePath: "components/ui/animated-button.tsx",
 			},
 			{
 				codeUrl: "components/examples/animated-button.tsx",
-				filePath: "components/examples/animated-button.tsx",
 			},
 		],
 	},
@@ -42,19 +39,15 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/audio-recorder/index.tsx",
-				filePath: "components/ui/audio-recorder/index.tsx",
 			},
 			{
 				codeUrl: "components/ui/audio-recorder/screen.tsx",
-				filePath: "components/ui/audio-recorder/screen.tsx",
 			},
 			{
 				codeUrl: "components/ui/audio-recorder/download-button.tsx",
-				filePath: "components/ui/audio-recorder/download-button.tsx",
 			},
 			{
 				codeUrl: "components/ui/audio-recorder/icons.tsx",
-				filePath: "components/ui/audio-recorder/icons.tsx",
 			},
 		],
 	},
@@ -66,11 +59,9 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/button.tsx",
-				filePath: "components/ui/button.tsx",
 			},
 			{
 				codeUrl: "components/examples/button.tsx",
-				filePath: "components/examples/button.tsx",
 			},
 		],
 	},
@@ -82,11 +73,9 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/command.tsx",
-				filePath: "components/ui/command.tsx",
 			},
 			{
 				codeUrl: "components/examples/command.tsx",
-				filePath: "components/examples/command.tsx",
 			},
 		],
 	},
@@ -98,15 +87,12 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",
-				filePath: "hooks/use-measure.ts",
 			},
 			{
 				codeUrl: "components/ui/expandable.tsx",
-				filePath: "components/ui/expandable.tsx",
 			},
 			{
 				codeUrl: "components/examples/expandable.tsx",
-				filePath: "components/examples/expandable.tsx",
 			},
 		],
 	},
@@ -123,23 +109,18 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/media-player/index.tsx",
-				filePath: "components/ui/media-player/index.tsx",
 			},
 			{
 				codeUrl: "components/ui/media-player/screen.tsx",
-				filePath: "components/ui/media-player/screen.tsx",
 			},
 			{
 				codeUrl: "components/ui/media-player/playlist.tsx",
-				filePath: "components/ui/media-player/playlist.tsx",
 			},
 			{
 				codeUrl: "components/ui/media-player/icons.tsx",
-				filePath: "components/ui/media-player/icons.tsx",
 			},
 			{
 				codeUrl: "components/examples/media-player.tsx",
-				filePath: "components/examples/media-player.tsx",
 			},
 		],
 	},
@@ -151,11 +132,9 @@ export const components: Component[] = [
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/scroll-area.tsx",
-				filePath: "components/ui/scroll-area.tsx",
 			},
 			{
 				codeUrl: "components/examples/scroll-area.tsx",
-				filePath: "components/examples/scroll-area.tsx",
 			},
 		],
 	},
