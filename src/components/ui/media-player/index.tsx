@@ -195,28 +195,27 @@ export function MediaPlayer({ className, variant = 1, showDecorativeSpeakers = t
 			</div>
 
 			{/* screen */}
-			<div className="relative mt-4 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900">
+			<div className="relative mt-4 grid items-center overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 max-md:aspect-3/2">
 				<Screen analyser={analyser} isActive={isPlaying} barOrigin="center" className="my-1" />
 				{variant === 1 && <PlayList isOpen={isPlayListOpen} currentTrackIndex={trackIndex} onTrackSelect={playTrack} />}
 			</div>
 
-			{/* controls */}
-			<div className="mt-4 flex items-center gap-3">
+			{/* buttons */}
+			<div className="mt-4 flex gap-3 max-md:flex-col md:items-center">
 				<div className="flex items-center gap-2">
 					<PrevButton size="icon-sm" onClick={prevTrack} />
 					<PlayButton size="icon-sm" isPlaying={isPlaying} onClick={togglePlay} />
-					<NextButton size="icon-sm" onClick={nextTrack} />{" "}
+					<NextButton size="icon-sm" onClick={nextTrack} />
+					<PlayListButton onClick={() => setPlayListOpen((v) => !v)} className="ml-auto md:hidden" />
 				</div>
-				<span className="text-xs text-neutral-600 tabular-nums">{formatTime(currentTime)}</span>
-				<SeekBar progress={progress} onSeek={seekAudio} />
-				<span className="text-xs text-neutral-600 tabular-nums">{formatTime(duration)}</span>
 
-				<button
-					onClick={() => setPlayListOpen((o) => !o)}
-					className="-m-2 p-2 text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase transition-colors hover:text-neutral-300"
-				>
-					<ListIcon />
-				</button>
+				<div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+					<span className="text-xs text-neutral-600 tabular-nums">{formatTime(currentTime)}</span>
+					<SeekBar progress={progress} onSeek={seekAudio} />
+					<span className="text-xs text-neutral-600 tabular-nums">{formatTime(duration)}</span>
+				</div>
+
+				<PlayListButton onClick={() => setPlayListOpen((v) => !v)} className="max-md:hidden" />
 			</div>
 
 			{variant === 2 && (
@@ -251,6 +250,19 @@ export function NextButton(props: ButtonProps) {
 		<Button aria-label="Next" variant="outline" size="icon" {...props}>
 			<NextIcon />
 		</Button>
+	)
+}
+
+interface PlayListButtonProps extends ComponentProps<"button"> {}
+
+export function PlayListButton({ className, ...props }: PlayListButtonProps) {
+	return (
+		<button
+			className={`-m-2 p-2 text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase transition-colors hover:text-neutral-300 ${className || ""}`}
+			{...props}
+		>
+			<ListIcon />
+		</button>
 	)
 }
 
