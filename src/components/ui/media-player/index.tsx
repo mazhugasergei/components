@@ -206,7 +206,11 @@ export function MediaPlayer({ className, variant = 1, showDecorativeSpeakers = t
 					<PrevButton size="icon-sm" onClick={prevTrack} />
 					<PlayButton size="icon-sm" isPlaying={isPlaying} onClick={togglePlay} />
 					<NextButton size="icon-sm" onClick={nextTrack} />
-					<PlayListButton onClick={() => setPlayListOpen((v) => !v)} className="ml-auto md:hidden" />
+					<PlayListButton
+						isOpen={isPlayListOpen}
+						onClick={() => setPlayListOpen((v) => !v)}
+						className="ml-auto md:hidden"
+					/>
 				</div>
 
 				<div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
@@ -215,7 +219,7 @@ export function MediaPlayer({ className, variant = 1, showDecorativeSpeakers = t
 					<span className="text-xs text-neutral-600 tabular-nums">{formatTime(duration)}</span>
 				</div>
 
-				<PlayListButton onClick={() => setPlayListOpen((v) => !v)} className="max-md:hidden" />
+				<PlayListButton isOpen={isPlayListOpen} onClick={() => setPlayListOpen((v) => !v)} className="max-md:hidden" />
 			</div>
 
 			{variant === 2 && (
@@ -253,11 +257,14 @@ export function NextButton(props: ButtonProps) {
 	)
 }
 
-interface PlayListButtonProps extends ComponentProps<"button"> {}
+interface PlayListButtonProps extends ComponentProps<"button"> {
+	isOpen: boolean
+}
 
-export function PlayListButton({ className, ...props }: PlayListButtonProps) {
+export function PlayListButton({ isOpen, className, ...props }: PlayListButtonProps) {
 	return (
 		<button
+			aria-label={isOpen ? "Close play list" : "Open play list"}
 			className={`-m-2 p-2 text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase transition-colors hover:text-neutral-300 ${className || ""}`}
 			{...props}
 		>
