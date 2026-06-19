@@ -254,33 +254,29 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 			{/* controls */}
 			<div className="mt-4 flex items-center gap-3">
 				<div className="flex items-center gap-2">
-					{TRACKS.length > 1 && <PrevButton size="icon-sm" onClick={prevTrack} />}
+					<PrevButton size="icon-sm" onClick={prevTrack} />
 					<PlayButton size="icon-sm" isPlaying={isPlaying} onClick={togglePlay} />
-					{TRACKS.length > 1 && <NextButton size="icon-sm" onClick={nextTrack} />}
+					<NextButton size="icon-sm" onClick={nextTrack} />{" "}
 				</div>
 				<span className="text-xs text-neutral-600 tabular-nums">{fmt(currentTime)}</span>
 				<SeekBar progress={progress} onSeek={seekAudio} />
 				<span className="text-xs text-neutral-600 tabular-nums">{fmt(duration)}</span>
 
-				{TRACKS.length > 1 && (
-					<button
-						onClick={() => setPlaylistOpen((o) => !o)}
-						className="-m-2 p-2 text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase transition-colors hover:text-neutral-300"
-					>
-						<ListIcon />
-					</button>
-				)}
+				<button
+					onClick={() => setPlaylistOpen((o) => !o)}
+					className="-m-2 p-2 text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase transition-colors hover:text-neutral-300"
+				>
+					<ListIcon />
+				</button>
 			</div>
 
-			{TRACKS.length > 1 && (
-				<PlayList
-					isOpen={isPlaylistOpen}
-					tracks={TRACKS}
-					trackNames={trackNames}
-					currentTrackIndex={trackIndex}
-					onTrackSelect={playTrack}
-				/>
-			)}
+			<PlayList
+				isOpen={isPlaylistOpen}
+				tracks={TRACKS}
+				trackNames={trackNames}
+				currentTrackIndex={trackIndex}
+				onTrackSelect={playTrack}
+			/>
 
 			<audio ref={audioPlayerRef} src={currentTrackSrc} preload="metadata" className="hidden" />
 
