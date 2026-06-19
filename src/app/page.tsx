@@ -9,7 +9,7 @@ import { ChevronRightIcon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
-const categories = ["All", "Animation", "Input", "Navigation"]
+const categories = ["All", ...new Set(components.map((component) => component.tag))]
 
 export default function Home() {
 	const [selectedCategory, setSelectedCategory] = useState("All")
