@@ -129,7 +129,7 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 				<RecordButton isRecording={isRecording} onClick={toggleRecord} disabled={isPlaying} />
 				<PlayButton isPlaying={isPlaying} disabled={!hasRecording || isRecording} onClick={togglePlay} />
 				<SeekBar progress={progress} onSeek={seekAudio} disabled={!hasRecording || isRecording} />
-				<Duration time={displayTime} />
+				<Time time={displayTime} />
 				<DownloadButton blob={audioBlobRef.current} originalName="recording" disabled={!hasRecording || isRecording} />
 				<audio ref={audioPlayerRef} className="hidden" />
 			</div>
@@ -196,11 +196,11 @@ export function SeekBar({ progress, disabled, className, onSeek, ...props }: See
 	)
 }
 
-export interface DurationProps extends ComponentProps<"span"> {
+export interface TimeProps extends ComponentProps<"span"> {
 	time: number
 }
 
-export function Duration({ time, ...props }: DurationProps) {
+export function Time({ time, ...props }: TimeProps) {
 	return (
 		<span className="text-xs text-neutral-600 tabular-nums" {...props}>
 			{Math.floor(time / 60)}:{String(Math.floor(time % 60)).padStart(2, "0")}
