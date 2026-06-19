@@ -10,14 +10,14 @@ interface Track {
 }
 
 const TRACKS: Track[] = [
-	{ src: "/audio/Elysium Sound - Cosmic Dreamer - Synthwave Cyberpunk.mp3" },
-	{ src: "/audio/Greg Kirkelie - 1980s Synthwave.mp3" },
-	{ src: "/audio/Elysium Sound - Stellar Sunset Middle - Synth Pop Retro Music.mp3" },
+	{ src: "/audio/Elysium_Sound_-_Cosmic_Dreamer_-_Synthwave_Cyberpunk.mp3" },
+	{ src: "/audio/Greg_Kirkelie_-_1980s_Synthwave.mp3" },
+	{ src: "/audio/Elysium_Sound_-_Stellar_Sunset_Middle_-_Synth_Pop_Retro_Music.mp3" },
 ]
 
 const getFilenameFromSrc = (src: string): string => {
 	const filename = src.split("/").pop() || src
-	return filename.replace(/\.[^/.]+$/, "").replace(/-/g, " ") // clean display name
+	return filename.replace(/\.[^/.]+$/, "").replace(/_/g, " ") // clean display name
 }
 
 export interface MediaPlayerProps extends ComponentProps<"div"> {
