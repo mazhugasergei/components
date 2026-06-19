@@ -105,6 +105,7 @@ export function MediaPlayer({ className, ...props }: ComponentProps<"div">) {
 			<Screen
 				analyser={analyser}
 				isActive={isPlaying}
+				barOrigin="center"
 				className="rounded-xl border border-neutral-800 bg-neutral-900"
 			/>
 

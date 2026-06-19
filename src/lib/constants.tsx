@@ -109,8 +109,16 @@ export const components: Component[] = [
 		tag: "Media",
 		codeBlocks: [
 			{
-				codeUrl: "components/ui/media-player.tsx",
-				filePath: "components/ui/media-player.tsx",
+				codeUrl: "components/ui/media-player/index.tsx",
+				filePath: "components/ui/media-player/index.tsx",
+			},
+			{
+				codeUrl: "components/ui/media-player/screen.tsx",
+				filePath: "components/ui/media-player/screen.tsx",
+			},
+			{
+				codeUrl: "components/ui/media-player/icons.tsx",
+				filePath: "components/ui/media-player/icons.tsx",
 			},
 		],
 		examples: [<MediaPlayerExample />],
