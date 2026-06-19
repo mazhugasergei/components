@@ -1,9 +1,11 @@
 "use client"
 
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { useEffect, useState } from "react"
 import { TRACKS } from "."
 
 interface PlayListProps {
+	variant?: 1 | 2
 	isOpen: boolean
 	currentTrackIndex: number
 	onTrackSelect: (index: number, shouldPlay: boolean) => void
@@ -43,7 +45,7 @@ const extractId3v1Title = async (url: string): Promise<string | null> => {
 	}
 }
 
-export function PlayList({ isOpen, currentTrackIndex, onTrackSelect }: PlayListProps) {
+export function PlayList({ variant = 1, isOpen, currentTrackIndex, onTrackSelect }: PlayListProps) {
 	const [trackNames, setTrackNames] = useState<string[]>([])
 
 	// load metadata for all tracks
@@ -63,14 +65,19 @@ export function PlayList({ isOpen, currentTrackIndex, onTrackSelect }: PlayListP
 
 	return (
 		<div
-			className="mt-4 overflow-hidden transition-all duration-300 ease-in-out"
+			className={`overflow-hidden transition-all duration-150 ease-in-out ${
+				variant === 1 ? "absolute inset-0 z-10 bg-neutral-900" : variant === 2 ? "mt-4" : ""
+			}`}
 			style={{
-				maxHeight: isOpen ? "31.25rem" : "0",
-				marginTop: isOpen ? "" : "0",
 				opacity: isOpen ? 1 : 0,
+				maxHeight: variant === 2 ? (isOpen ? "31.25rem" : "0") : "",
+				marginTop: variant === 2 ? (isOpen ? "" : "0") : "",
+				pointerEvents: variant === 1 ? (isOpen ? "auto" : "none") : "auto",
 			}}
 		>
-			<div className="flex flex-col gap-1">
+			<ScrollArea
+				className={variant === 1 ? "flex h-full flex-col gap-1 p-2" : variant === 2 ? "flex flex-col gap-1" : ""}
+			>
 				{TRACKS.map((track, i) => {
 					const displayName = trackNames[i] ?? getFilenameFromSrc(track)
 
@@ -89,7 +96,7 @@ export function PlayList({ isOpen, currentTrackIndex, onTrackSelect }: PlayListP
 						</button>
 					)
 				})}
-			</div>
+			</ScrollArea>
 		</div>
 	)
 }

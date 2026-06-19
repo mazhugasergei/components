@@ -15,10 +15,11 @@ export const TRACKS = [
 const formatTime = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`
 
 export interface MediaPlayerProps extends ComponentProps<"div"> {
+	variant?: 1 | 2
 	showDecorativeSpeakers?: boolean
 }
 
-export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props }: MediaPlayerProps) {
+export function MediaPlayer({ className, variant = 1, showDecorativeSpeakers = true, ...props }: MediaPlayerProps) {
 	const audioPlayerRef = useRef<HTMLAudioElement>(null)
 	const audioCtxRef = useRef<AudioContext | null>(null)
 	const sourceNodeRef = useRef<MediaElementAudioSourceNode | null>(null)
@@ -29,7 +30,7 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 	const [currentTime, setCurrentTime] = useState(0)
 	const [duration, setDuration] = useState(0)
 	const [trackIndex, setTrackIndex] = useState(0)
-	const [isPlaylistOpen, setPlaylistOpen] = useState(false)
+	const [isPlayListOpen, setPlayListOpen] = useState(false)
 
 	const currentTrackSrc = TRACKS[trackIndex]!
 
@@ -194,8 +195,9 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 			</div>
 
 			{/* screen */}
-			<div className="mt-4 rounded-xl border border-neutral-800 bg-neutral-900">
+			<div className="relative mt-4 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900">
 				<Screen analyser={analyser} isActive={isPlaying} barOrigin="center" className="my-1" />
+				{variant === 1 && <PlayList isOpen={isPlayListOpen} currentTrackIndex={trackIndex} onTrackSelect={playTrack} />}
 			</div>
 
 			{/* controls */}
@@ -210,14 +212,16 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 				<span className="text-xs text-neutral-600 tabular-nums">{formatTime(duration)}</span>
 
 				<button
-					onClick={() => setPlaylistOpen((o) => !o)}
+					onClick={() => setPlayListOpen((o) => !o)}
 					className="-m-2 p-2 text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase transition-colors hover:text-neutral-300"
 				>
 					<ListIcon />
 				</button>
 			</div>
 
-			<PlayList isOpen={isPlaylistOpen} currentTrackIndex={trackIndex} onTrackSelect={playTrack} />
+			{variant === 2 && (
+				<PlayList variant={2} isOpen={isPlayListOpen} currentTrackIndex={trackIndex} onTrackSelect={playTrack} />
+			)}
 
 			<audio ref={audioPlayerRef} src={currentTrackSrc} preload="metadata" className="hidden" />
 

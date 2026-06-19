@@ -117,8 +117,16 @@ export const components: Component[] = [
 				filePath: "components/ui/media-player/screen.tsx",
 			},
 			{
+				codeUrl: "components/ui/media-player/playlist.tsx",
+				filePath: "components/ui/media-player/playlist.tsx",
+			},
+			{
 				codeUrl: "components/ui/media-player/icons.tsx",
 				filePath: "components/ui/media-player/icons.tsx",
+			},
+			{
+				codeUrl: "components/examples/media-player.tsx",
+				filePath: "components/examples/media-player.tsx",
 			},
 		],
 		examples: [<MediaPlayerExample />],
