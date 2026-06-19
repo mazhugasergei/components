@@ -4,6 +4,7 @@ import { ButtonExample } from "@/components/examples/button"
 import { CommandExample } from "@/components/examples/command"
 import { ExpandableExample } from "@/components/examples/expandable"
 import { MediaPlayerExample } from "@/components/examples/media-player"
+import { ScrollAreaExample } from "@/components/examples/scroll-area"
 import Link from "next/link"
 import type { Component } from "./types"
 
@@ -139,6 +140,22 @@ export const components: Component[] = [
 			{
 				codeUrl: "components/examples/media-player.tsx",
 				filePath: "components/examples/media-player.tsx",
+			},
+		],
+	},
+	{
+		title: "ScrollArea",
+		description: "Scrollable area with custom scrollbar styling.",
+		tag: "Layout",
+		examples: [<ScrollAreaExample />],
+		codeBlocks: [
+			{
+				codeUrl: "components/ui/scroll-area.tsx",
+				filePath: "components/ui/scroll-area.tsx",
+			},
+			{
+				codeUrl: "components/examples/scroll-area.tsx",
+				filePath: "components/examples/scroll-area.tsx",
 			},
 		],
 	},
