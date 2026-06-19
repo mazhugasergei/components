@@ -64,24 +64,38 @@ export function MediaPlayer({ className, ...props }: ComponentProps<"div">) {
 		const player = audioPlayerRef.current
 		if (!player) return
 
+		const updateDuration = () => {
+			if (player.duration && isFinite(player.duration)) {
+				setDuration(player.duration)
+			}
+		}
+
 		const onTimeUpdate = () => {
 			if (!player.duration) return
 			setProgress((player.currentTime / player.duration) * 100)
 			setCurrentTime(player.currentTime)
 		}
-		const onLoadedMetadata = () => setDuration(player.duration)
+
 		const onEnded = () => {
 			setIsPlaying(false)
 			setProgress(0)
 			setCurrentTime(0)
 		}
 
+		player.addEventListener("loadedmetadata", updateDuration)
+		player.addEventListener("durationchange", updateDuration)
+		player.addEventListener("canplay", updateDuration)
 		player.addEventListener("timeupdate", onTimeUpdate)
-		player.addEventListener("loadedmetadata", onLoadedMetadata)
 		player.addEventListener("ended", onEnded)
+
+		// catch the case where metadata already loaded before this effect ran
+		updateDuration()
+
 		return () => {
+			player.removeEventListener("loadedmetadata", updateDuration)
+			player.removeEventListener("durationchange", updateDuration)
+			player.removeEventListener("canplay", updateDuration)
 			player.removeEventListener("timeupdate", onTimeUpdate)
-			player.removeEventListener("loadedmetadata", onLoadedMetadata)
 			player.removeEventListener("ended", onEnded)
 		}
 	}, [])
@@ -99,7 +113,6 @@ export function MediaPlayer({ className, ...props }: ComponentProps<"div">) {
 		>
 			<div className="flex justify-between gap-4">
 				<p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase">media player</p>
-				<Time time={currentTime} total={duration} />
 			</div>
 
 			<Screen
@@ -111,10 +124,12 @@ export function MediaPlayer({ className, ...props }: ComponentProps<"div">) {
 
 			<div className="flex items-center gap-3">
 				<PlayButton isPlaying={isPlaying} onClick={togglePlay} />
+				<Time time={currentTime} />
 				<SeekBar progress={progress} onSeek={seekAudio} />
+				<Time time={duration} />
 			</div>
 
-			<audio ref={audioPlayerRef} src={"./audio.mp3"} preload="metadata" className="hidden" />
+			<audio ref={audioPlayerRef} src="./audio.mp3" preload="metadata" className="hidden" />
 
 			<DecorativeSpeakers />
 		</div>
@@ -162,16 +177,14 @@ export function SeekBar({ progress, disabled, className, onSeek, ...props }: See
 
 export interface TimeProps extends ComponentProps<"span"> {
 	time: number
-	total?: number
 }
 
-export function Time({ time, total, ...props }: TimeProps) {
+export function Time({ time, ...props }: TimeProps) {
 	const fmt = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`
 
 	return (
 		<span className="text-xs text-neutral-600 tabular-nums" {...props}>
 			{fmt(time)}
-			{total ? ` / ${fmt(total)}` : ""}
 		</span>
 	)
 }

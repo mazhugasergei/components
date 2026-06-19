@@ -50,7 +50,6 @@ export function Screen({ analyser, isActive, barOrigin = "bottom", className, ..
 		const slot = (BAR_WIDTH + BAR_GAP) * dpr
 		const barW = BAR_WIDTH * dpr
 		const centered = barOriginRef.current === "center"
-		const now = Date.now()
 		const half = Math.ceil(barCount / 2)
 
 		ctx.clearRect(0, 0, w, h)
