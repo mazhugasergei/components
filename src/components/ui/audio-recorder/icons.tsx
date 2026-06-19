@@ -85,8 +85,6 @@ export function DownloadIcon({ size = DEFAULT_ICON_SIZE, ...props }: IconProps) 
 		>
 			<path
 				d={`M${stemX} ${stemTop}v${stemLen}M${armX} ${armY}l${armD} ${armD} ${armD}-${armD}M${baseX} ${baseY}h${baseLen}`}
-				strokeLinecap="round"
-				strokeLinejoin="round"
 			/>
 		</svg>
 	)
