@@ -40,8 +40,8 @@ export const components: Component[] = [
 				filePath: "components/ui/audio-recorder/screen.tsx",
 			},
 			{
-				codeUrl: "components/ui/audio-recorder/doanload-button.tsx",
-				filePath: "components/ui/audio-recorder/doanload-button.tsx",
+				codeUrl: "components/ui/audio-recorder/download-button.tsx",
+				filePath: "components/ui/audio-recorder/download-button.tsx",
 			},
 			{
 				codeUrl: "components/ui/audio-recorder/icons.tsx",

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ComponentProps, useCallback, useEffect, useRef, useState } from "react"
-import { DownloadButton } from "./doanload-button"
+import { DownloadButton } from "./download-button"
 import { PauseIcon, PlayIcon, RecordIcon } from "./icons"
 import { Screen } from "./screen"
 import { formatTime } from "./utils"
