@@ -4,6 +4,7 @@ import { ButtonExample } from "@/components/examples/button"
 import { CommandExample } from "@/components/examples/command"
 import { ExpandableExample } from "@/components/examples/expandable"
 import { MediaPlayerExample } from "@/components/examples/media-player"
+import Link from "next/link"
 import type { Component } from "./types"
 
 export const components: Component[] = [
@@ -11,6 +12,7 @@ export const components: Component[] = [
 		title: "AnimatedButton",
 		description: "Smooth width transitions when button content changes.",
 		tag: "Animation",
+		examples: [<AnimatedButtonExample />],
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",
@@ -25,12 +27,17 @@ export const components: Component[] = [
 				filePath: "components/examples/animated-button.tsx",
 			},
 		],
-		examples: [<AnimatedButtonExample />],
 	},
 	{
 		title: "AudioRecorder",
 		description: "Audio recording component with playback and save capabilities.",
 		tag: "Media",
+		examples: [<AudioRecorderExample />],
+		notice: (
+			<>
+				Also need <Link href="/button">Button</Link>.
+			</>
+		),
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/audio-recorder/index.tsx",
@@ -49,12 +56,12 @@ export const components: Component[] = [
 				filePath: "components/ui/audio-recorder/icons.tsx",
 			},
 		],
-		examples: [<AudioRecorderExample />],
 	},
 	{
 		title: "Button",
 		description: "Versatile button component with multiple variants and sizes.",
 		tag: "Input",
+		examples: [<ButtonExample />],
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/button.tsx",
@@ -65,12 +72,12 @@ export const components: Component[] = [
 				filePath: "components/examples/button.tsx",
 			},
 		],
-		examples: [<ButtonExample />],
 	},
 	{
 		title: "Command",
 		description: "Accessible command palette with keyboard navigation and search functionality.",
 		tag: "Navigation",
+		examples: [<CommandExample />],
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/command.tsx",
@@ -81,12 +88,12 @@ export const components: Component[] = [
 				filePath: "components/examples/command.tsx",
 			},
 		],
-		examples: [<CommandExample />],
 	},
 	{
 		title: "Expandable",
 		description: "Smooth animations for expandable content.",
 		tag: "Animation",
+		examples: [<ExpandableExample />],
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",
@@ -101,12 +108,17 @@ export const components: Component[] = [
 				filePath: "components/examples/expandable.tsx",
 			},
 		],
-		examples: [<ExpandableExample />],
 	},
 	{
 		title: "MediaPlayer",
 		description: "Media player component with playback controls and progress tracking.",
 		tag: "Media",
+		examples: [<MediaPlayerExample />],
+		notice: (
+			<>
+				Also need <Link href="/button">Button</Link> and <Link href="/scroll-area">ScrollArea</Link>.
+			</>
+		),
 		codeBlocks: [
 			{
 				codeUrl: "components/ui/media-player/index.tsx",
@@ -129,6 +141,5 @@ export const components: Component[] = [
 				filePath: "components/examples/media-player.tsx",
 			},
 		],
-		examples: [<MediaPlayerExample />],
 	},
 ]

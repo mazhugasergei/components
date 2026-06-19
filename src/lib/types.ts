@@ -2,8 +2,9 @@ export interface Component {
 	title: string
 	description: string
 	tag: string
-	codeBlocks: CodeBlock[]
 	examples: React.ReactNode[]
+	notice?: React.ReactNode
+	codeBlocks: CodeBlock[]
 }
 
 export interface CodeBlock {
@@ -21,6 +22,7 @@ export interface ProcessedCodeBlock {
 export interface ProcessedComponent {
 	title: string
 	description: string
-	codeBlocks: ProcessedCodeBlock[]
 	examples: any[]
+	notice?: React.ReactNode
+	codeBlocks: ProcessedCodeBlock[]
 }

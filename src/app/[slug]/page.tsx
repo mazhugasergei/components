@@ -4,6 +4,7 @@ import { Header } from "@/components/header"
 import { PageHeader } from "@/components/page-header"
 import { processCodeBlocks } from "@/lib/code-loader"
 import { toKebabCase } from "@/utils/text"
+import { LightbulbIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,6 +22,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
 				<div className="space-y-8">
 					<div className="bg-card flex justify-center rounded-lg border p-10">{component.examples[0]}</div>
+
+					{component.notice && (
+						<div className="bg-card text-muted-foreground flex gap-3 rounded-lg border px-4 py-3">
+							<LightbulbIcon size={15} className="mt-0.5 shrink-0" />
+							<p className="text-sm leading-relaxed [&_a]:underline [&_a]:underline-offset-2">{component.notice}</p>
+						</div>
+					)}
 
 					<div className="space-y-6">
 						{component.codeBlocks.map((block, index) => (
