@@ -47,10 +47,6 @@ export const components: Component[] = [
 				codeUrl: "components/ui/audio-recorder/icons.tsx",
 				filePath: "components/ui/audio-recorder/icons.tsx",
 			},
-			{
-				codeUrl: "components/ui/audio-recorder/utils.ts",
-				filePath: "components/ui/audio-recorder/utils.ts",
-			},
 		],
 		examples: [<AudioRecorderExample />],
 	},

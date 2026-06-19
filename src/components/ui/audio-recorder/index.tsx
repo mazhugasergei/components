@@ -5,7 +5,6 @@ import { ComponentProps, useCallback, useEffect, useRef, useState } from "react"
 import { DownloadButton } from "./download-button"
 import { PauseIcon, PlayIcon, RecordIcon } from "./icons"
 import { Screen } from "./screen"
-import { formatTime } from "./utils"
 
 export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 	const audioPlayerRef = useRef<HTMLAudioElement>(null)
@@ -204,7 +203,7 @@ export interface DurationProps extends ComponentProps<"span"> {
 export function Duration({ time, ...props }: DurationProps) {
 	return (
 		<span className="text-xs text-neutral-600 tabular-nums" {...props}>
-			{formatTime(time)}
+			{Math.floor(time / 60)}:{String(Math.floor(time % 60)).padStart(2, "0")}
 		</span>
 	)
 }
