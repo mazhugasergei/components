@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
 	reactCompiler: true,
-	assetPrefix: "/components",
+	basePath: "/components",
 }
 
 export default nextConfig
