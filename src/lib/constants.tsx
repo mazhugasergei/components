@@ -3,6 +3,7 @@ import { AudioRecorderExample } from "@/components/examples/audio-recorder"
 import { ButtonExample } from "@/components/examples/button"
 import { CommandExample } from "@/components/examples/command"
 import { ExpandableExample } from "@/components/examples/expandable"
+import { MediaPlayerExample } from "@/components/examples/media-player"
 import type { Component } from "./types"
 
 export const components: Component[] = [
@@ -101,5 +102,17 @@ export const components: Component[] = [
 			},
 		],
 		examples: [<ExpandableExample />],
+	},
+	{
+		title: "MediaPlayer",
+		description: "Media player component with playback controls and progress tracking.",
+		tag: "Media",
+		codeBlocks: [
+			{
+				codeUrl: "components/ui/media-player.tsx",
+				filePath: "components/ui/media-player.tsx",
+			},
+		],
+		examples: [<MediaPlayerExample />],
 	},
 ]
