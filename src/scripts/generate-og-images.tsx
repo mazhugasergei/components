@@ -152,7 +152,7 @@ async function generate() {
 			await ogImage({
 				eyebrow: component.tag,
 				title: component.title,
-				description: component.description,
+				description: component.description.replace(/ (?=[^ ]*$)/, "\xA0"),
 				footer: `${fileCount} ${fileCount === 1 ? "file" : "files"}`,
 				fontData,
 			}),
