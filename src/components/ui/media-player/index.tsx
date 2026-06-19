@@ -162,9 +162,28 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 	}, [isPlaying, ensureAnalyser])
 
 	const prevTrack = useCallback(() => {
-		const idx = (trackIndex - 1 + TRACKS.length) % TRACKS.length
-		playTrack(idx, true)
-	}, [trackIndex, playTrack])
+		const player = audioPlayerRef.current
+		if (!player) return
+
+		// if we've passed 3 seconds, restart the current track from the beginning
+		if (currentTime >= 3) {
+			player.currentTime = 0
+			setProgress(0)
+			setCurrentTime(0)
+
+			// ensure it's playing
+			if (!isPlaying) {
+				player.play().catch(() => {
+					setIsPlaying(false)
+				})
+				setIsPlaying(true)
+			}
+		} else {
+			// otherwise go to the previous track
+			const idx = (trackIndex - 1 + TRACKS.length) % TRACKS.length
+			playTrack(idx, true)
+		}
+	}, [currentTime, trackIndex, playTrack, isPlaying])
 
 	const nextTrack = useCallback(() => {
 		const idx = (trackIndex + 1) % TRACKS.length
