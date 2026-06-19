@@ -195,13 +195,13 @@ export function MediaPlayer({ className, variant = 1, showDecorativeSpeakers = t
 			</div>
 
 			{/* screen */}
-			<div className="relative mt-4 grid items-center overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 max-md:aspect-3/2">
+			<div className="relative mt-4 grid items-center overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 max-sm:aspect-3/2">
 				<Screen analyser={analyser} isActive={isPlaying} barOrigin="center" className="my-1" />
 				{variant === 1 && <PlayList isOpen={isPlayListOpen} currentTrackIndex={trackIndex} onTrackSelect={playTrack} />}
 			</div>
 
 			{/* buttons */}
-			<div className="mt-4 flex gap-3 max-md:flex-col md:items-center">
+			<div className="mt-4 flex gap-3 max-sm:flex-col sm:items-center">
 				<div className="flex items-center gap-2">
 					<PrevButton size="icon-sm" onClick={prevTrack} />
 					<PlayButton size="icon-sm" isPlaying={isPlaying} onClick={togglePlay} />
@@ -209,17 +209,17 @@ export function MediaPlayer({ className, variant = 1, showDecorativeSpeakers = t
 					<PlayListButton
 						isOpen={isPlayListOpen}
 						onClick={() => setPlayListOpen((v) => !v)}
-						className="ml-auto md:hidden"
+						className="ml-auto sm:hidden"
 					/>
 				</div>
 
-				<div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+				<div className="grid flex-1 grid-cols-[auto_1fr_auto] items-center gap-2">
 					<span className="text-xs text-neutral-600 tabular-nums">{formatTime(currentTime)}</span>
 					<SeekBar progress={progress} onSeek={seekAudio} />
 					<span className="text-xs text-neutral-600 tabular-nums">{formatTime(duration)}</span>
 				</div>
 
-				<PlayListButton isOpen={isPlayListOpen} onClick={() => setPlayListOpen((v) => !v)} className="max-md:hidden" />
+				<PlayListButton isOpen={isPlayListOpen} onClick={() => setPlayListOpen((v) => !v)} className="max-sm:hidden" />
 			</div>
 
 			{variant === 2 && (
