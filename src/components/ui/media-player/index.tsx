@@ -3,22 +3,16 @@
 import { Button, ButtonProps } from "@/components/ui/button"
 import { ComponentProps, useCallback, useEffect, useRef, useState } from "react"
 import { ListIcon, NextIcon, PauseIcon, PlayIcon, PrevIcon } from "./icons"
+import { PlayList } from "./playlist"
 import { Screen } from "./screen"
 
-interface Track {
-	src: string
-}
-
-const TRACKS: Track[] = [
-	{ src: "/audio/Elysium_Sound_-_Cosmic_Dreamer_-_Synthwave_Cyberpunk.mp3" },
-	{ src: "/audio/Greg_Kirkelie_-_1980s_Synthwave.mp3" },
-	{ src: "/audio/Elysium_Sound_-_Stellar_Sunset_Middle_-_Synth_Pop_Retro_Music.mp3" },
+export const TRACKS = [
+	"/audio/Elysium_Sound_-_Cosmic_Dreamer_-_Synthwave_Cyberpunk.mp3",
+	"/audio/Greg_Kirkelie_-_1980s_Synthwave.mp3",
+	"/audio/Elysium_Sound_-_Stellar_Sunset_Middle_-_Synth_Pop_Retro_Music.mp3",
 ]
 
-const getFilenameFromSrc = (src: string): string => {
-	const filename = src.split("/").pop() || src
-	return filename.replace(/\.[^/.]+$/, "").replace(/_/g, " ") // clean display name
-}
+const formatTime = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`
 
 export interface MediaPlayerProps extends ComponentProps<"div"> {
 	showDecorativeSpeakers?: boolean
@@ -36,53 +30,8 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 	const [duration, setDuration] = useState(0)
 	const [trackIndex, setTrackIndex] = useState(0)
 	const [isPlaylistOpen, setPlaylistOpen] = useState(false)
-	const [trackNames, setTrackNames] = useState<string[]>([])
 
-	const currentTrackSrc = TRACKS[trackIndex]!.src
-
-	// ==================== METADATA EXTRACTION ====================
-	const extractId3v1Title = async (url: string): Promise<string | null> => {
-		try {
-			const res = await fetch(url)
-			if (!res.ok) return null
-			const arrayBuffer = await res.arrayBuffer()
-			const dv = new DataView(arrayBuffer)
-
-			const fileSize = arrayBuffer.byteLength
-			if (fileSize < 128) return null
-
-			const tagOffset = fileSize - 128
-			const tag = String.fromCharCode(dv.getUint8(tagOffset), dv.getUint8(tagOffset + 1), dv.getUint8(tagOffset + 2))
-
-			if (tag !== "TAG") return null
-
-			let title = ""
-			for (let i = 0; i < 30; i++) {
-				const byte = dv.getUint8(tagOffset + 3 + i)
-				if (byte === 0) break
-				title += String.fromCharCode(byte)
-			}
-
-			return title.trim() || null
-		} catch {
-			return null
-		}
-	}
-
-	// load metadata for all tracks
-	useEffect(() => {
-		const loadAllMetadata = async () => {
-			const names = await Promise.all(
-				TRACKS.map(async (track) => {
-					const metaTitle = await extractId3v1Title(track.src)
-					return metaTitle || getFilenameFromSrc(track.src)
-				})
-			)
-			setTrackNames(names)
-		}
-
-		loadAllMetadata()
-	}, [])
+	const currentTrackSrc = TRACKS[trackIndex]!
 
 	// ==================== PLAYER LOGIC ====================
 	const ensureAnalyser = useCallback(() => {
@@ -120,7 +69,7 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 			setCurrentTime(0)
 			setDuration(0)
 
-			player.src = TRACKS[index]!.src
+			player.src = TRACKS[index]!
 
 			if (shouldPlay) {
 				const onCanPlay = async () => {
@@ -235,8 +184,6 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 		}
 	}, [])
 
-	const fmt = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`
-
 	return (
 		<div
 			className={`w-full max-w-md rounded-xl border border-neutral-800 bg-neutral-900/60 p-4 ${className || ""}`}
@@ -258,9 +205,9 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 					<PlayButton size="icon-sm" isPlaying={isPlaying} onClick={togglePlay} />
 					<NextButton size="icon-sm" onClick={nextTrack} />{" "}
 				</div>
-				<span className="text-xs text-neutral-600 tabular-nums">{fmt(currentTime)}</span>
+				<span className="text-xs text-neutral-600 tabular-nums">{formatTime(currentTime)}</span>
 				<SeekBar progress={progress} onSeek={seekAudio} />
-				<span className="text-xs text-neutral-600 tabular-nums">{fmt(duration)}</span>
+				<span className="text-xs text-neutral-600 tabular-nums">{formatTime(duration)}</span>
 
 				<button
 					onClick={() => setPlaylistOpen((o) => !o)}
@@ -270,59 +217,11 @@ export function MediaPlayer({ className, showDecorativeSpeakers = true, ...props
 				</button>
 			</div>
 
-			<PlayList
-				isOpen={isPlaylistOpen}
-				tracks={TRACKS}
-				trackNames={trackNames}
-				currentTrackIndex={trackIndex}
-				onTrackSelect={playTrack}
-			/>
+			<PlayList isOpen={isPlaylistOpen} currentTrackIndex={trackIndex} onTrackSelect={playTrack} />
 
 			<audio ref={audioPlayerRef} src={currentTrackSrc} preload="metadata" className="hidden" />
 
 			{showDecorativeSpeakers && <DecorativeSpeakers className="mt-4" />}
-		</div>
-	)
-}
-
-interface PlayListProps {
-	isOpen: boolean
-	tracks: Track[]
-	trackNames: string[]
-	currentTrackIndex: number
-	onTrackSelect: (index: number, shouldPlay: boolean) => void
-}
-
-export function PlayList({ isOpen, tracks, trackNames, currentTrackIndex, onTrackSelect }: PlayListProps) {
-	return (
-		<div
-			className="mt-4 overflow-hidden transition-all duration-300 ease-in-out"
-			style={{
-				maxHeight: isOpen ? "31.25rem" : "0",
-				marginTop: isOpen ? "" : "0",
-				opacity: isOpen ? 1 : 0,
-			}}
-		>
-			<div className="flex flex-col gap-1">
-				{tracks.map((track, i) => {
-					const displayName = trackNames[i] ?? getFilenameFromSrc(track.src)
-
-					return (
-						<button
-							key={track.src}
-							onClick={() => onTrackSelect(i, true)}
-							className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${
-								i === currentTrackIndex
-									? "bg-neutral-800 text-neutral-100"
-									: "text-neutral-500 hover:bg-neutral-800/50 hover:text-neutral-300"
-							}`}
-						>
-							<span className="w-4 shrink-0 text-center text-[0.6875rem] text-neutral-600 tabular-nums">{i + 1}</span>
-							<span className="text-[0.6875rem] tracking-[0.075rem]">{displayName}</span>
-						</button>
-					)
-				})}
-			</div>
 		</div>
 	)
 }
