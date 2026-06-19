@@ -76,7 +76,7 @@ export default function Home() {
 							</Link>
 						))}
 						{/* empty cell */}
-						{filteredComponents.length % 2 === 1 && <div className="bg-background"></div>}
+						{filteredComponents.length % 2 === 1 && <div className="bg-background max-sm:hidden"></div>}
 					</div>
 				</main>
 			</ScrollArea>
