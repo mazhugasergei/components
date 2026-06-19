@@ -1,13 +1,11 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { ComponentProps, useCallback, useEffect, useRef, useState } from "react"
-import { Converter } from "./converter"
-import { DecorativeSpeakers } from "./decorative-speakers"
-import { Duration } from "./duration"
-import { PlayButton } from "./play-button"
-import { RecordButton } from "./record-button"
+import { DownloadButton } from "./doanload-button"
+import { PauseIcon, PlayIcon, RecordIcon } from "./icons"
 import { Screen } from "./screen"
-import { SeekBar } from "./seek-bar"
+import { formatTime } from "./utils"
 
 export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 	const audioPlayerRef = useRef<HTMLAudioElement>(null)
@@ -133,11 +131,126 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 				<PlayButton isPlaying={isPlaying} disabled={!hasRecording || isRecording} onClick={togglePlay} />
 				<SeekBar progress={progress} onSeek={seekAudio} disabled={!hasRecording || isRecording} />
 				<Duration time={displayTime} />
-				<Converter blob={audioBlobRef.current} originalName="recording" disabled={!hasRecording || isRecording} />
+				<DownloadButton blob={audioBlobRef.current} originalName="recording" disabled={!hasRecording || isRecording} />
 				<audio ref={audioPlayerRef} className="hidden" />
 			</div>
 
 			<DecorativeSpeakers />
+		</div>
+	)
+}
+
+export interface RecordButtonProps extends ComponentProps<"button"> {
+	isRecording: boolean
+}
+
+export function RecordButton({ isRecording, ...props }: RecordButtonProps) {
+	return (
+		<Button
+			aria-label={isRecording ? "Stop recording" : "Start recording"}
+			variant="outline"
+			size="icon"
+			className={`${isRecording ? "border-red-400! bg-red-400/5! text-red-400! hover:bg-red-400/10!" : ""}`}
+			{...props}
+		>
+			<RecordIcon isRecording={isRecording} className={isRecording ? "animate-pulse" : ""} />
+		</Button>
+	)
+}
+
+export interface PlayButtonProps extends ComponentProps<"button"> {
+	isPlaying: boolean
+}
+
+export function PlayButton({ isPlaying, ...props }: PlayButtonProps) {
+	return (
+		<Button aria-label={isPlaying ? "Pause" : "Play"} variant="outline" size="icon" {...props}>
+			{isPlaying ? <PauseIcon /> : <PlayIcon />}
+		</Button>
+	)
+}
+
+export interface SeekBarProps extends Omit<ComponentProps<"div">, "onChange"> {
+	progress: number
+	disabled?: boolean
+	onSeek?: (value: number) => void
+}
+
+export function SeekBar({ progress, disabled, className, onSeek, ...props }: SeekBarProps) {
+	return (
+		<div className={`relative isolate h-5 flex-1 ${className || ""}`} {...props}>
+			<div className="absolute top-1/2 -z-10 h-1 w-full -translate-y-1/2 rounded-full bg-neutral-800" />
+			<div
+				className="pointer-events-none absolute top-1/2 -z-10 h-1 -translate-y-1/2 rounded-full bg-neutral-400 transition-[width] duration-100"
+				style={{ width: `${progress}%` }}
+			/>
+			<input
+				type="range"
+				min={0}
+				max={100}
+				value={progress}
+				disabled={disabled}
+				onChange={(e) => onSeek?.(Number(e.target.value))}
+				className={`absolute inset-0 h-full w-full appearance-none bg-transparent ${disabled ? "" : "cursor-pointer"} [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-transparent [&::-moz-range-track]:bg-transparent [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-transparent`}
+			/>
+		</div>
+	)
+}
+
+export interface DurationProps extends ComponentProps<"span"> {
+	time: number
+}
+
+export function Duration({ time, ...props }: DurationProps) {
+	return (
+		<span className="text-xs text-neutral-600 tabular-nums" {...props}>
+			{formatTime(time)}
+		</span>
+	)
+}
+
+export function DecorativeSpeakers() {
+	const ASPECT_RATIO = 10 / 1
+	const DOT_SIZE = 3
+	const DOT_GAP = 5
+
+	const containerRef = useRef<HTMLDivElement>(null)
+	const [grid, setGrid] = useState({ cols: 0, rows: 0 })
+
+	useEffect(() => {
+		const container = containerRef.current
+		if (!container) return
+
+		const updateGrid = () => {
+			const { width, height } = container.getBoundingClientRect()
+			const cell = DOT_SIZE + DOT_GAP
+			const cols = Math.max(0, Math.floor((width + DOT_GAP) / cell))
+			const rows = Math.max(0, Math.floor((height + DOT_GAP) / cell))
+			setGrid({ cols, rows })
+		}
+
+		updateGrid()
+		const observer = new ResizeObserver(updateGrid)
+		observer.observe(container)
+		return () => observer.disconnect()
+	}, [])
+
+	const dots = Array.from({ length: grid.cols * grid.rows })
+
+	return (
+		<div ref={containerRef} className="relative w-full" style={{ aspectRatio: `${ASPECT_RATIO}` }}>
+			<div
+				className="absolute inset-0 grid place-content-center"
+				style={{
+					gridTemplateColumns: `repeat(${grid.cols}, ${DOT_SIZE}px)`,
+					gridTemplateRows: `repeat(${grid.rows}, ${DOT_SIZE}px)`,
+					gap: `${DOT_GAP}px`,
+				}}
+			>
+				{dots.map((_, i) => (
+					<span key={i} className="rounded-full bg-black" style={{ width: DOT_SIZE, height: DOT_SIZE }} />
+				))}
+			</div>
 		</div>
 	)
 }

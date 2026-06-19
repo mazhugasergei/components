@@ -40,36 +40,16 @@ export const components: Component[] = [
 				filePath: "components/ui/audio-recorder/screen.tsx",
 			},
 			{
-				codeUrl: "components/ui/audio-recorder/record-button.tsx",
-				filePath: "components/ui/audio-recorder/record-button.tsx",
-			},
-			{
-				codeUrl: "components/ui/audio-recorder/play-button.tsx",
-				filePath: "components/ui/audio-recorder/play-button.tsx",
-			},
-			{
-				codeUrl: "components/ui/audio-recorder/seek-bar.tsx",
-				filePath: "components/ui/audio-recorder/seek-bar.tsx",
-			},
-			{
-				codeUrl: "components/ui/audio-recorder/duration.tsx",
-				filePath: "components/ui/audio-recorder/duration.tsx",
-			},
-			{
-				codeUrl: "components/ui/audio-recorder/converter.tsx",
-				filePath: "components/ui/audio-recorder/converter.tsx",
-			},
-			{
-				codeUrl: "components/ui/audio-recorder/decorative-speakers.tsx",
-				filePath: "components/ui/audio-recorder/decorative-speakers.tsx",
+				codeUrl: "components/ui/audio-recorder/doanload-button.tsx",
+				filePath: "components/ui/audio-recorder/doanload-button.tsx",
 			},
 			{
 				codeUrl: "components/ui/audio-recorder/icons.tsx",
 				filePath: "components/ui/audio-recorder/icons.tsx",
 			},
 			{
-				codeUrl: "components/examples/audio-recorder.tsx",
-				filePath: "components/examples/audio-recorder.tsx",
+				codeUrl: "components/ui/audio-recorder/utils.ts",
+				filePath: "components/ui/audio-recorder/utils.ts",
 			},
 		],
 		examples: [<AudioRecorderExample />],

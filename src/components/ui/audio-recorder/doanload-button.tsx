@@ -5,12 +5,12 @@ import { useState } from "react"
 import { DownloadIcon, LoaderIcon } from "./icons"
 import { audioBufferToWav } from "./utils"
 
-export interface ConverterProps extends React.ComponentProps<typeof Button> {
+export interface DownloadButtonProps extends React.ComponentProps<typeof Button> {
 	blob: Blob | null
 	originalName?: string
 }
 
-export function Converter({ blob, originalName = "recording", disabled, ...props }: ConverterProps) {
+export function DownloadButton({ blob, originalName = "recording", disabled, ...props }: DownloadButtonProps) {
 	const [loading, setLoading] = useState(false)
 
 	const convertToWav = async () => {
