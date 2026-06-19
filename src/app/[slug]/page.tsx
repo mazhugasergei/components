@@ -37,8 +37,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 							return (
 								<div key={index} className={cn("relative rounded-lg", block.filePath && "bg-card border")}>
 									{block.filePath ? (
-										<div className="flex items-center justify-between gap-2 p-1 pl-3 text-xs">
-											<span className="text-muted-foreground text-right font-mono">{block.filePath}</span>
+										<div className="grid grid-cols-[1fr_auto] items-center justify-between gap-2 p-1 pl-3 text-xs">
+											<span className="text-muted-foreground overflow-hidden font-mono text-ellipsis whitespace-nowrap">
+												{block.filePath}
+											</span>
 											<CopyButton text={textToCopy} />
 										</div>
 									) : (
