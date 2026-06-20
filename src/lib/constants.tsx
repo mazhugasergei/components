@@ -46,12 +46,6 @@ export const components: Component[] = [
 				codeUrl: "components/ui/audio-recorder/index.tsx",
 			},
 			{
-				codeUrl: "components/ui/audio-recorder/screen.tsx",
-			},
-			{
-				codeUrl: "components/ui/audio-recorder/download-button.tsx",
-			},
-			{
 				codeUrl: "components/ui/audio-recorder/icons.tsx",
 			},
 			{

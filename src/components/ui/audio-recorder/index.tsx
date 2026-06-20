@@ -2,9 +2,69 @@
 
 import { Button } from "@/components/ui/button"
 import { ComponentProps, useCallback, useEffect, useRef, useState } from "react"
-import { DownloadButton } from "./download-button"
-import { PauseIcon, PlayIcon, RecordIcon } from "./icons"
-import { Screen } from "./screen"
+import { DownloadIcon, LoaderIcon, PauseIcon, PlayIcon, RecordIcon } from "./icons"
+
+export function audioBufferToWav(buffer: AudioBuffer): ArrayBuffer {
+	const numOfChan = buffer.numberOfChannels
+	const length = buffer.length * numOfChan * 2 + 44
+	const result = new ArrayBuffer(length)
+	const view = new DataView(result)
+	const channels: Float32Array[] = []
+	let offset = 0
+	let pos = 0
+
+	const writeString = (str: string) => {
+		for (let i = 0; i < str.length; i++) {
+			view.setUint8(pos++, str.charCodeAt(i))
+		}
+	}
+
+	// Write WAV header
+	writeString("RIFF")
+	view.setUint32(pos, length - 8, true)
+	pos += 4
+	writeString("WAVE")
+	writeString("fmt ")
+	view.setUint32(pos, 16, true)
+	pos += 4
+	view.setUint16(pos, 1, true)
+	pos += 2 // PCM
+	view.setUint16(pos, numOfChan, true)
+	pos += 2
+	view.setUint32(pos, buffer.sampleRate, true)
+	pos += 4
+	view.setUint32(pos, buffer.sampleRate * numOfChan * 2, true)
+	pos += 4
+	view.setUint16(pos, numOfChan * 2, true)
+	pos += 2
+	view.setUint16(pos, 16, true)
+	pos += 2
+	writeString("data")
+	view.setUint32(pos, length - pos - 4, true)
+	pos += 4
+
+	// Extract channel data
+	for (let i = 0; i < numOfChan; i++) {
+		channels.push(buffer.getChannelData(i))
+	}
+
+	// Interleave samples (TypeScript-safe)
+	const maxSamples = buffer.length
+	while (offset < maxSamples) {
+		for (let i = 0; i < numOfChan; i++) {
+			const sample = channels[i]?.[offset] ?? 0 // Safe access with fallback
+
+			const clamped = Math.max(-1, Math.min(1, sample))
+			const scaled = clamped < 0 ? clamped * 0x8000 : clamped * 0x7fff
+
+			view.setInt16(pos, scaled | 0, true) // | 0 ensures integer
+			pos += 2
+		}
+		offset++
+	}
+
+	return result
+}
 
 export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 	const audioPlayerRef = useRef<HTMLAudioElement>(null)
@@ -126,7 +186,7 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 				{status && <p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500">{status}</p>}
 			</div>
 
-			<Screen
+			<Dsplay
 				analyser={analyser}
 				isActive={isRecording}
 				className="rounded-xl border border-neutral-800 bg-neutral-900"
@@ -142,6 +202,130 @@ export function AudioRecorder({ className, ...props }: ComponentProps<"div">) {
 			</div>
 
 			<DecorativeSpeakers />
+		</div>
+	)
+}
+
+export interface DisplayProps extends ComponentProps<"div"> {
+	analyser: AnalyserNode | null
+	isActive: boolean
+}
+
+export function Dsplay({ analyser, isActive, className, ...props }: DisplayProps) {
+	const BAR_WIDTH = 3
+	const BAR_GAP = 2
+	const SAMPLE_INTERVAL = 60 // ms
+	const LINE_STOP = 0.9
+	const LINE_START = 0.0
+	const LINE_WIDTH = 2
+
+	const canvasRef = useRef<HTMLCanvasElement>(null)
+	const dataArrayRef = useRef<Uint8Array<ArrayBuffer> | null>(null)
+	const animFrameRef = useRef(0)
+	const historyRef = useRef<number[]>([])
+	const lastSampleRef = useRef(0)
+
+	const drawBaseline = useCallback((ctx: CanvasRenderingContext2D, w: number, h: number) => {
+		const dpr = window.devicePixelRatio
+		const slot = (BAR_WIDTH + BAR_GAP) * dpr
+		const barHeight = 2 * dpr
+		const count = Math.ceil(w / slot)
+
+		ctx.fillStyle = "rgba(148,163,184,0.25)"
+		for (let i = 0; i < count; i++) {
+			ctx.fillRect(i * slot, (h - barHeight) / 2, BAR_WIDTH * dpr, barHeight)
+		}
+	}, [])
+
+	const drawIdle = useCallback(() => {
+		const canvas = canvasRef.current
+		if (!canvas) return
+		canvas.width = canvas.offsetWidth * window.devicePixelRatio
+		canvas.height = canvas.offsetHeight * window.devicePixelRatio
+		const ctx = canvas.getContext("2d")
+		if (!ctx) return
+		const { width: w, height: h } = canvas
+		ctx.clearRect(0, 0, w, h)
+		drawBaseline(ctx, w, h)
+	}, [drawBaseline])
+
+	const drawBars = useCallback(() => {
+		const canvas = canvasRef.current
+		const dataArray = dataArrayRef.current
+		if (!analyser || !dataArray || !canvas) return
+
+		animFrameRef.current = requestAnimationFrame(drawBars)
+
+		analyser.getByteTimeDomainData(dataArray)
+
+		let sumSquares = 0
+		for (let i = 0; i < dataArray.length; i++) {
+			const v = ((dataArray[i] ?? 128) - 128) / 128
+			sumSquares += v * v
+		}
+		const rms = Math.sqrt(sumSquares / dataArray.length)
+		const level = Math.min(1, rms * 4)
+
+		const dpr = window.devicePixelRatio
+		const slot = (BAR_WIDTH + BAR_GAP) * dpr
+		const { width: w, height: h } = canvas
+
+		const maxVisibleBars = Math.max(1, Math.ceil((w * LINE_STOP) / slot))
+		const targetX = maxVisibleBars * slot
+
+		const now = Date.now()
+		if (now - lastSampleRef.current >= SAMPLE_INTERVAL) {
+			lastSampleRef.current = now
+			const history = historyRef.current
+			history.push(level)
+			if (history.length > maxVisibleBars) history.shift()
+		}
+
+		const ctx = canvas.getContext("2d")
+		if (!ctx) return
+		ctx.clearRect(0, 0, w, h)
+
+		drawBaseline(ctx, w, h)
+
+		const history = historyRef.current
+		history.forEach((lvl, i) => {
+			const barHeight = Math.max(2 * dpr, lvl * h * 0.9)
+			const x = i * slot
+			ctx.fillStyle = "#fff"
+			ctx.fillRect(x, (h - barHeight) / 2, BAR_WIDTH * dpr, barHeight)
+		})
+
+		// red line travels from LINE_START_PERCENT → LINE_STOP_PERCENT as bars fill
+		const startX = w * LINE_START
+		const lineX =
+			history.length >= maxVisibleBars ? targetX : startX + (history.length / maxVisibleBars) * (targetX - startX)
+		ctx.fillStyle = "#f87171"
+		ctx.fillRect(lineX, 0, LINE_WIDTH * dpr, h)
+	}, [analyser, drawBaseline])
+
+	useEffect(() => {
+		drawIdle()
+		window.addEventListener("resize", drawIdle)
+		return () => window.removeEventListener("resize", drawIdle)
+	}, [drawIdle])
+
+	useEffect(() => {
+		if (isActive && analyser) {
+			dataArrayRef.current = new Uint8Array(new ArrayBuffer(analyser.fftSize))
+			historyRef.current = []
+			lastSampleRef.current = 0
+			drawBars()
+		} else {
+			cancelAnimationFrame(animFrameRef.current)
+			drawIdle()
+		}
+
+		return () => cancelAnimationFrame(animFrameRef.current)
+	}, [isActive, analyser, drawBars, drawIdle])
+
+	return (
+		<div className={`overflow-hidden ${className || ""}`} {...props}>
+			<canvas ref={canvasRef} className="block h-20 w-full" />
 		</div>
 	)
 }
@@ -212,6 +396,59 @@ export function Time({ time, ...props }: TimeProps) {
 		<span className="text-xs text-neutral-600 tabular-nums" {...props}>
 			{Math.floor(time / 60)}:{String(Math.floor(time % 60)).padStart(2, "0")}
 		</span>
+	)
+}
+
+export interface DownloadButtonProps extends React.ComponentProps<typeof Button> {
+	blob: Blob | null
+	originalName?: string
+}
+
+export function DownloadButton({ blob, originalName = "recording", disabled, ...props }: DownloadButtonProps) {
+	const [loading, setLoading] = useState(false)
+
+	const convertToWav = async () => {
+		if (!blob) return
+		setLoading(true)
+
+		try {
+			const arrayBuffer = await blob.arrayBuffer()
+			const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+
+			const audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
+
+			const wavBuffer = audioBufferToWav(audioBuffer) // pure JS function below
+
+			const wavBlob = new Blob([wavBuffer], { type: "audio/wav" })
+
+			const url = URL.createObjectURL(wavBlob)
+			const a = document.createElement("a")
+			a.href = url
+			a.download = `${originalName}-${Date.now()}.wav`
+			a.click()
+			URL.revokeObjectURL(url)
+
+			// Optional: close context to free memory
+			audioContext.close()
+		} catch (err) {
+			console.error("Conversion failed:", err)
+			alert("Failed to convert audio. Try recording in a different format or browser.")
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	return (
+		<Button
+			aria-label="Download the recording"
+			variant="outline"
+			size="icon"
+			onClick={convertToWav}
+			disabled={!blob || loading || disabled}
+			{...props}
+		>
+			{loading ? <LoaderIcon className="animate-spin" /> : <DownloadIcon />}
+		</Button>
 	)
 }
 
