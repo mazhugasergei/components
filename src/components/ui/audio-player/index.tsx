@@ -223,7 +223,7 @@ export function AudioPlayer({ className, variant = 1, showDecorativeSpeakers = t
 			{...props}
 		>
 			<div className="flex items-center justify-between">
-				<p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase">media player</p>
+				<p className="text-[0.6875rem] tracking-[0.075rem] text-neutral-500 uppercase">audio player</p>
 			</div>
 
 			{/* screen */}
