@@ -1,4 +1,4 @@
-import React from "react"
+import { ComponentProps } from "react"
 
 const SCROLLBAR_CSS = `
   .custom-scrollbar::-webkit-scrollbar {
@@ -23,7 +23,7 @@ const SCROLLBAR_CSS = `
   }
 `
 
-export interface ScrollAreaProps extends React.ComponentProps<"div"> {
+export interface ScrollAreaProps extends ComponentProps<"div"> {
 	className?: string
 }
 

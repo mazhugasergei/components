@@ -5,8 +5,8 @@ import { ButtonExample } from "@/components/examples/button"
 import { CommandExample } from "@/components/examples/command"
 import { ExpandableExample } from "@/components/examples/expandable"
 import { ScrollAreaExample } from "@/components/examples/scroll-area"
+import type { Component } from "@/lib/types"
 import Link from "next/link"
-import type { Component } from "./types"
 
 export const components: Component[] = [
 	{
@@ -58,6 +58,11 @@ export const components: Component[] = [
 		description: "Smooth width transitions when button content changes.",
 		tag: "Animation",
 		examples: [<AnimatedButtonExample />],
+		notice: (
+			<>
+				Also need <Link href="/button">Button</Link>.
+			</>
+		),
 		codeBlocks: [
 			{
 				codeUrl: "hooks/use-measure.ts",

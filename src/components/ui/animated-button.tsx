@@ -1,7 +1,8 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { useMeasure } from "@/hooks/use-measure"
-import React from "react"
+import { ComponentProps, useEffect, useRef, useState } from "react"
 
 const EASING = "cubic-bezier(0.19,1,0.22,1)"
 
@@ -11,18 +12,18 @@ const transitionIn = [
 	`scale 400ms ${EASING} 50ms`,
 ].join(", ")
 
-export function AnimatedButton({ children, className, ...props }: React.ComponentProps<"button">) {
+export function AnimatedButton({ children, className, ...props }: ComponentProps<"button">) {
 	const [ref, bounds] = useMeasure()
-	const [width, setWidth] = React.useState("auto")
-	const [displayedChildren, setDisplayedChildren] = React.useState(children)
-	const [visible, setVisible] = React.useState(true)
-	const isFirstRender = React.useRef(true)
+	const [width, setWidth] = useState("auto")
+	const [displayedChildren, setDisplayedChildren] = useState(children)
+	const [visible, setVisible] = useState(true)
+	const isFirstRender = useRef(true)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (bounds.width > 0) setWidth(`${bounds.width}px`)
 	}, [bounds.width])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (isFirstRender.current) {
 			isFirstRender.current = false
 			return
@@ -39,9 +40,9 @@ export function AnimatedButton({ children, className, ...props }: React.Componen
 	}, [children])
 
 	return (
-		<button
+		<Button
 			style={{ width }}
-			className={`bg-primary flex cursor-pointer items-center justify-center rounded-lg border py-1.5 transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] active:scale-95 ${className ?? ""}`}
+			className={`cursor-pointer font-sans normal-case transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] active:scale-95 ${className ?? ""}`}
 			{...props}
 		>
 			<div ref={ref}>
@@ -58,6 +59,6 @@ export function AnimatedButton({ children, className, ...props }: React.Componen
 					{displayedChildren}
 				</span>
 			</div>
-		</button>
+		</Button>
 	)
 }
