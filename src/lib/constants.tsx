@@ -1,28 +1,33 @@
 import { AnimatedButtonExample } from "@/components/examples/animated-button"
+import { AudioPlayerExample } from "@/components/examples/audio-player"
 import { AudioRecorderExample } from "@/components/examples/audio-recorder"
 import { ButtonExample } from "@/components/examples/button"
 import { CommandExample } from "@/components/examples/command"
 import { ExpandableExample } from "@/components/examples/expandable"
-import { MediaPlayerExample } from "@/components/examples/media-player"
 import { ScrollAreaExample } from "@/components/examples/scroll-area"
 import Link from "next/link"
 import type { Component } from "./types"
 
 export const components: Component[] = [
 	{
-		title: "AnimatedButton",
-		description: "Smooth width transitions when button content changes.",
-		tag: "Animation",
-		examples: [<AnimatedButtonExample />],
+		title: "AudioPlayer",
+		description: "Media player component with playback controls and progress tracking.",
+		tag: "Media",
+		examples: [<AudioPlayerExample />],
+		notice: (
+			<>
+				Also need <Link href="/button">Button</Link> and <Link href="/scroll-area">ScrollArea</Link>.
+			</>
+		),
 		codeBlocks: [
 			{
-				codeUrl: "hooks/use-measure.ts",
+				codeUrl: "components/ui/audio-player/index.tsx",
 			},
 			{
-				codeUrl: "components/ui/animated-button.tsx",
+				codeUrl: "components/ui/audio-player/icons.tsx",
 			},
 			{
-				codeUrl: "components/examples/animated-button.tsx",
+				codeUrl: "components/examples/audio-player.tsx",
 			},
 		],
 	},
@@ -48,6 +53,26 @@ export const components: Component[] = [
 			},
 			{
 				codeUrl: "components/ui/audio-recorder/icons.tsx",
+			},
+			{
+				codeUrl: "components/examples/audio-recorder.tsx",
+			},
+		],
+	},
+	{
+		title: "AnimatedButton",
+		description: "Smooth width transitions when button content changes.",
+		tag: "Animation",
+		examples: [<AnimatedButtonExample />],
+		codeBlocks: [
+			{
+				codeUrl: "hooks/use-measure.ts",
+			},
+			{
+				codeUrl: "components/ui/animated-button.tsx",
+			},
+			{
+				codeUrl: "components/examples/animated-button.tsx",
 			},
 		],
 	},
@@ -93,34 +118,6 @@ export const components: Component[] = [
 			},
 			{
 				codeUrl: "components/examples/expandable.tsx",
-			},
-		],
-	},
-	{
-		title: "MediaPlayer",
-		description: "Media player component with playback controls and progress tracking.",
-		tag: "Media",
-		examples: [<MediaPlayerExample />],
-		notice: (
-			<>
-				Also need <Link href="/button">Button</Link> and <Link href="/scroll-area">ScrollArea</Link>.
-			</>
-		),
-		codeBlocks: [
-			{
-				codeUrl: "components/ui/media-player/index.tsx",
-			},
-			{
-				codeUrl: "components/ui/media-player/screen.tsx",
-			},
-			{
-				codeUrl: "components/ui/media-player/playlist.tsx",
-			},
-			{
-				codeUrl: "components/ui/media-player/icons.tsx",
-			},
-			{
-				codeUrl: "components/examples/media-player.tsx",
 			},
 		],
 	},
