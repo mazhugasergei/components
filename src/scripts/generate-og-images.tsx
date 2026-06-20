@@ -127,6 +127,11 @@ async function save(response: ImageResponse, filePath: string) {
 async function generate() {
 	console.log("\n Generating OG images...\n")
 
+	if (fs.existsSync(OUT_DIR)) {
+		fs.rmSync(OUT_DIR, { recursive: true, force: true })
+		console.log(" Cleared existing OG images\n")
+	}
+
 	const fontData = await fetch(
 		"https://raw.githubusercontent.com/vercel/geist-font/refs/heads/main/packages/next/dist/fonts/geist-sans/Geist-Medium.ttf"
 	).then((r) => {
