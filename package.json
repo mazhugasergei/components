@@ -2,7 +2,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "next start",
+		"start": "npx serve@latest out",
 		"format": "prettier --write .",
 		"generate:og": "tsx ./src/scripts/generate-og-images.tsx"
 	},
